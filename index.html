@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gian De Gruccio — Finance Research Project</title>
+  <title>Gian De Gruccio — Student Finance Research Project</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     :root[data-theme="dark"] {
@@ -60,7 +60,8 @@
     .hero-inner{max-width:1200px;margin:0 auto;}
     .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;}
     .hero-band h1{font-family:'DM Serif Display',serif;font-size:clamp(26px,4vw,50px);font-weight:400;line-height:1.1;margin-bottom:8px;}
-    .hero-sub{color:var(--muted);font-size:13px;max-width:500px;line-height:1.6;margin-bottom:28px;}
+    .hero-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.08em;margin-bottom:18px;}
+    .hero-sub{color:var(--muted);font-size:13px;max-width:560px;line-height:1.65;margin-bottom:28px;}
     .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:860px;}
     .kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
     .kpi .kl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px;}
@@ -84,6 +85,7 @@
     .sec-hd h2{font-family:'DM Serif Display',serif;font-size:19px;font-weight:400;}
     .sec-hd .sc{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
     .sec-line{border:none;border-top:1px solid var(--border);margin-bottom:22px;}
+    .intro-note{font-size:13px;color:var(--muted);line-height:1.65;max-width:760px;margin-bottom:26px;}
 
     /* STOCK GRID */
     .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
@@ -122,21 +124,25 @@
     .card.core .rfill{background:var(--gold);}
     .card.growth .rfill{background:var(--red);}
 
-    /* ── SCORING MODEL ── */
-    .score-intro{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:32px;}
+    /* SCORING MODEL */
+    .score-intro{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;}
     .score-intro h3{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;margin-bottom:8px;}
-    .score-intro p{font-size:13px;color:var(--muted);line-height:1.65;max-width:700px;margin-bottom:20px;}
+    .score-intro p{font-size:13px;color:var(--muted);line-height:1.65;max-width:760px;margin-bottom:20px;}
     .formula-row{display:flex;gap:10px;flex-wrap:wrap;}
-    .fblock{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;min-width:140px;}
+    .fblock{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;min-width:150px;flex:1;}
     .fblock .fw{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--blue);}
-    .fblock .fn{font-size:11px;color:var(--muted);margin-top:2px;}
-    .fblock .fd{font-size:11px;color:var(--text);margin-top:4px;line-height:1.4;}
+    .fblock .fn{font-size:11px;color:var(--text);margin-top:2px;font-weight:600;}
+    .fblock .fd{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.45;}
+    .limit-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin:4px 0 0;}
+    .limit-list li{font-size:13px;color:var(--muted);padding-left:18px;position:relative;line-height:1.55;}
+    .limit-list li::before{content:'›';position:absolute;left:2px;color:var(--gold);font-weight:600;}
 
     .score-table-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-    .score-table-hd{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .score-table-hd{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
     .score-table-hd h4{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;}
     .sort-hint{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
-    table{width:100%;border-collapse:collapse;}
+    .table-scroll{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;min-width:640px;}
     thead th{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap;}
     thead th:hover{color:var(--text);}
     thead th.sorted{color:var(--blue);}
@@ -151,35 +157,34 @@
     .td-bar{display:flex;align-items:center;gap:8px;}
     .td-bar-track{flex:1;height:4px;background:var(--border);border-radius:2px;min-width:60px;}
     .td-bar-fill{height:100%;border-radius:2px;background:var(--blue);}
-    .td-rating{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:3px;letter-spacing:.06em;}
+    .td-rating{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:3px;letter-spacing:.04em;white-space:nowrap;}
     .rat-buy{background:var(--green-dim);color:var(--green);}
     .rat-watch{background:var(--gold-dim);color:var(--gold);}
     .rat-avoid{background:var(--red-dim);color:var(--red);}
-
-    /* SCORE BREAKDOWN MINI BARS */
     .mini-scores{display:flex;gap:4px;flex-wrap:wrap;}
     .ms{font-family:'JetBrains Mono',monospace;font-size:9px;background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:2px 6px;color:var(--muted);}
     .ms b{color:var(--text);}
 
-    /* ── JOURNAL ── */
+    /* JOURNAL */
     .journal-intro{font-size:13px;color:var(--muted);line-height:1.65;max-width:680px;margin-bottom:32px;}
     .journal-entry{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:26px;margin-bottom:16px;}
-    .je-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;}
+    .je-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px;}
     .je-week{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;}
     .je-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px;}
-    .je-perf{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;}
+    .je-perf{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;white-space:nowrap;}
     .je-perf.up{color:var(--green);} .je-perf.down{color:var(--red);}
     .je-body{font-size:13px;color:var(--muted);line-height:1.7;}
-    .je-body p{margin-bottom:10px;}
+    .je-body p{margin-bottom:11px;}
     .je-body p:last-child{margin-bottom:0;}
+    .je-body strong{color:var(--text);}
     .je-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
     .je-tag{font-family:'JetBrains Mono',monospace;font-size:9px;background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:3px 8px;color:var(--muted);}
-    .coming-soon{background:var(--card);border:1px dashed var(--border);border-radius:12px;padding:32px;text-align:center;color:var(--muted);font-size:13px;}
-    .coming-soon span{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:8px;color:var(--muted);}
+    .coming-soon{background:var(--card);border:1px dashed var(--border);border-radius:12px;padding:24px;text-align:center;color:var(--muted);font-size:13px;}
+    .coming-soon span{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:8px;color:var(--muted);line-height:1.6;}
 
-    /* ── RESEARCH ── */
+    /* RESEARCH */
     .research-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:18px;}
-    .rc-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;}
+    .rc-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px;}
     .rc-sym{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;}
     .rc-name{font-size:13px;color:var(--muted);margin-top:3px;}
     .rc-body h5{font-size:13px;font-weight:600;margin-bottom:6px;margin-top:16px;color:var(--text);}
@@ -189,15 +194,17 @@
     .rcm{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:8px 12px;}
     .rcm .rm-l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;}
     .rcm .rm-v{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;}
+    .rc-reviewed{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:14px;letter-spacing:.06em;text-transform:uppercase;}
 
-    /* ── ABOUT ── */
+    /* ABOUT */
     .about-hero{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:36px;margin-bottom:20px;display:flex;gap:28px;align-items:flex-start;}
     .about-av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#F0B429);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:26px;color:#fff;}
     .about-hero h3{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;margin-bottom:4px;}
     .about-hero .ah-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;}
-    .about-hero p{font-size:13px;color:var(--muted);line-height:1.72;max-width:620px;}
+    .about-hero p{font-size:13px;color:var(--muted);line-height:1.72;max-width:640px;}
     .learned-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px;}
     .learned-card h4{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;margin-bottom:16px;}
+    .learned-card>p{font-size:13px;color:var(--muted);line-height:1.72;}
     .learned-item{display:flex;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
     .learned-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
     .li-num{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--blue);opacity:.4;flex-shrink:0;line-height:1;}
@@ -209,12 +216,12 @@
     .method-card h4{font-family:'DM Serif Display',serif;font-size:17px;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
     .method-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
     .method-card li{font-size:12px;color:var(--muted);padding-left:16px;position:relative;line-height:1.5;}
-    .method-card li::before{content:'→';position:absolute;left:0;color:var(--gold);}
+    .method-card li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:600;}
 
     /* SIMULATOR */
     .sim-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-top:32px;}
     .sim-section h3{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;margin-bottom:6px;}
-    .sim-section .ss-sub{font-size:13px;color:var(--muted);margin-bottom:22px;}
+    .sim-section .ss-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6;}
     .sim-ctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px;}
     .sim-ctrl label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
     input[type=range]{-webkit-appearance:none;appearance:none;width:200px;height:4px;background:var(--border);border-radius:2px;outline:none;}
@@ -225,12 +232,13 @@
     .sr-sym{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;}
     .sr-alloc{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
     .sr-val{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;}
-    .sim-total{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;}
+    .sim-total{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;}
     .st-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
     .st-val{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:600;}
     .st-val.up{color:var(--green);} .st-val.down{color:var(--red);}
     .st-pnl{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:3px;}
     .st-pnl.up{color:var(--green);} .st-pnl.down{color:var(--red);}
+    .sim-fine{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6;}
 
     /* DISCLAIMER */
     .disclaimer{margin-top:32px;padding:14px 18px;border:1px solid var(--border);border-radius:7px;background:var(--bg2);}
@@ -241,6 +249,8 @@
       .hero-band{padding:26px 16px;}
       .section{padding:28px 14px 60px;}
       .about-hero{flex-direction:column;}
+      .score-intro{padding:22px;}
+      .research-card{padding:22px;}
     }
   </style>
 </head>
@@ -268,20 +278,21 @@
 <!-- HERO BAND -->
 <div class="hero-band" id="hero-band">
   <div class="hero-inner">
-    <div class="eyebrow">Student Finance Research Project · Community College → Transfer</div>
+    <div class="eyebrow">Student Finance Research Project · Summer 2026</div>
     <h1>Risk-Tiered Stock Watchlist</h1>
-    <p class="hero-sub">10 blue-chip core holdings for capital preservation. 5 high-conviction growth bets for asymmetric upside. Built and maintained by Gian De Gruccio.</p>
+    <div class="hero-note">Educational project · not financial advice</div>
+    <p class="hero-sub">10 established companies and 5 higher-risk growth stocks. I built this project to learn how investors compare business quality, valuation, risk, and long-term growth. Built and maintained by Gian De Gruccio.</p>
     <div class="kpi-row">
       <div class="kpi"><div class="kl">Portfolio Value</div><div class="kv" id="kv-total">—</div><div class="ks">$10k simulated</div></div>
-      <div class="kpi"><div class="kl">Today's P&L</div><div class="kv" id="kv-pnl">—</div><div class="ks">vs. yesterday close</div></div>
+      <div class="kpi"><div class="kl">Today's Change</div><div class="kv" id="kv-pnl">—</div><div class="ks">vs. yesterday close</div></div>
       <div class="kpi"><div class="kl">Gainers</div><div class="kv up" id="kv-gain">—</div><div class="ks">of 15 up today</div></div>
-      <div class="kpi"><div class="kl">Top Scorer</div><div class="kv" id="kv-top" style="font-size:15px">—</div><div class="ks">by model score</div></div>
+      <div class="kpi"><div class="kl">Top Model Score</div><div class="kv" id="kv-top" style="font-size:15px">—</div><div class="ks">by my scoring model</div></div>
       <div class="kpi"><div class="kl">Last Updated</div><div class="kv" id="kv-upd" style="font-size:13px">—</div><div class="ks">Live via Finnhub</div></div>
     </div>
   </div>
 </div>
 
-<!-- ══ WATCHLIST ══ -->
+<!-- WATCHLIST -->
 <div class="section active" id="sec-watchlist">
   <div class="ctrl-row">
     <button class="fb on" onclick="filterCards('all',this)">All (15)</button>
@@ -294,9 +305,11 @@
     <button class="rfbtn" id="rfbtn" onclick="loadAllPrices()">↻ Refresh</button>
   </div>
 
+  <p class="intro-note">I chose these 15 companies to compare different types of investments: stable established companies, AI-related growth companies, consumer brands, financial companies, and more speculative technology names. The goal was not to build a perfect portfolio, but to practice comparing risk and quality across different sectors. The colored letter on each card is a grade from my own scoring model, explained on the Scoring Model page.</p>
+
   <div class="sec-hd">
     <span class="tier-pill pill-c">Core Holdings</span>
-    <h2>Low Risk · Established Companies</h2>
+    <h2>Lower Risk · Established Companies</h2>
     <span class="sc">10 picks</span>
   </div>
   <hr class="sec-line"/>
@@ -304,7 +317,7 @@
 
   <div class="sec-hd">
     <span class="tier-pill pill-g">Growth Bets</span>
-    <h2>High Risk · High Reward</h2>
+    <h2>Higher Risk · Higher Potential Reward</h2>
     <span class="sc">5 picks</span>
   </div>
   <hr class="sec-line"/>
@@ -312,7 +325,7 @@
 
   <div class="sim-section">
     <h3>Portfolio Simulator</h3>
-    <p class="ss-sub">Allocate capital equally across all 15 picks and watch it move with live prices.</p>
+    <p class="ss-sub">This splits a hypothetical amount equally across all 15 picks and tracks how it would move with live prices. It is a learning tool, not a real account.</p>
     <div class="sim-ctrl">
       <label>Capital:</label>
       <input type="range" id="sim-slider" min="1000" max="100000" step="1000" value="10000" oninput="updateSim()"/>
@@ -326,206 +339,247 @@
         <div class="st-pnl" id="st-pnl"></div>
       </div>
       <div style="text-align:right">
-        <div class="st-lbl">Return Today</div>
+        <div class="st-lbl">Change Today</div>
         <div class="st-val" id="st-ret" style="font-size:18px">—</div>
       </div>
     </div>
+    <p class="sim-fine">The simulator assumes equal starting weights and does not include taxes, transaction costs, or real trading decisions. It tracks price movement only and does not include dividends, which matters for stocks like KO that are partly valued for their dividend.</p>
   </div>
-  <div class="disclaimer"><p><strong>Educational purposes only.</strong> This is a student finance research project. Nothing here constitutes financial advice or a recommendation to buy or sell any security. Live prices via Finnhub free API. Fundamental stats are approximate reference values.</p></div>
+
+  <div class="disclaimer"><p><strong>Educational project — not financial advice.</strong> This is a student finance research project. Nothing here is a recommendation to buy or sell any security. Live prices come from the Finnhub API. Fundamental stats are approximate reference values that I check against public sources, and they can change over time.</p></div>
 </div>
 
-<!-- ══ SCORING MODEL ══ -->
+<!-- SCORING MODEL -->
 <div class="section" id="sec-scores">
   <div class="score-intro">
     <h3>The Scoring Model</h3>
-    <p>Each stock is scored out of 100 using a weighted five-factor model. The goal is to make stock selection systematic rather than emotional — to have a repeatable framework I can defend, not just a gut-feel list. Scores above 75 get a Buy rating; 55–74 get Watch; below 55 get Avoid.</p>
+    <p>Each company is scored out of 100 using a weighted five-factor model. The point is to make comparing companies more organized and less based on gut feeling, so I look at the same five things every time. Scores above 75 are labeled Strong Model Fit, scores from 55 to 74 are labeled Mixed Model Fit, and scores below 55 are labeled Weak Model Fit. These labels only reflect how each company fits my scoring model. They are not buy or sell recommendations.</p>
     <div class="formula-row">
-      <div class="fblock"><div class="fw">25%</div><div class="fn">Financial Strength</div><div class="fd">FCF, debt/equity, balance sheet quality</div></div>
-      <div class="fblock"><div class="fw">25%</div><div class="fn">Growth</div><div class="fd">Revenue growth rate, earnings trajectory</div></div>
-      <div class="fblock"><div class="fw">20%</div><div class="fn">Valuation</div><div class="fd">P/E vs. sector, price vs. 52w range</div></div>
-      <div class="fblock"><div class="fw">15%</div><div class="fn">Risk</div><div class="fd">Beta, volatility, cycle position</div></div>
-      <div class="fblock"><div class="fw">15%</div><div class="fn">Moat</div><div class="fd">Brand, switching costs, market leadership</div></div>
+      <div class="fblock"><div class="fw">25%</div><div class="fn">Financial Strength</div><div class="fd">Higher scores go to companies with strong cash flow, manageable debt, and consistent profitability.</div></div>
+      <div class="fblock"><div class="fw">25%</div><div class="fn">Growth</div><div class="fd">Higher scores go to companies with rising revenue, earnings growth, or exposure to a long-term trend.</div></div>
+      <div class="fblock"><div class="fw">20%</div><div class="fn">Valuation</div><div class="fd">Higher scores go to companies that seem reasonably priced compared with their growth and sector.</div></div>
+      <div class="fblock"><div class="fw">15%</div><div class="fn">Risk</div><div class="fd">Higher scores go to companies with lower volatility, more stable demand, and fewer major uncertainties.</div></div>
+      <div class="fblock"><div class="fw">15%</div><div class="fn">Moat</div><div class="fd">Higher scores go to companies with strong brands, switching costs, scale, patents, or market leadership.</div></div>
     </div>
+    <p style="margin-top:20px;margin-bottom:0">This is not a perfect formula. I am still learning which factors should matter most.</p>
   </div>
+
+  <div class="score-intro">
+    <h3>Model Limitations</h3>
+    <p>This scoring model is simplified, and I built it as a learning tool rather than as real research. It helps me organize how I compare companies, but it has limits I try to stay honest about.</p>
+    <ul class="limit-list">
+      <li>Some parts of the score are subjective, especially moat and risk.</li>
+      <li>A high score does not mean the stock will go up soon.</li>
+      <li>A low score does not mean the company is bad.</li>
+      <li>The model does not fully capture breaking news, earnings surprises, management changes, interest rates, or sudden shifts in investor sentiment.</li>
+      <li>The model is meant to help me ask better questions, not predict the market.</li>
+    </ul>
+  </div>
+
   <div class="score-table-wrap">
     <div class="score-table-hd">
-      <h4>All 15 Stocks — Ranked by Score</h4>
+      <h4>All 15 Companies — Ranked by Model Score</h4>
       <span class="sort-hint">Click any column to sort ↕</span>
     </div>
-    <table id="score-table">
-      <thead>
-        <tr>
-          <th onclick="sortTable('sym')">Ticker</th>
-          <th onclick="sortTable('score')">Score</th>
-          <th onclick="sortTable('grade')">Grade</th>
-          <th onclick="sortTable('fin')">Fin. Strength</th>
-          <th onclick="sortTable('growth')">Growth</th>
-          <th onclick="sortTable('val')">Valuation</th>
-          <th onclick="sortTable('risk')">Risk</th>
-          <th onclick="sortTable('moat')">Moat</th>
-          <th onclick="sortTable('rating')">Rating</th>
-        </tr>
-      </thead>
-      <tbody id="score-tbody"></tbody>
-    </table>
+    <div class="table-scroll">
+      <table id="score-table">
+        <thead>
+          <tr>
+            <th onclick="sortTable('sym')">Ticker</th>
+            <th onclick="sortTable('score')">Score</th>
+            <th onclick="sortTable('grade')">Grade</th>
+            <th onclick="sortTable('fin')">Fin. Strength</th>
+            <th onclick="sortTable('growth')">Growth</th>
+            <th onclick="sortTable('val')">Valuation</th>
+            <th onclick="sortTable('risk')">Risk</th>
+            <th onclick="sortTable('moat')">Moat</th>
+            <th onclick="sortTable('rating')">Model Fit</th>
+          </tr>
+        </thead>
+        <tbody id="score-tbody"></tbody>
+      </table>
+    </div>
   </div>
-  <div class="disclaimer" style="margin-top:20px"><p><strong>Model transparency:</strong> All scores are the author's own assessments based on publicly available fundamental data. They represent a learning exercise in quantitative stock analysis, not professional financial research.</p></div>
+  <div class="disclaimer" style="margin-top:20px"><p><strong>Model transparency:</strong> All scores are my own assessments based on publicly available data. They are a learning exercise in comparing companies, not professional research, and the labels only describe how each company fits my model.</p></div>
+
+  <div class="score-intro" style="margin-top:24px">
+    <h3>Data Sources</h3>
+    <p>I try to be clear about where my numbers come from, since this is a learning project.</p>
+    <ul class="limit-list">
+      <li>Live stock prices: Finnhub API.</li>
+      <li>Company and financial data checked through public sources such as Yahoo Finance, company investor relations pages, SEC filings, and market data websites.</li>
+      <li>Journal reflections are based on weekly portfolio snapshots and my own research notes.</li>
+    </ul>
+    <p style="margin-top:16px;margin-bottom:0">Because this is a student project, I try to verify important numbers, but financial metrics can change over time.</p>
+  </div>
 </div>
 
-<!-- ══ JOURNAL ══ -->
+<!-- JOURNAL -->
 <div class="section" id="sec-journal">
-  <p class="journal-intro">A running log of what the simulated portfolio did each week, what my original assumptions got right or wrong, and what I learned. Updated weekly throughout Summer 2026.</p>
+  <p class="journal-intro">A running log of what the simulated portfolio did each week, what my assumptions got right or wrong, and what I learned. Updated weekly throughout Summer 2026.</p>
 
-  <div class="journal-entry">
-  <div class="je-hd">
-    <div><div class="je-week">Week 2 — Scores vs. Price Action</div><div class="je-date">June 2026</div></div>
-    <div class="je-perf up">+$15.44 (+0.15%)</div>
-  </div>
-  <div class="je-body">
-    <p>The portfolio basically held flat this week, up about 0.15%. What stood out more than the total number was how differently individual stocks moved. MSFT, my highest-scored stock at 86/100, was actually down 3.18% on the day, while SMCI jumped 15.66%, the biggest move on the entire list.</p>
-    <p>I understand now that my scoring model represents long-term company strength, not short-term price movement. A single day's drop, like MSFT's, has little effect on a company this large and well-established. A stock's price can move just from circulating information, public criticism from an analyst, or money shifting in and out of sectors, none of which necessarily reflects the actual health of the business. This is a good way to see the difference between a stable, high-quality company and a short-term trade.</p>
-    <p>SMCI's jump made more sense once I looked at beta and market cap. Its beta of 1.95 means it's nearly twice as volatile as the overall market, where a beta of 1.0 moves exactly with the market. SMCI also has a much smaller market cap than most other stocks on my list, and smaller-cap stocks can swing hard on a single piece of news since it takes less money to move the price. As someone who used to own this stock, I actually watched this exact pattern before: from August 10 to 11, 2022, SMCI jumped about 19% after reporting strong fiscal Q4 earnings. This week's move is the same kind of behavior, just on a smaller scale.</p>
-  </div>
-  <div class="je-tags">
-    <span class="je-tag">beta</span>
-    <span class="je-tag">market-cap</span>
-    <span class="je-tag">smci</span>
-    <span class="je-tag">scoring-vs-price</span>
-  </div>
-</div>
   <div class="journal-entry">
     <div class="je-hd">
-    <div><div class="je-week">Week 1 — Project Launch</div><div class="je-date">June 2026</div></div>
-    <div class="je-perf up">Initializing…</div>
+      <div><div class="je-week">Week 2 — Scores vs. Price Action</div><div class="je-date">June 2026</div></div>
+      <div class="je-perf up">+$15.44 (+0.15%)</div>
+    </div>
+    <div class="je-body">
+      <p><strong>Portfolio movement:</strong> The simulator was almost flat this week, up around 0.15%. The total number mattered less to me than how differently the individual stocks moved.</p>
+      <p><strong>Biggest surprise:</strong> MSFT has my highest model score at 86/100, but it was actually down about 3.18% on the day, while SMCI jumped around 15.66%, the biggest move on my whole list. At first I thought it was weird that Microsoft could be my top-scored stock and still drop that much.</p>
+      <p><strong>Concept I learned:</strong> My score is a long-term read on company quality, not a prediction of short-term price. A stock can move just from circulating news, an analyst comment, or money rotating between sectors, none of which changes the actual business. I had to look up beta and market cap before SMCI's jump made sense to me. A beta around 1.95 means SMCI tends to move nearly twice as much as the market, and a smaller market cap means it takes less money to swing the price. As someone who used to own this stock, I had already seen this kind of move before.</p>
+      <p><strong>Next question:</strong> I want to figure out whether my model gives too much weight to growth and not enough to valuation, since some of my high-growth names still score well even when they look expensive.</p>
+    </div>
+    <div class="je-tags">
+      <span class="je-tag">Beta</span>
+      <span class="je-tag">Market Cap</span>
+      <span class="je-tag">SMCI</span>
+      <span class="je-tag">Scoring vs. Price</span>
+    </div>
   </div>
-  <div class="je-body">
-    <p>Before this project I honestly thought finance was mostly just buying stocks and trying to pick the right company before everyone else did. I didn't think much about the deeper stuff like revenue, business model, competition, whether the price actually makes sense for what the company is. Building this made me actually look at that.</p>
-    <p>Researching MSFT, NVDA, and KO showed me how different "big stock" can mean. Microsoft felt huge and stable with a bunch of different ways to make money: software, cloud, AI. NVIDIA was more exciting but also more confusing because so much of its price is based on what people think AI will become, not just what's happening right now. Coca-Cola isn't trying to grow fast at all, it just has a brand and demand that doesn't go away. Comparing them made me realize how much of a stock price is a bet on the future and not just a reflection of the present.</p>
-    <p>The most personal part of this whole project is SMCI being on the growth list. My dad and I actually bought it in August 2020 because we thought servers and data centers were going to matter more as computing demand grew. We sold in early 2023 after it had already gone up a lot. Figured it was smarter to take the win than get greedy. It kept climbing after we sold which stings a little but I don't think that makes it a bad decision. We made a good call with the information we had at the time. That's the lesson I keep coming back to with this project. Investing isn't about timing things perfectly, it's about making a reasonable decision and being okay with not knowing how it plays out.</p>
+
+  <div class="journal-entry">
+    <div class="je-hd">
+      <div><div class="je-week">Week 1 — Project Launch</div><div class="je-date">June 2026</div></div>
+      <div class="je-perf up">Starting point</div>
+    </div>
+    <div class="je-body">
+      <p>Before this project I honestly thought finance was mostly just buying stocks and trying to pick the right company before everyone else did. I did not think much about the deeper stuff like revenue, business model, competition, or whether the price actually makes sense for what the company is. Building this made me actually look at that.</p>
+      <p>Researching MSFT, NVDA, and KO showed me how different "big stock" can mean. Microsoft felt huge and stable with a bunch of different ways to make money: software, cloud, AI. NVIDIA was more exciting but also more confusing because so much of its price is based on what people think AI will become, not just what is happening right now. Coca-Cola is not trying to grow fast at all, it just has a brand and demand that does not go away. Comparing them made me realize how much of a stock price is a bet on the future and not just a reflection of the present.</p>
+      <p>The most personal part of this whole project is SMCI being on the growth list. My dad and I actually bought it in August 2020 because we thought servers and data centers were going to matter more as computing demand grew. We sold in early 2023 after it had already gone up a lot. We figured it was smarter to take the win than get greedy. It kept climbing after we sold, which stings a little, but I do not think that makes it a bad decision. We made a reasonable call with the information we had at the time. That is the lesson I keep coming back to with this project. Investing is not about timing things perfectly, it is about making a reasonable decision and being okay with not knowing how it plays out.</p>
+    </div>
+    <div class="je-tags">
+      <span class="je-tag">Scoring Model</span>
+      <span class="je-tag">SMCI</span>
+      <span class="je-tag">Personal Experience</span>
+      <span class="je-tag">Valuation</span>
+    </div>
   </div>
-  <div class="je-tags">
-    <span class="je-tag">scoring-model</span>
-    <span class="je-tag">smci</span>
-    <span class="je-tag">personal-experience</span>
-    <span class="je-tag">valuation</span>
-  </div>
-</div>
+
   <div class="coming-soon">
-    Week 2 entry coming soon.
-    <span>Updated every Monday — check back next week.</span>
+    Updated weekly throughout Summer 2026.
+    <span>New reflections are added as the project develops.</span>
   </div>
 </div>
 
-<!-- ══ RESEARCH ══ -->
+<!-- RESEARCH -->
 <div class="section" id="sec-research">
 
   <div class="research-card">
     <div class="rc-hd">
       <div><div class="rc-sym">MSFT</div><div class="rc-name">Microsoft Corporation · Core Holding</div></div>
-      <div>
-        <span class="td-rating rat-buy" style="font-size:11px;padding:5px 12px;">BUY</span>
-      </div>
+      <div><span class="td-rating rat-buy" style="font-size:11px;padding:5px 12px;">Strong Model Fit</span></div>
     </div>
     <div class="rc-body">
-      <h5>Why It's in the Core Tier</h5>
-      <p>Microsoft has three separate businesses that would each be large companies on their own: Azure (cloud), Office 365 (productivity software), and LinkedIn/gaming. This diversification is rare. When one segment slows, the others tend to compensate. Azure's revenue has been growing above 25% year-over-year, which is exceptional for a company this size.</p>
-      <h5>The Investment Thesis</h5>
-      <p>Microsoft's shift to subscription-based revenue (Azure, Office 365, Xbox Game Pass) means revenue is recurring and predictable — the opposite of a one-time sale model. Recurring revenue is valued at a premium by the market because it's more reliable. The integration of OpenAI's technology into Copilot across all Microsoft products gives it an AI distribution advantage that will take years for competitors to replicate at the same scale.</p>
-      <h5>Key Risks</h5>
-      <p>Valuation is the main risk. A P/E above 35 means the market is pricing in continued strong growth — if Azure slows, the multiple could compress quickly. Regulatory pressure in Europe around Teams bundling is an ongoing concern. Competition from Google Cloud and AWS in the cloud segment is intensifying.</p>
+      <h5>Why I Included It</h5>
+      <p>Microsoft has several separate businesses that would each be large companies on their own: Azure (cloud), Office 365 (software), and LinkedIn and gaming. When one part slows down, the others can help make up for it. Before this project, I mostly thought of Microsoft as Windows, Office, and Xbox. Researching it made me realize how important recurring software revenue and cloud computing are to the company.</p>
+      <h5>What I Think the Business Case Is</h5>
+      <p>A lot of Microsoft's revenue is now subscription based, which means it is recurring and more predictable than a one-time sale. Investors tend to value steady, recurring revenue more highly because it is more reliable. Microsoft has also been adding AI features through Copilot across its products, which could be a long-term advantage given how widely its software is already used. Azure has recently been growing quickly, which made me realize how important cloud revenue is to the company.</p>
+      <h5>What Could Go Wrong</h5>
+      <p>Valuation is the main thing I worry about. If cloud growth slows, the stock could fall even if the business is still solid. There is also regulatory pressure in Europe and growing competition from Google Cloud and Amazon in the cloud space.</p>
       <h5>What I Learned Researching This</h5>
-      <p>I didn't understand the difference between product revenue and subscription revenue before this project. Microsoft's move from selling Office as a one-time purchase to charging monthly changed the entire character of its financials — it made earnings more predictable, which reduces risk and supports a higher valuation multiple. That's a lesson that applies far beyond just Microsoft.</p>
+      <p>I did not really understand the difference between one-time product revenue and subscription revenue before this project. Microsoft's move from selling Office as a one-time purchase to charging monthly changed the whole character of its financials and made earnings more predictable. That is a lesson that applies well beyond just Microsoft.</p>
     </div>
     <div class="rc-metrics">
-      <div class="rcm"><div class="rm-l">Beta</div><div class="rm-v">1.04</div></div>
-      <div class="rcm"><div class="rm-l">P/E</div><div class="rm-v">~35</div></div>
-      <div class="rcm"><div class="rm-l">My Score</div><div class="rm-v">84/100</div></div>
+      <div class="rcm"><div class="rm-l">Beta</div><div class="rm-v">~1.10</div></div>
+      <div class="rcm"><div class="rm-l">P/E</div><div class="rm-v">~22.6</div></div>
+      <div class="rcm"><div class="rm-l">My Score</div><div class="rm-v">86/100</div></div>
       <div class="rcm"><div class="rm-l">Sector</div><div class="rm-v" style="font-size:12px">Technology</div></div>
     </div>
+    <div class="rc-reviewed">Stats last reviewed: June 2026</div>
   </div>
 
   <div class="research-card">
     <div class="rc-hd">
       <div><div class="rc-sym">NVDA</div><div class="rc-name">NVIDIA Corporation · Growth Bet</div></div>
-      <div><span class="td-rating rat-watch" style="font-size:11px;padding:5px 12px;">WATCH</span></div>
+      <div><span class="td-rating rat-watch" style="font-size:11px;padding:5px 12px;">Mixed Model Fit</span></div>
     </div>
     <div class="rc-body">
-      <h5>Why It's in the Growth Tier</h5>
-      <p>NVIDIA's beta above 1.8 immediately flags it as volatile — it moves significantly more than the market. But the reason it belongs here isn't just the volatility, it's the nature of the business. GPU demand for AI training is currently growing faster than NVIDIA can manufacture chips. That's a rare supply constraint problem, which usually means pricing power and strong margins.</p>
-      <h5>The Investment Thesis</h5>
-      <p>NVIDIA is not just a chip company anymore — it's the infrastructure layer of the AI economy. Every major cloud provider (Amazon, Google, Microsoft, Meta) is spending billions on H100 and Blackwell GPUs to build AI capacity. NVIDIA's CUDA software platform, built over 15 years, creates a switching cost moat that is genuinely hard to replicate. AMD is trying, but software ecosystems don't get built overnight.</p>
-      <h5>Key Risks</h5>
-      <p>The valuation is the elephant in the room. A P/E above 50 means the market expects NVIDIA to keep growing at a rate that would be extraordinary for any company. If AI capex spending slows — if companies decide they've built enough GPU capacity — NVIDIA's revenue could drop sharply. China export restrictions also cut off a meaningful revenue opportunity.</p>
+      <h5>Why I Included It</h5>
+      <p>NVIDIA's beta is high (around 2.2), which means it tends to move a lot more than the overall market. I did not include it just because it is volatile though. NVIDIA stood out to me because its chips are central to many AI systems, and demand for them has been very strong.</p>
+      <h5>What I Think the Business Case Is</h5>
+      <p>NVIDIA does not just sell hardware. I learned that its CUDA software ecosystem, which it has built up over many years, makes it harder for customers to switch away to a competitor. Big cloud companies like Amazon, Google, Microsoft, and Meta have been spending heavily on its chips to build AI capacity. Competitors like AMD are trying to catch up, but software ecosystems take a long time to build.</p>
+      <h5>What Could Go Wrong</h5>
+      <p>The valuation is the biggest risk. NVIDIA's AI chip demand has been extremely strong, which is one reason investors have valued the company so highly. If that spending slows down, or if companies decide they have built enough capacity, revenue could drop quickly. Export restrictions to China also cut off part of its market.</p>
       <h5>What I Learned Researching This</h5>
-      <p>I learned the difference between a cyclical business and a secular growth story. Semiconductors used to be deeply cyclical — demand surged and crashed with PC and smartphone cycles. NVIDIA's AI exposure may have structurally changed that, but I'm not certain. That uncertainty is why it's a Growth Bet at 5% allocation rather than a Core Holding at 10%.</p>
+      <p>I learned the difference between a cyclical business and a longer-term growth story. Semiconductors used to be very cyclical, rising and falling with PC and phone cycles. NVIDIA's AI exposure may have changed that, but I am not sure, and that uncertainty is part of why it is a growth bet at a smaller position rather than a core holding.</p>
     </div>
     <div class="rc-metrics">
-      <div class="rcm"><div class="rm-l">Beta</div><div class="rm-v">1.89</div></div>
-      <div class="rcm"><div class="rm-l">P/E</div><div class="rm-v">~50</div></div>
-      <div class="rcm"><div class="rm-l">My Score</div><div class="rm-v">74/100</div></div>
+      <div class="rcm"><div class="rm-l">Beta</div><div class="rm-v">~2.2</div></div>
+      <div class="rcm"><div class="rm-l">P/E</div><div class="rm-v">~32.3</div></div>
+      <div class="rcm"><div class="rm-l">My Score</div><div class="rm-v">72/100</div></div>
       <div class="rcm"><div class="rm-l">Sector</div><div class="rm-v" style="font-size:12px">Semiconductors</div></div>
     </div>
+    <div class="rc-reviewed">Stats last reviewed: June 2026</div>
   </div>
 
   <div class="research-card">
     <div class="rc-hd">
       <div><div class="rc-sym">KO</div><div class="rc-name">The Coca-Cola Company · Core Holding</div></div>
-      <div><span class="td-rating rat-buy" style="font-size:11px;padding:5px 12px;">BUY</span></div>
+      <div><span class="td-rating rat-buy" style="font-size:11px;padding:5px 12px;">Strong Model Fit</span></div>
     </div>
     <div class="rc-body">
-      <h5>Why It's in the Core Tier</h5>
-      <p>Beta of 0.61 — Coca-Cola barely moves when the market moves. That's the definition of a defensive stock. In 2022, when the S&P 500 fell over 18%, KO dropped less than 3%. That kind of stability has a real portfolio value, especially when paired with more volatile positions.</p>
-      <h5>The Investment Thesis</h5>
-      <p>Warren Buffett has owned Coca-Cola since 1988 and still holds it. His reasoning is simple: the brand is worth more than any individual product. Coke has distribution in over 200 countries, a portfolio of 500+ beverages beyond just cola, and pricing power — they can raise prices modestly without losing significant volume because the brand loyalty is that strong. That's a textbook economic moat.</p>
-      <h5>Key Risks</h5>
-      <p>Health trends are the long-term headwind. Consumer preferences are shifting toward low-sugar and functional beverages, and KO has been slower to adapt than rivals in some markets. Currency risk is also real — with revenue in 200 countries, a strong dollar suppresses reported earnings even when the business itself is doing well.</p>
+      <h5>Why I Included It</h5>
+      <p>Coca-Cola's beta is low (around 0.35), which means it usually moves less than the overall market. It generally moves less than high-growth technology stocks, which makes it a more defensive holding. I wanted at least one company like this on my list to balance out the riskier names.</p>
+      <h5>What I Think the Business Case Is</h5>
+      <p>Coca-Cola helped me understand what a moat means in a simple way. Even though soda is not a complicated product, the brand, the distribution network in over 200 countries, and customer habits make the company difficult to compete with. It also sells hundreds of other drinks beyond cola, and it has a long history of paying and raising its dividend.</p>
+      <h5>What Could Go Wrong</h5>
+      <p>Health trends are a long-term concern, since people are shifting toward lower-sugar drinks and Coca-Cola has been slower to adapt in some markets. Currency risk also matters, because a strong dollar can lower its reported earnings even when the underlying business is doing fine.</p>
       <h5>What I Learned Researching This</h5>
-      <p>Researching KO taught me what a Dividend Aristocrat actually means — it's a company that has raised its dividend for 25+ consecutive years. KO has done it for over 60. That consistency is only possible with very stable free cash flow, which is itself a signal of competitive moat. High, stable dividends are a form of proof, not just an income feature.</p>
+      <p>Researching KO taught me what a Dividend Aristocrat actually means, which is a company that has raised its dividend for at least 25 years in a row. KO has done it for over 60. That kind of consistency is only possible with very stable cash flow, which is itself a sign of a strong, durable business.</p>
     </div>
     <div class="rc-metrics">
-      <div class="rcm"><div class="rm-l">Beta</div><div class="rm-v">0.61</div></div>
-      <div class="rcm"><div class="rm-l">P/E</div><div class="rm-v">~24</div></div>
-      <div class="rcm"><div class="rm-l">My Score</div><div class="rm-v">80/100</div></div>
+      <div class="rcm"><div class="rm-l">Beta</div><div class="rm-v">~0.35</div></div>
+      <div class="rcm"><div class="rm-l">P/E</div><div class="rm-v">~25</div></div>
+      <div class="rcm"><div class="rm-l">My Score</div><div class="rm-v">75/100</div></div>
       <div class="rcm"><div class="rm-l">Sector</div><div class="rm-v" style="font-size:12px">Consumer Staples</div></div>
     </div>
+    <div class="rc-reviewed">Stats last reviewed: June 2026</div>
   </div>
-<div class="research-card">
-  <div class="rc-hd">
-    <div><div class="rc-sym">SMCI</div><div class="rc-name">Super Micro Computer · Growth Bet</div></div>
-    <div><span class="td-rating rat-watch" style="font-size:11px;padding:5px 12px;">WATCH</span></div>
+
+  <div class="research-card">
+    <div class="rc-hd">
+      <div><div class="rc-sym">SMCI</div><div class="rc-name">Super Micro Computer · Growth Bet</div></div>
+      <div><span class="td-rating rat-watch" style="font-size:11px;padding:5px 12px;">Mixed Model Fit</span></div>
+    </div>
+    <div class="rc-body">
+      <h5>Why This One's Personal</h5>
+      <p>My dad and I actually bought SMCI in August 2020. It was not my idea at first. My dad helped me think through the business: SMCI builds high-density servers for data centers, and he thought demand for that kind of computing power was going to grow. I did not fully understand every detail at the time, but the basic logic made sense to me.</p>
+      <h5>What Happened</h5>
+      <p>We bought in at around $30 a share and sold in early 2023 at around $92, based on the prices I have checked. We sold because the stock had already gone up a lot and it felt smarter to lock in the gain than keep pushing our luck. It kept climbing after we sold, which is a little frustrating to look back on, but I do not think that makes it a bad decision. A profitable choice can still feel imperfect in hindsight.</p>
+      <h5>Why I Included It</h5>
+      <p>SMCI connects to the same AI trend as some of my other picks, since companies building AI systems need a lot of servers. It has also been volatile partly because of past accounting questions, which is one reason it sits in my growth group and not my core group.</p>
+      <h5>What I Learned Researching This</h5>
+      <p>This is the experience that taught me investing is not about timing the exact top or bottom. We made a reasonable decision with what we knew, and it worked out, but the point is not that we picked a winner. The point is that I saw how hard these decisions are, how much uncertainty is involved, and how emotions like the fear of missing out or the fear of giving back gains affect the choice.</p>
+    </div>
+    <div class="rc-metrics">
+      <div class="rcm"><div class="rm-l">Beta</div><div class="rm-v">~1.95</div></div>
+      <div class="rcm"><div class="rm-l">P/E</div><div class="rm-v">~18</div></div>
+      <div class="rcm"><div class="rm-l">My Score</div><div class="rm-v">66/100</div></div>
+      <div class="rcm"><div class="rm-l">Sector</div><div class="rm-v" style="font-size:12px">AI Infrastructure</div></div>
+    </div>
+    <div class="rc-reviewed">Stats last reviewed: June 2026</div>
   </div>
-  <div class="rc-body">
-    <h5>Why This One's Personal</h5>
-    <p>My dad and I actually bought SMCI in August 2020. It wasn't my idea, he explained the business to me first. SMCI builds high-density servers for data centers, and he thought demand for that kind of computing power was about to grow a lot. I didn't fully understand every detail at the time, but the logic made sense to me.</p>
-    <h5>What Happened</h5>
-    <p>We bought in at around $30 a share in August 2020 and sold in March 2023 at around $92. That's roughly a 3x return. We sold because the stock had already run up a lot and it felt smarter to lock in the gain than keep pushing our luck. It kept climbing after we sold, which stings a little looking back, but I don't think that makes it a bad decision.</p>
-    <h5>Why It's Still on This List</h5>
-    <p>SMCI is a direct beneficiary of the AI buildout. Companies like Microsoft, Google, and Meta need servers to run all the AI workloads they're building, and SMCI builds the high-density hardware for exactly that. The stock has also been volatile because of past accounting scrutiny, which is part of why it's a Growth Bet and not a Core Holding here.</p>
-    <h5>What I Actually Learned From This</h5>
-    <p>This is the trade that taught me investing isn't about timing the exact top or bottom. We made a reasonable decision with the information we had, and it worked out. I used to think good investors always know when to get out at the perfect moment. Now I think good investing is mostly about making sound decisions and being okay not knowing how things would have played out if you'd held longer or sold sooner.</p>
-  </div>
-  <div class="rc-metrics">
-    <div class="rcm"><div class="rm-l">Beta</div><div class="rm-v">1.95</div></div>
-    <div class="rcm"><div class="rm-l">P/E</div><div class="rm-v">~18</div></div>
-    <div class="rcm"><div class="rm-l">My Score</div><div class="rm-v">66/100</div></div>
-    <div class="rcm"><div class="rm-l">Sector</div><div class="rm-v" style="font-size:12px">AI Infrastructure</div></div>
-  </div>
-</div>
+
   <div class="coming-soon">
-    Research reports for IONQ and JPM coming in Week 2.
-    <span>New reports added weekly as the project develops.</span>
+    Additional research reports are being added throughout the summer.
+    <span>Next focus: JPM and IONQ, to compare how my model handles a financial company versus a speculative growth company.</span>
   </div>
 </div>
 
-<!-- ══ ABOUT ══ -->
+<!-- ABOUT -->
 <div class="section" id="sec-about">
   <div class="about-hero">
     <div class="about-av">G</div>
     <div>
       <h3>Gian De Gruccio</h3>
-      <div class="ah-sub">Finance Major · Community College → Transfer Candidate</div>
-      <p>I built this project to close the gap between studying finance and actually doing it. My goal is to transfer into a four-year university as a Finance major, and I wanted something concrete to show — not just grades and coursework, but evidence that I understand how markets work and can build analytical frameworks to make sense of them. This watchlist is that evidence. Every pick has a thesis, every score has a methodology, and every journal entry is an honest account of what the data did versus what I expected.</p>
+      <div class="ah-sub">Aspiring Finance / Applied Mathematics Student</div>
+      <p>I built this project because I wanted to move beyond just being interested in finance and actually practice analyzing companies. I am still learning, but this website gives me a place to organize my research, test a scoring model, and reflect on what I get right or wrong each week. Each company has a reason for being included, each score follows the same basic framework, and each journal entry tracks what I learned as the project developed.</p>
     </div>
+  </div>
+
+  <div class="learned-card">
+    <h4>Why These 15 Stocks?</h4>
+    <p>I chose these 15 companies to compare different types of investments: stable established companies, AI-related growth companies, consumer brands, financial companies, and more speculative technology names. The goal was not to create a perfect portfolio, but to practice comparing risk and quality across different sectors.</p>
   </div>
 
   <div class="learned-card">
@@ -533,58 +587,86 @@
     <div class="learned-item">
       <div class="li-num">01</div>
       <div class="li-body">
-        <h6>Finance is portfolio construction, not stock picking</h6>
-        <p>I started thinking this project was about finding good companies. It turned out to be about building a system — how much risk to take, how to balance stability and growth, and why diversification across sectors matters more than any individual pick.</p>
+        <h6>Finance is portfolio construction, not just stock picking</h6>
+        <p>I started thinking this project was about finding good companies. It turned out to be more about building a system: how much risk to take, how to balance stability and growth, and why spreading across sectors matters more than any single pick.</p>
       </div>
     </div>
     <div class="learned-item">
       <div class="li-num">02</div>
       <div class="li-body">
         <h6>Beta changed how I think about risk</h6>
-        <p>Before this project, I thought risk meant "could this company go bankrupt." Beta taught me that risk also means how much a stock amplifies market moves — and that a portfolio full of high-beta stocks gets hurt badly in downturns even if every company in it is fundamentally solid.</p>
+        <p>Before this project, I mostly thought risk meant "could this company go bankrupt." Beta taught me that risk also means how much a stock amplifies market moves, and that a list full of high-beta stocks can get hurt badly in a downturn even if every company in it is solid.</p>
       </div>
     </div>
     <div class="learned-item">
       <div class="li-num">03</div>
       <div class="li-body">
-        <h6>Valuation is a humbling exercise</h6>
-        <p>Scoring NVIDIA's valuation made me realize how much uncertainty is baked into a high P/E stock. You're not just paying for what the company is — you're paying for what you believe it will become. That's a different kind of judgment, and it's harder than it looks.</p>
+        <h6>Valuation is harder than it looks</h6>
+        <p>Scoring NVIDIA's valuation made me realize how much uncertainty is built into a high P/E stock. You are not just paying for what the company is, you are paying for what you believe it will become, and that is a different kind of judgment.</p>
       </div>
     </div>
     <div class="learned-item">
       <div class="li-num">04</div>
       <div class="li-body">
-        <h6>Consistency matters more than any single insight</h6>
-        <p>The most valuable part of this project isn't the website — it's the habit of checking prices, reading earnings summaries, and updating the journal every week. Real portfolio managers don't make one brilliant call; they make thousands of small, disciplined decisions over time.</p>
+        <h6>Consistency matters more than any single call</h6>
+        <p>The most useful part of this project is not the website itself, it is the habit of checking prices, reading about the companies, and updating the journal each week. Steady, small decisions over time seem to matter more than one big idea.</p>
       </div>
     </div>
+  </div>
+
+  <div class="learned-card">
+    <h4>Questions I'm Still Working On</h4>
+    <ul class="limit-list">
+      <li>How much should valuation matter compared with growth?</li>
+      <li>Should a company with high volatility automatically receive a lower score?</li>
+      <li>How do investors decide when a great company is too expensive?</li>
+      <li>How should I compare companies from completely different sectors?</li>
+      <li>What financial metrics matter most for banks compared with technology companies?</li>
+    </ul>
+  </div>
+
+  <div class="learned-card">
+    <h4>Next Steps for the Project</h4>
+    <ul class="limit-list">
+      <li>Add JPM and IONQ research reports.</li>
+      <li>Ask a finance, economics, business, or accounting teacher or professor for feedback on the model.</li>
+      <li>Improve the scoring model after getting feedback.</li>
+      <li>Track weekly portfolio changes through the summer.</li>
+      <li>Learn more about valuation ratios and how different sectors should be scored.</li>
+    </ul>
+  </div>
+
+  <div class="learned-card">
+    <h4>Outside Feedback</h4>
+    <p>I plan to ask a finance, economics, business, or accounting teacher or professor to review my scoring model and give feedback on how to improve it. As I get feedback, I will note what I changed and why.</p>
   </div>
 
   <div class="method-grid">
     <div class="method-card">
       <h4><span style="color:var(--gold)">◆</span> Core Selection Criteria</h4>
       <ul>
-        <li>Beta below 1.10 — moves less than the overall market</li>
-        <li>Market cap above $100B — size provides stability</li>
-        <li>Positive free cash flow for 5+ consecutive years</li>
-        <li>Dividend history or consistent buyback program</li>
-        <li>Industry leadership with defensible competitive moat</li>
-        <li>Low debt-to-equity relative to sector peers</li>
+        <li>Lower beta, so it tends to move less than the overall market</li>
+        <li>Large, well-established company</li>
+        <li>Consistent free cash flow over several years</li>
+        <li>Dividend history or steady buybacks</li>
+        <li>A clear leadership position in its industry</li>
+        <li>Reasonable debt compared with similar companies</li>
       </ul>
     </div>
     <div class="method-card">
       <h4><span style="color:var(--red)">◆</span> Growth Selection Criteria</h4>
       <ul>
-        <li>High total addressable market with early penetration</li>
-        <li>Revenue growth rate above 20% year-over-year</li>
-        <li>Structural tailwind — AI, quantum, energy drinks, etc.</li>
-        <li>High beta accepted — volatility is the price of upside</li>
-        <li>Smaller or mid-cap with room to grow significantly</li>
-        <li>Position sizing discipline — max 5% per growth bet</li>
+        <li>A large market it could keep expanding into</li>
+        <li>Faster revenue growth than the core names</li>
+        <li>Exposure to a long-term trend such as AI or quantum computing</li>
+        <li>Higher beta accepted, since more volatility comes with the upside</li>
+        <li>Often smaller, with more room to grow but more risk</li>
+        <li>Kept to a smaller position size because of that risk</li>
       </ul>
     </div>
   </div>
-  <div class="disclaimer"><p><strong>Educational purposes only.</strong> This is a student finance project built and maintained by Gian De Gruccio. Nothing here constitutes financial advice. All analysis represents the author's own learning process.</p></div>
+
+  <div class="disclaimer"><p><strong>Educational project — not financial advice.</strong> This is a student finance project built and maintained by Gian De Gruccio. Nothing here is a recommendation to buy or sell any security, and all analysis reflects my own learning process. This site was built as a student coding and finance project using HTML, CSS, JavaScript, GitHub Pages, and AI coding assistance, with the final content reviewed and edited by me.</p></div>
 </div>
 
 <script>
@@ -593,58 +675,58 @@ const API_KEY = 'd8p1q59r01qp954u56rgd8p1q59r01qp954u56s0';
 const CORE = [
   {ticker:'AAPL', name:'Apple Inc.',          sector:'Technology',       beta:'0.81',pe:'31', w52l:'164',w52h:'260',w52p:72,risk:30,
    scores:{fin:88,growth:75,val:65,risk:78,moat:95},
-   thesis:"World's largest company by market cap. Massive cash reserves, loyal ecosystem, and consistent buybacks make this the quintessential defensive tech hold."},
+   thesis:"One of the largest companies by market value. Large cash reserves, a loyal customer base, and steady buybacks make it a relatively stable technology holding."},
   {ticker:'MSFT', name:'Microsoft Corp.',      sector:'Technology',       beta:'1.10',pe:'22.6', w52l:'356',w52h:'555',w52p:65,risk:32,
    scores:{fin:92,growth:88,val:75,risk:75,moat:95},
-   thesis:"Azure cloud growth plus dominant enterprise software. Recurring revenue model reduces cyclicality. AI Copilot integration adds a compelling long-term growth vector."},
+   thesis:"Cloud growth through Azure plus widely used software. Recurring subscription revenue makes earnings more predictable, and Copilot adds an AI angle."},
   {ticker:'JNJ',  name:'Johnson & Johnson',    sector:'Healthcare',       beta:'0.55',pe:'22', w52l:'140',w52h:'170',w52p:60,risk:18,
    scores:{fin:90,growth:55,val:72,risk:92,moat:85},
-   thesis:"Dividend King with 60+ consecutive years of dividend increases. Pharma, MedTech, and consumer health diversification acts as a natural economic hedge."},
+   thesis:"Long history of raising its dividend. Pharma, medical technology, and consumer health diversify the business and add stability."},
   {ticker:'PG',   name:'Procter & Gamble',     sector:'Consumer Staples', beta:'0.59',pe:'26', w52l:'155',w52h:'183',w52p:55,risk:15,
    scores:{fin:88,growth:50,val:68,risk:94,moat:90},
-   thesis:"Household brands — Tide, Pampers, Gillette — create inelastic demand. People buy these regardless of recessions. The textbook definition of a defensive stock."},
+   thesis:"Everyday brands like Tide, Pampers, and Gillette create steady demand. People keep buying these products through good times and bad."},
   {ticker:'JPM',  name:'JPMorgan Chase',        sector:'Financials',       beta:'1.10',pe:'13', w52l:'185',w52h:'285',w52p:70,risk:35,
    scores:{fin:85,growth:68,val:82,risk:72,moat:88},
-   thesis:"Most profitable bank in U.S. history. Diversified across retail, investment banking, and asset management limits single-sector exposure significantly."},
+   thesis:"One of the largest and most profitable U.S. banks. Spreading across retail banking, investment banking, and asset management lowers single-area risk."},
   {ticker:'KO',   name:'Coca-Cola Co.',         sector:'Consumer Staples', beta:'0.35',pe:'25', w52l:'65', w52h:'84', w52p:50,risk:14,
    scores:{fin:85,growth:45,val:70,risk:95,moat:92},
-   thesis:"60-year Dividend Aristocrat with distribution in 200+ countries. Currency diversification and brand moat make this a classic capital-preservation holding."},
+   thesis:"Long-time dividend grower with distribution in over 200 countries. The brand and global reach make it a more defensive holding."},
   {ticker:'WMT',  name:'Walmart Inc.',          sector:'Consumer Staples', beta:'0.53',pe:'37', w52l:'76', w52h:'110',w52p:80,risk:20,
    scores:{fin:82,growth:65,val:58,risk:90,moat:88},
-   thesis:"Discount retail thrives in downturns as consumers trade down. E-commerce and grocery pickup have reinvigorated growth without sacrificing core value proposition."},
+   thesis:"Discount retail tends to hold up in downturns as shoppers look for value. E-commerce and grocery pickup have added newer growth."},
   {ticker:'V',    name:'Visa Inc.',             sector:'Financials',       beta:'0.95',pe:'32', w52l:'270',w52h:'365',w52p:68,risk:28,
    scores:{fin:95,growth:72,val:65,risk:82,moat:96},
-   thesis:"Visa doesn't lend money — it takes a cut of every transaction. Asset-light, high-margin, and benefits structurally from the global shift away from cash."},
+   thesis:"Visa does not lend money, it takes a small cut of transactions on its network. That makes it asset-light and tied to the shift away from cash."},
   {ticker:'BRK-B',name:'Berkshire Hathaway B',  sector:'Diversified',      beta:'0.90',pe:'21', w52l:'400',w52h:'530',w52p:75,risk:25,
    scores:{fin:94,growth:58,val:75,risk:85,moat:92},
-   thesis:"Owning Berkshire is owning a diversified portfolio managed by the greatest capital allocator in history. Insurance, equities, and operating businesses in one ticker."},
+   thesis:"Owning Berkshire is like owning a diversified mix of insurance, stock holdings, and operating businesses in a single ticker."},
   {ticker:'NEE',  name:'NextEra Energy',         sector:'Utilities',        beta:'0.58',pe:'20', w52l:'62', w52h:'92', w52p:45,risk:22,
    scores:{fin:78,growth:62,val:74,risk:90,moat:80},
-   thesis:"World's largest producer of wind and solar energy. Regulated utility income provides stability while renewables growth provides long-term upside — a rare combination."},
+   thesis:"A large producer of wind and solar energy. Regulated utility income adds stability while renewables add a longer-term growth angle."},
 ];
 
 const GROWTH = [
   {ticker:'NVDA', name:'NVIDIA Corp.',          sector:'Semiconductors',   beta:'2.20',pe:'32.3', w52l:'142',w52h:'237',w52p:85,risk:80,
    scores:{fin:78,growth:96,val:42,risk:45,moat:90},
-   thesis:"Infrastructure layer of the AI boom. Data center GPU demand from hyperscalers grows faster than supply. High valuation reflects enormous market expectations."},
+   thesis:"Its chips are central to many AI systems, and demand has been very strong. A high valuation reflects big expectations from investors."},
   {ticker:'PLTR', name:'Palantir Technologies', sector:'Data / AI',        beta:'2.50',pe:'180',w52l:'18', w52h:'125',w52p:90,risk:88,
    scores:{fin:55,growth:82,val:22,risk:35,moat:78},
-   thesis:"Government and enterprise AI analytics gaining commercial traction. Extremely high valuation and volatile price action — pure high-conviction growth play."},
+   thesis:"Government and enterprise AI analytics that is gaining commercial customers. Very high valuation and volatile price make it a speculative pick."},
   {ticker:'SMCI', name:'Super Micro Computer',  sector:'AI Infrastructure',beta:'1.95',pe:'18', w52l:'18', w52h:'120',w52p:60,risk:85,
    scores:{fin:60,growth:88,val:68,risk:40,moat:62},
-   thesis:"Designs high-density server systems for AI workloads. Direct beneficiary of hyperscaler capex cycles. Volatile due to past accounting scrutiny."},
+   thesis:"Builds high-density servers for AI workloads, so it benefits from data-center spending. Volatile partly because of past accounting questions."},
   {ticker:'IONQ', name:'IonQ Inc.',             sector:'Quantum Computing', beta:'2.10',pe:'N/A',w52l:'6',  w52h:'55', w52p:70,risk:95,
    scores:{fin:30,growth:70,val:28,risk:25,moat:72},
-   thesis:"Pure-play publicly traded quantum computing company. Pre-revenue at scale but potentially transformational if the technology matures. Highly speculative."},
+   thesis:"A publicly traded quantum computing company. Still early and not yet profitable at scale, so it is highly speculative but potentially important."},
   {ticker:'CELH', name:'Celsius Holdings',       sector:'Consumer / Bev.', beta:'2.30',pe:'45', w52l:'22', w52h:'90', w52p:35,risk:78,
    scores:{fin:65,growth:85,val:50,risk:42,moat:70},
-   thesis:"Fastest-growing energy drink brand in the U.S., challenging Monster and Red Bull. High beta reflects the all-or-nothing nature of CPG growth stories."},
+   thesis:"A fast-growing energy drink brand competing with Monster and Red Bull. High beta reflects how uncertain fast growth in this space can be."},
 ];
 
 const ALL = [...CORE,...GROWTH];
 const prices = {};
 
-// ── SCORE CALC ──
+// SCORE CALC
 function calcScore(s) {
   return Math.round(s.fin*.25 + s.growth*.25 + s.val*.20 + s.risk*.15 + s.moat*.15);
 }
@@ -652,10 +734,12 @@ function getGrade(score) {
   if(score>=80)return'A'; if(score>=70)return'B'; if(score>=60)return'C'; return'D';
 }
 function getRating(score) {
-  if(score>=75)return{label:'BUY',cls:'rat-buy'}; if(score>=55)return{label:'WATCH',cls:'rat-watch'}; return{label:'AVOID',cls:'rat-avoid'};
+  if(score>=75)return{label:'Strong',cls:'rat-buy'};
+  if(score>=55)return{label:'Mixed',cls:'rat-watch'};
+  return{label:'Weak',cls:'rat-avoid'};
 }
 
-// ── BUILD CARDS ──
+// BUILD CARDS
 function buildCard(s, tier) {
   const safe = s.ticker.replace('-','_');
   const score = calcScore(s.scores);
@@ -696,7 +780,7 @@ function buildCard(s, tier) {
 document.getElementById('core-grid').append(...CORE.map(s=>buildCard(s,'core')));
 document.getElementById('growth-grid').append(...GROWTH.map(s=>buildCard(s,'growth')));
 
-// ── SCORE TABLE ──
+// SCORE TABLE
 function buildScoreTable(sortKey='score', asc=false) {
   const rows = ALL.map(s => {
     const sc = s.scores;
@@ -704,8 +788,9 @@ function buildScoreTable(sortKey='score', asc=false) {
     return {...s, score, grade:getGrade(score), rating:getRating(score)};
   });
   rows.sort((a,b) => {
-    const av = a[sortKey] ?? a.scores?.[sortKey] ?? 0;
-    const bv = b[sortKey] ?? b.scores?.[sortKey] ?? 0;
+    let av, bv;
+    if(sortKey==='rating'){ av=a.score; bv=b.score; }
+    else { av = a[sortKey] ?? a.scores?.[sortKey] ?? 0; bv = b[sortKey] ?? b.scores?.[sortKey] ?? 0; }
     if(typeof av==='string') return asc ? av.localeCompare(bv) : bv.localeCompare(av);
     return asc ? av-bv : bv-av;
   });
@@ -728,12 +813,12 @@ function sortTable(key) {
   if(key===lastSort) sortAsc=!sortAsc; else sortAsc=false;
   lastSort=key;
   document.querySelectorAll('thead th').forEach(th=>th.classList.remove('sorted'));
-  event.target.classList.add('sorted');
+  if(event && event.target) event.target.classList.add('sorted');
   buildScoreTable(key,sortAsc);
 }
 buildScoreTable();
 
-// ── SPARKLINE ──
+// SPARKLINE
 function drawSpark(id, price, change) {
   const canvas = document.getElementById(id);
   if(!canvas) return;
@@ -758,7 +843,7 @@ function drawSpark(id, price, change) {
   ctx.strokeStyle=color; ctx.lineWidth=1.5; ctx.stroke();
 }
 
-// ── FETCH ──
+// FETCH
 async function fetchQ(ticker) {
   const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${API_KEY}`);
   if(!r.ok) throw new Error('http '+r.status);
@@ -794,7 +879,7 @@ async function loadAllPrices() {
   btn.disabled=false; btn.textContent='↻ Refresh';
 }
 
-// ── KPIs ──
+// KPIs
 function updateKPIs() {
   const per=10000/15; let tv=0,tp=0,g=0;
   ALL.forEach(s=>{
@@ -812,7 +897,7 @@ function updateKPIs() {
   document.getElementById('kv-top').textContent=`${top.ticker} · ${calcScore(top.scores)}/100`;
 }
 
-// ── SIMULATOR ──
+// SIMULATOR
 function updateSim() {
   const cap=parseInt(document.getElementById('sim-slider').value);
   document.getElementById('sim-amt').textContent=`$${cap.toLocaleString()}`;
@@ -836,7 +921,7 @@ function updateSim() {
   ret_el.textContent=`${ret>=0?'+':''}${ret.toFixed(3)}%`; ret_el.className=`st-val ${ret>=0?'up':'down'}`;
 }
 
-// ── TICKER ──
+// TICKER
 function updateTicker() {
   const items=ALL.map(s=>{
     const p=prices[s.ticker];
@@ -848,7 +933,7 @@ function updateTicker() {
   document.getElementById('ticker-track').innerHTML=items+items;
 }
 
-// ── FILTER ──
+// FILTER
 function filterCards(f,btn) {
   document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
@@ -858,7 +943,7 @@ function filterCards(f,btn) {
   });
 }
 
-// ── SECTION NAV ──
+// SECTION NAV
 function showSection(id, btn) {
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));
@@ -866,9 +951,10 @@ function showSection(id, btn) {
   btn.classList.add('active');
   const hb=document.getElementById('hero-band');
   hb.style.display=id==='watchlist'?'':'none';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── MARKET STATUS ──
+// MARKET STATUS
 function checkMarket() {
   const et=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));
   const d=et.getDay(), h=et.getHours()+et.getMinutes()/60;
@@ -877,13 +963,13 @@ function checkMarket() {
   document.getElementById('stxt').textContent=open?'Market Open':'Market Closed';
 }
 
-// ── THEME ──
+// THEME
 function toggleTheme() {
   const h=document.documentElement;
   h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');
 }
 
-// ── INIT ──
+// INIT
 checkMarket(); setInterval(checkMarket,60000);
 updateTicker();
 loadAllPrices();
