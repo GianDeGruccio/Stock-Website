@@ -1,0 +1,16 @@
+# OS / editor files
+.DS_Store
+Thumbs.db
+*.log
+
+# Never commit local secrets or Cloudflare build artifacts
+.dev.vars
+proxy/.dev.vars
+proxy/node_modules/
+proxy/.wrangler/
+
+# Common environment files (keep examples)
+.env
+.env.*
+!.env.example
+!*.example

@@ -1,0 +1,11 @@
+# wrangler.toml — configuration for the Cloudflare Worker proxy.
+# Deploy with:  npx wrangler deploy
+# Run locally with:  npx wrangler dev
+
+name = "finance-quote-proxy"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# IMPORTANT: the Finnhub key is NOT stored here. It is a secret you set once with:
+#   npx wrangler secret put FINNHUB_API_KEY
+# For local development, put it in a file named `.dev.vars` (see .dev.vars.example).

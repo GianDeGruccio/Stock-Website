@@ -1,0 +1,16 @@
+# .dev.vars.example
+# -----------------------------------------------------------------------------
+# This is the ".env.example" for this project. Cloudflare Workers read local
+# secrets from a file named ".dev.vars" (same idea as a .env file).
+#
+# Setup:
+#   1. Copy this file to ".dev.vars"      ->  cp .dev.vars.example .dev.vars
+#   2. Put your real key in ".dev.vars"   (that file is git-ignored)
+#   3. Never commit ".dev.vars" or the real key.
+#
+# For the DEPLOYED Worker (production), you do NOT use this file. Instead run:
+#   npx wrangler secret put FINNHUB_API_KEY
+#
+# Get a free API key at https://finnhub.io
+
+FINNHUB_API_KEY=your_finnhub_api_key_here

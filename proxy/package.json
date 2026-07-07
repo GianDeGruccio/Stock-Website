@@ -1,0 +1,13 @@
+{
+  "name": "finance-quote-proxy",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Small Cloudflare Worker that proxies Finnhub stock quotes so the API key stays server-side.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}
