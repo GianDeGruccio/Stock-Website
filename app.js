@@ -18,7 +18,7 @@
    e.g. 'https://finance-quote-proxy.your-subdomain.workers.dev'.
    Leave it as '' and the site still works — prices simply show as unavailable.
 ============================================================================= */
-const API_BASE_URL = '';
+const API_BASE_URL = 'https://finance-quote-proxy.giandegfinance.workers.dev';
 
 /* =============================================================================
    2. Small helpers
