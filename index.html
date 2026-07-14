@@ -331,6 +331,25 @@
     <p class="journal-intro">A running log of what the simulated portfolio did each week, what my assumptions got right or wrong, and what I learned. Updated weekly throughout Summer 2026.</p>
     <p class="journal-clarify">Note on the numbers: each entry records the daily equal-weight snapshot observed during that week's check-in — a single day's movement, not a full week's or cumulative return.</p>
 
+<div class="journal-entry">
+      <div class="je-hd">
+        <div><div class="je-week">Week 5 — Launching Version 2 and Preparing for Outside Feedback</div><div class="je-date">July 2026</div></div>
+        <div class="je-perf up">Version 2 Launch</div>
+      </div>
+      <div class="je-body">
+        <p><strong>What changed this week:</strong> This week, I launched Version 2 of my finance website. The project now feels more complete than the original version because it includes live stock prices, a 15-company watchlist, a scoring model, a Model Lab, beginner finance lessons, and a short quiz. Instead of only showing research pages, the site now gives visitors a way to interact with the model and see how changing assumptions can change company rankings.</p>
+        <p><strong>Fixing a security issue:</strong> One of the biggest improvements this week was fixing the way live market data works. Earlier in the project, I realized that putting an API key directly into a public website was a serious security issue. To solve this, I moved live price requests through a Cloudflare Worker, so the website can still show market data without exposing the key in the browser. This helped me understand that building a finance tool is not only about the investing model, but also about making the site safer and more responsible.</p>
+        <p><strong>What the Model Lab taught me:</strong> The Model Lab was also an important addition because it shows that a scoring model depends on the assumptions behind it. If someone changes the weight placed on growth, valuation, risk, or financial strength, the rankings can change even when the company data stays the same. That made me think more carefully about the limitations of my model. A simple five-factor model can be useful for beginners, but it can also oversimplify companies that operate in very different industries.</p>
+        <p><strong>Next question:</strong> My biggest realization this week is that the next step is not just adding more features. The project needs outside feedback. I want to know whether the model is accurate enough, whether the explanations are clear, and whether the site is actually useful for someone beginning to learn finance. My next goal is to send the website to professors and finance professionals so I can revise the project based on real criticism instead of only my own assumptions.</p>
+      </div>
+      <div class="je-tags">
+        <span class="je-tag">Version 2 Launch</span>
+        <span class="je-tag">Cloudflare Worker</span>
+        <span class="je-tag">Model Lab</span>
+        <span class="je-tag">Outside Feedback</span>
+      </div>
+    </div>
+
     <div class="journal-entry">
       <div class="je-hd">
         <div><div class="je-week">Week 4 — First Down Week</div><div class="je-date">July 2026</div></div>
