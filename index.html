@@ -452,7 +452,195 @@
 
   <!-- ============================ RESEARCH ============================ -->
   <section class="section" id="sec-research" aria-label="Research" tabindex="-1">
+<nav class="research-toc" aria-label="Research page sections">
+      <a href="#research-model-testing">Model Testing Project</a>
+      <a href="#research-company-notes">Company Research Notes</a>
+    </nav>
 
+    <div id="research-model-testing">
+      <div class="page-lead">
+        <h2>Testing a Simple Five-Factor Stock Scoring Framework</h2>
+      </div>
+
+      <div class="panel">
+        <h3>Research Question</h3>
+        <p>How do company rankings change when the weights in a simplified five-factor stock scoring framework are adjusted?</p>
+        <p>I care about this question because a scoring model can look objective even when it is partly based on judgment. The weights I picked reflect what I currently think matters when comparing companies, but another person could reasonably care more about growth, valuation, risk, or financial strength.</p>
+        <p>That made me want to test whether some companies stay near the top no matter how the weights change, or whether they only look strong when one factor is weighted heavily. If a company's rank depends mostly on one assumption, that tells me something different than if its rank stays strong across several different ways of thinking about investing.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Methodology</h3>
+        <p>This test uses the same 15 companies and the same underlying factor scores — Financial Strength, Growth, Valuation, Risk, and Moat — described on the Scoring Model page. Nothing about the individual company scores changes in this section.</p>
+        <p>The only thing that changes is the weight given to each factor. I tested five weighting scenarios: my default model, an equal-weight model, a growth-heavy model, a value-heavy model, and a defensive/risk-aware model. Every score is still calculated as a weighted average on a 0–100 scale.</p>
+        <p>The point of this section is not to find the one "correct" model. It is to see how much the choice of weights can move a company's rank, even when nothing about the company itself changes.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Sensitivity Analysis: Five Weighting Scenarios</h3>
+        <p>I tested five different weighting scenarios on the same 15 companies, using the same factor scores described on the Scoring Model page. Each scenario represents a different way of prioritizing what matters in a company. None of them is meant to be "the right one" — the point is to see how much the ranking moves when the priorities change.</p>
+        <p>A quick note on the numbers: all scores are rounded to whole numbers, so small differences and exact ties shouldn't be read as meaningful on their own. In the Base Model, for example, AAPL and BRK-B both show a score of 80 despite having different underlying factor scores — the rounding just happens to land them at the same number.</p>
+
+        <div class="research-card">
+          <div class="rc-hd">
+            <div><div class="rc-sym" style="font-size:16px">Base Model</div><div class="rc-name">Financial Strength 25% · Growth 25% · Valuation 20% · Risk 15% · Moat 15%</div></div>
+          </div>
+          <div class="rc-body">
+            <p>This is the weighting I actually use across the rest of the site.</p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Rank</th><th scope="col">Ticker</th><th scope="col">Score</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>MSFT</td><td>86</td></tr>
+                  <tr><td>2</td><td>V</td><td>81</td></tr>
+                  <tr><td>3</td><td>AAPL</td><td>80</td></tr>
+                  <tr><td>4</td><td>BRK-B</td><td>80</td></tr>
+                  <tr><td>5</td><td>JPM</td><td>79</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Under my default weighting, the top five are companies that score reasonably well across most factors, not companies that depend on one factor being unusually high.</p>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-hd">
+            <div><div class="rc-sym" style="font-size:16px">Equal-Weight Model</div><div class="rc-name">20% across all five factors</div></div>
+          </div>
+          <div class="rc-body">
+            <p>This reduces my specific weighting preference by treating all five factors equally.</p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Rank</th><th scope="col">Ticker</th><th scope="col">Score</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>MSFT</td><td>85</td></tr>
+                  <tr><td>2</td><td>V</td><td>82</td></tr>
+                  <tr><td>3</td><td>BRK-B</td><td>81</td></tr>
+                  <tr><td>4</td><td>AAPL</td><td>80</td></tr>
+                  <tr><td>5</td><td>JNJ</td><td>79</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Four of the same five companies stay near the top even without my specific weighting choices, which suggests this group isn't just an artifact of how I built the base model.</p>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-hd">
+            <div><div class="rc-sym" style="font-size:16px">Growth-Heavy Model</div><div class="rc-name">Financial Strength 20% · Growth 40% · Valuation 15% · Risk 10% · Moat 15%</div></div>
+          </div>
+          <div class="rc-body">
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Rank</th><th scope="col">Ticker</th><th scope="col">Score</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>MSFT</td><td>87</td></tr>
+                  <tr><td>2</td><td>V</td><td>80</td></tr>
+                  <tr><td>3</td><td>AAPL</td><td>79</td></tr>
+                  <tr><td>4</td><td>NVDA</td><td>78</td></tr>
+                  <tr><td>5</td><td>JPM</td><td>77</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>This is the only scenario where a Growth-tier company breaks into the top five. Under these assumptions, the model treats NVDA's growth as enough to outweigh its weaker valuation and risk scores, which pushes it above more defensive names like BRK-B and JNJ.</p>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-hd">
+            <div><div class="rc-sym" style="font-size:16px">Value-Heavy Model</div><div class="rc-name">Financial Strength 20% · Growth 15% · Valuation 35% · Risk 15% · Moat 15%</div></div>
+          </div>
+          <div class="rc-body">
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Rank</th><th scope="col">Ticker</th><th scope="col">Score</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>MSFT</td><td>83</td></tr>
+                  <tr><td>2</td><td>JPM</td><td>80</td></tr>
+                  <tr><td>3</td><td>BRK-B</td><td>80</td></tr>
+                  <tr><td>4</td><td>V</td><td>79</td></tr>
+                  <tr><td>5</td><td>AAPL</td><td>78</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>When valuation becomes more influential in the model, JPM moves up to #2 from #5 in the base model. This doesn't mean JPM is "cheap" in any absolute sense — it means that in my current framework, JPM's valuation score carries more weight in this scenario, which changes its overall rank.</p>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-hd">
+            <div><div class="rc-sym" style="font-size:16px">Defensive / Risk-Aware Model</div><div class="rc-name">Financial Strength 30% · Growth 15% · Valuation 15% · Risk 25% · Moat 15%</div></div>
+          </div>
+          <div class="rc-body">
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Rank</th><th scope="col">Ticker</th><th scope="col">Score</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>MSFT</td><td>85</td></tr>
+                  <tr><td>2</td><td>V</td><td>84</td></tr>
+                  <tr><td>3</td><td>BRK-B</td><td>83</td></tr>
+                  <tr><td>4</td><td>JNJ</td><td>82</td></tr>
+                  <tr><td>5</td><td>AAPL</td><td>81</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Weighting more heavily toward financial strength and lower risk keeps mostly the same core group at the top, but reorders it toward steadier businesses. JPM actually drops out of the top five under this scenario.</p>
+          </div>
+        </div>
+
+        <div class="warn-box" style="margin-top:16px">A note on IONQ: IonQ ranked #15 — last place — in all five scenarios tested, including Growth-Heavy. This does not mean IonQ is a bad company. It means that in my current framework, IonQ's weaker financial-strength and valuation scores outweigh its growth score under every weighting I tested, because the model still treats it as highly speculative given its risk and limited current fundamentals.</div>
+      </div>
+
+      <div class="panel">
+        <h3>Key Observations</h3>
+        <p>Looking across all five scenarios together, a few patterns stood out to me.</p>
+        <p>MSFT stayed #1 in every single scenario I tested, with scores ranging only from 83 to 87. That range is small compared to how much the weights themselves shifted. In my current framework, that suggests the model doesn't see MSFT as strong because of one standout factor — it's more that none of its factor scores are weak enough to get punished heavily under any of the five weighting philosophies I tried.</p>
+        <p>NVDA's rank was one of the most sensitive to the Growth-Heavy scenario, moving from #11 in four of the five scenarios up to #4 under Growth-Heavy weighting. That's a big jump from one assumption change. It shows that under these assumptions, how much you emphasize growth specifically can matter more for NVDA than for almost anything else on the list.</p>
+        <p>JPM rose to its best rank, #2, under the Value-Heavy model, up from #5 in the Base Model. This doesn't mean JPM is undervalued in any real sense — it means that when valuation becomes more influential in the model, JPM's valuation score has more room to lift its overall rank than it does under my default weights.</p>
+        <p>IonQ ranked last, #15, in all five scenarios, including Growth-Heavy, where its score was actually its highest of the five (52) but still not enough to move it out of last place. In my current framework, that suggests its weaker financial-strength and valuation scores outweigh its growth score no matter how the other weights shift — not that growth doesn't matter to the model, but that it isn't enough on its own to offset the rest.</p>
+        <p>Taken together, these patterns showed me that the model's output depends not only on the company data, but also on the assumptions built into the weighting system.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Case Studies</h3>
+
+        <h4>Microsoft vs. Nvidia</h4>
+        <p>MSFT was the most stable company in the sensitivity test, while NVDA moved much more — from #11 in four of the five scenarios up to #4 under Growth-Heavy weighting.</p>
+        <p>This comparison shows two different kinds of strength in my current framework. MSFT doesn't depend on any one factor being weighted heavily to rank well; it holds up under almost any set of assumptions I tested. NVDA's high rank, on the other hand, only shows up under a specific set of assumptions — mainly when growth is weighted much more heavily than the other factors. Neither pattern makes one company "better" than the other. It just means the model's confidence in each one rests on different things, and NVDA's ranking is more dependent on what you choose to prioritize.</p>
+
+        <h4>Coca-Cola vs. SMCI</h4>
+        <p>Under most of the scenarios I tested, KO ranked ahead of SMCI. But under Growth-Heavy weighting, SMCI ranked #11 while KO ranked #12, meaning SMCI moved slightly ahead of KO in that scenario.</p>
+        <p>KO and SMCI represent almost opposite kinds of companies: a slower-growth defensive consumer brand versus a volatile, growth-driven AI infrastructure company. The fact that their order can flip depending on the weighting is, in my current framework, the clearest example I have of why comparing very different types of companies with one scoring system is hard. It's not that the model is broken — it's that a single set of weights can't fully capture the tradeoff between stability and growth potential. Under these assumptions, which company "wins" says more about what you told the model to value than about which business is stronger.</p>
+
+        <h4>JPMorgan Chase vs. IonQ</h4>
+        <p>JPM's rank varied noticeably depending on the scenario, reaching as high as #2 under Value-Heavy weighting. IonQ, by contrast, ranked #15 — last place — in every single scenario I tested, including Growth-Heavy, where its own score was actually its highest of the five.</p>
+        <p>This comparison is less about JPM specifically and more about what IonQ's consistency shows. JPM's movement makes sense given how much its valuation score is rewarded once valuation becomes more influential. IonQ's staying in last place across every scenario suggests that, in my current framework, its weaker financial-strength and valuation scores aren't being offset by any of the weighting philosophies I tried — not even the one built to reward growth the most. That says something about how this specific model treats early-stage, low-profitability companies right now. It isn't a statement about whether IonQ is a good or bad company going forward.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Limitations of This Testing</h3>
+        <p>This testing has real limits, and I want to be upfront about them.</p>
+        <p>I only tested five preset weighting scenarios, not every possible combination of weights. There are countless other ways to prioritize these five factors, and a different set of presets could highlight different patterns than the ones I found here.</p>
+        <p>The 15 companies in this test were intentionally chosen by me for the watchlist, not randomly selected from the market. Whatever patterns show up in this testing apply to this specific group of companies, not to stocks in general.</p>
+        <p>The underlying factor scores themselves are still my own judgments, based on simplified public research rather than raw financial statements or a standardized data source. This sensitivity analysis only tests what happens when the weights change — it doesn't test whether those underlying scores are accurate in the first place.</p>
+        <p>There's no backtesting here. I'm not checking whether any of these rankings, under any scenario, would have predicted how these stocks actually performed. This is a test of how the model behaves, not a test of whether the model is right.</p>
+        <p>This also isn't a professional valuation model. There's no discounted cash flow analysis, no formal comparable-company pricing, and no statistical risk modeling behind any of these factors — just structured judgment applied consistently across companies.</p>
+        <p>Finally, applying one framework to very different kinds of businesses has real limits. The same five factors are used to score a bank, several technology companies, a utility, and early-stage growth companies. The KO vs. SMCI case study is one example of where that becomes difficult, not a case where the model successfully solved it.</p>
+        <p style="margin-bottom:0">What this section shows is that this model's rankings are sensitive to the assumptions built into it. It does not show which companies are good or bad investments, and none of it should be read as investment advice.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Outside Feedback and Revision Plan</h3>
+        <p>I have not yet received outside feedback on this project. Nothing in this section reflects feedback that has already happened — it's a plan for what comes next.</p>
+        <p>My plan is to share the site with professors and instructors in finance, economics, business, and applied math, and with finance professionals who might be willing to take a look. I'm especially interested in feedback on whether the five-factor methodology holds up as a learning framework, whether the weighting assumptions are reasonable, whether the explanations across the site are clear, and what limitations I might be missing or underestimating.</p>
+        <p style="margin-bottom:0">Once I receive feedback, any changes I make because of it will be added to the Project Revision Log on the About page, so there's an honest, visible record of what changed and why.</p>
+      </div>
+    </div>
+
+    <div id="research-company-notes">
+      <div class="page-lead">
+        <h2>Company Research Notes</h2>
+      </div>
     <div class="research-card">
       <div class="rc-hd">
         <div><div class="rc-sym">MSFT</div><div class="rc-name">Microsoft Corporation · Core Company</div></div>
@@ -552,6 +740,7 @@
     <div class="coming-soon">
       Additional research reports are being added throughout the summer.
       <span>Next focus: JPM and IONQ, to compare how my model handles a financial company versus a speculative growth company.</span>
+    </div>
     </div>
   </section>
 

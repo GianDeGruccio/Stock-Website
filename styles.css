@@ -409,3 +409,7 @@ tr.cmp-max td{color:var(--text);}
   .card{opacity:1!important;transform:none!important;}
   .ticker-track{animation:none!important;}
 }
+/* ---- Research page: jump links (Week 7 addition) -------------------------- */
+.research-toc{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
+.research-toc a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:6px;padding:8px 14px;text-decoration:none;transition:color .15s,border-color .15s;}
+.research-toc a:hover{color:var(--text);border-color:var(--blue);}
