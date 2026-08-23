@@ -305,6 +305,91 @@ const QUIZ = [
 ];
 
 /* =============================================================================
+   QUIZ2 — a second five-question set covering the SAME five concepts as QUIZ,
+   in the same order, using different questions of comparable difficulty.
+   Built for pre/post student testing so a tester never sees the identical
+   quiz twice (identical repeats would let people just remember the answer
+   position, not demonstrate new understanding).
+============================================================================= */
+const QUIZ2 = [
+  {
+    q: "Company X trades around $20 per share with about 5 billion shares outstanding. Company Y trades around $200 per share with about 200 million shares outstanding. Which company has the larger market capitalization?",
+    options: [
+      "Company Y, since its share price is ten times higher",
+      "Company X, with a market cap of roughly $100 billion versus Company Y's roughly $40 billion",
+      "They are about equal, since both trade at large, round share prices",
+      "It cannot be determined without knowing each company's profit",
+    ],
+    answer: 1,
+    explanation: "Market cap is price times shares outstanding: about 5 billion × $20 = $100B for Company X, versus 200 million × $200 = $40B for Company Y. Company X's much larger share count outweighs Company Y's higher price per share.",
+  },
+  {
+    q: "Stock A has a beta of about 0.4. Stock B has a beta of about 1.8. On a day the overall market falls 2%, what does beta alone suggest?",
+    options: [
+      "Stock A is guaranteed not to lose value",
+      "Stock B has historically tended to fall by more than Stock A on days the market drops",
+      "Stock A must have less debt than Stock B",
+      "Stock B is more likely to go bankrupt",
+    ],
+    answer: 1,
+    explanation: "Beta describes the typical size of a stock's moves relative to the market, not safety, debt, or bankruptcy risk. A lower-beta stock like A has tended to move less than the market in either direction; a higher-beta stock like B has tended to move more.",
+  },
+  {
+    q: "Company A earns $3 per share and trades at $45 (a P/E of 15). Company B also earns $3 per share but trades at $90 (a P/E of 30). What does this difference most likely reflect?",
+    options: [
+      "Company B is automatically a worse investment",
+      "Company A must have committed accounting fraud",
+      "Investors are paying more for each dollar of Company B's current profit, usually because they expect faster future growth",
+      "Company B pays a much larger dividend",
+    ],
+    answer: 2,
+    explanation: "A higher P/E generally means investors are paying more per dollar of current earnings, usually because they expect stronger future growth. It does not by itself make a stock better, worse, fraudulent, or more likely to pay dividends.",
+  },
+  {
+    q: "An investor owns 12 different stocks, but all 12 are semiconductor companies. During a broad market downturn, the portfolio falls almost as much as the overall market. What best explains this?",
+    options: [
+      "Twelve stocks is never enough to reduce risk, regardless of what they are",
+      "All 12 stocks are in the same sector, so they tend to move together even though there are many of them",
+      "Semiconductor stocks are always riskier than every other sector",
+      "The investor should have owned fewer stocks",
+    ],
+    answer: 1,
+    explanation: "Diversification mainly comes from spreading across investments that do not move together, not simply from owning a large number of stocks. Twelve stocks concentrated in one sector can still fall as a group.",
+  },
+  {
+    q: "Company Z reports earnings that beat analyst expectations, yet its stock price barely moves. Based on the idea that price reflects expectations, what's the most likely explanation?",
+    options: [
+      "The earnings report must have been inaccurate",
+      "Investors already expected strong results, so the good news was largely already priced in",
+      "Good earnings never affect stock prices",
+      "The company's underlying business must be struggling",
+    ],
+    answer: 1,
+    explanation: "Stock prices reflect what investors already expect, not just whether results are good in isolation. If expectations were already high, even strong results may not move the price much, because the price already assumed strong performance.",
+  },
+];
+
+/* =============================================================================
+   Student-test feedback form. Paste your Google Form's shareable "Send" link
+   below (not the edit link). Leave it as '' until you have it — the test
+   section will show a placeholder instead of a broken button.
+
+   To have pre/post quiz scores arrive already filled in on the form:
+   1. Add a number/short-answer field for "Pre-test score" and one for
+      "Post-test score" to your Google Form (a "Score change" field is
+      optional).
+   2. In the form editor: ⋮ menu -> "Get pre-filled link" -> fill in any
+      sample numbers for those fields -> Get link.
+   3. Copy the entry ID for each field from that URL (looks like
+      entry.1234567890=...) and paste just the number below.
+   Leave any of the three blank to skip it — nothing breaks either way.
+============================================================================= */
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfNH3lKdnMx43K3cH-PwyUvd7Pm_tzhacqOIUi8CxAOnOiZPg/viewform';
+const GOOGLE_FORM_ENTRY_PRE = '181024736';   // entry ID for the "pre-test score" field
+const GOOGLE_FORM_ENTRY_POST = '1211824918';  // entry ID for the "post-test score" field
+const GOOGLE_FORM_ENTRY_DIFF = '';  // optional: entry ID for a "score change" field
+
+/* =============================================================================
    "Project Revision Log" content (only real, confirmed developments)
 ============================================================================= */
 const REVISION_LOG = [

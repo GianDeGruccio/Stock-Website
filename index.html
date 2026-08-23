@@ -27,6 +27,7 @@
       <button class="nav-link" type="button" data-section="journal">Journal</button>
       <button class="nav-link" type="button" data-section="research">Research</button>
       <button class="nav-link" type="button" data-section="about">About</button>
+      <button class="nav-link" type="button" data-section="test">Test</button>
     </div>
     <div class="nav-right">
       <div class="mkt-status" title="Typical U.S. market hours; exchange holidays are not included">
@@ -46,6 +47,7 @@
     <button class="nav-link" type="button" data-section="journal">Journal</button>
     <button class="nav-link" type="button" data-section="research">Research</button>
     <button class="nav-link" type="button" data-section="about">About</button>
+    <button class="nav-link" type="button" data-section="test">Test</button>
   </div>
 </header>
 
@@ -67,6 +69,10 @@
         <div class="kpi"><div class="kl">Up Today</div><div class="kv" id="kv-gain">—</div><div class="ks">of 15 companies</div></div>
         <div class="kpi"><div class="kl">Top Model Score</div><div class="kv" id="kv-top" style="font-size:15px">—</div><div class="ks">highest model fit</div></div>
         <div class="kpi"><div class="kl">Market Data</div><div class="kv" id="kv-upd" style="font-size:13px">—</div><div class="ks" id="kv-upd-sub">status</div></div>
+      </div>
+      <div class="test-cta">
+        <div class="test-cta-text"><strong>Help test this project.</strong> I'm looking for a few students to try it out and tell me honestly what's confusing. About 10–15 minutes, anonymous.</div>
+        <button class="lab-btn primary" type="button" data-section="test">Start Student Test →</button>
       </div>
     </div>
   </div>
@@ -894,6 +900,7 @@
         <li>Anonymous feedback on what was clear and what was confusing.</li>
         <li>Revisions to the explanations and tools based on common misunderstandings.</li>
       </ol>
+      <p style="margin-top:14px"><button class="lab-btn" type="button" data-section="test">Go to the student test →</button></p>
       <div class="results-placeholder">Results will appear here after the first session is run. No sessions have taken place yet, so there is nothing to report. This section is built so real, anonymous findings can be added later without rebuilding the page.</div>
     </div>
 
@@ -923,6 +930,71 @@
     </div>
 
     <div class="disclaimer"><p><strong>Educational project — not financial advice.</strong> This is a student finance project built and maintained by Gian De Gruccio. Nothing here is a recommendation to buy or sell any security, and all analysis reflects my own learning process. This site was built as a student coding and finance project using HTML, CSS, JavaScript, GitHub Pages, and AI coding assistance, with the final content reviewed and edited by me.</p></div>
+  </section>
+
+  <!-- ============================ STUDENT TEST ============================ -->
+  <section class="section" id="sec-test" aria-label="Student Test" tabindex="-1">
+    <div class="page-lead">
+      <h2>Help Test This Project</h2>
+      <p>I'm running a small, informal test of whether this site actually helps someone learn a few finance basics — not collecting ratings or reviews. It takes about 10–15 minutes, and your honest reaction is genuinely more useful to me than a compliment would be.</p>
+    </div>
+
+    <div class="learned-card">
+      <h4>Before You Start</h4>
+      <ul class="limit-list">
+        <li>This is a student-built finance education and research project, not a company or product.</li>
+        <li>I'm testing whether the site helps students understand and use these tools — I'm not testing you.</li>
+        <li>This should take about 10–15 minutes.</li>
+        <li>Honest criticism is more useful to me than compliments. If something is confusing, boring, or broken, please say so.</li>
+        <li>No identifying information is required. Answer anonymously.</li>
+        <li>This is educational only. Nothing on this site is investment advice.</li>
+      </ul>
+    </div>
+
+    <div class="learned-card">
+      <h4>Step 1 — Quick Baseline (5 questions)</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px">No wrong answers here — this is a starting point, not a grade. Guessing is completely fine. Your answers won't be shown back to you; that's intentional, so Step 2 doesn't turn into "look up what I got wrong."</p>
+      <div class="quiz">
+        <div id="pretest-questions"></div>
+        <div class="quiz-actions">
+          <button class="lab-btn primary" id="pretest-check" type="button">Submit Baseline</button>
+          <span class="quiz-warn" id="pretest-warn" hidden>Please answer all 5 questions before submitting.</span>
+          <span class="quiz-score" id="pretest-score" role="status" aria-live="polite" hidden></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="learned-card">
+      <h4>Step 2 — Learn the Five Concepts</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:6px">Both quizzes cover the same five ideas, so this covers all five, not just one:</p>
+      <ol class="plan-steps">
+        <li>Go to <strong>Learn</strong> and read all five lessons (Market Cap, Beta, P/E Ratio, Diversification, Good Company vs. Good Price).</li>
+        <li>Open the <strong>Model Lab</strong> and change at least one factor weight — see how the rankings shift.</li>
+      </ol>
+      <p style="font-size:12px;color:var(--muted);margin-top:10px">Optional, not required for the quiz: once you're done, take a look at one company's page in <strong>Research</strong>.</p>
+    </div>
+
+    <div class="learned-card">
+      <h4>Step 3 — Same Five Ideas, New Questions</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px">These cover the same five concepts as Step 1, just asked a different way.</p>
+      <div class="results-placeholder" id="posttest-lock">Complete Step 1 first — this unlocks once your baseline is submitted.</div>
+      <div class="quiz" id="posttest-quiz-block" hidden>
+        <div id="posttest-questions"></div>
+        <div class="quiz-actions">
+          <button class="lab-btn primary" id="posttest-check" type="button">Check answers</button>
+          <span class="quiz-warn" id="posttest-warn" hidden>Please answer all 5 questions before submitting.</span>
+          <span class="quiz-score" id="posttest-score" role="status" aria-live="polite" hidden></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="learned-card">
+      <h4>Step 4 — Tell Me What You Actually Think</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px">This is the part that matters most. Please be honest, even if that means telling me a section wasn't clear or wasn't worth your time.</p>
+      <div id="feedback-form-slot"></div>
+    </div>
+
+    <div class="disclaimer"><p>Nothing on this page is stored, tracked, or sent anywhere by this website itself. The only record of your visit is whatever you choose to submit through the anonymous feedback form above.</p></div>
   </section>
 
 </main>

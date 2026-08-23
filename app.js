@@ -776,7 +776,189 @@ function initQuiz() {
 }
 
 /* =============================================================================
-   17. Init
+   17. Student test — pre/post quiz blocks
+   Deliberately separate from renderQuiz/checkQuiz/initQuiz above (the Learn-
+   section practice quiz) so that existing, working feature is never touched
+   by this addition.
+
+   Pre-test and post-test are intentionally DIFFERENT flows, not the same
+   check function reused twice: the pre-test must never reveal correct
+   answers or explanations (that would teach the concepts before Step 2),
+   while the post-test does reveal them once scoring is complete. Scores are
+   held in memory only (preTestScore / postTestScore below) — nothing is
+   stored or transmitted anywhere by the site itself. A page reload clears
+   them by design, same as the rest of the site's "nothing persists" model.
+
+   PRE_TEST_QUIZ / POST_TEST_QUIZ are named constants on purpose. For the
+   dry run and the first formal pilot, one fixed assignment is enough. If a
+   later formal pilot wants a counterbalanced design (some testers get QUIZ2
+   first, others get QUIZ first), the simplest approach is a URL parameter
+   read once here to swap which constant points to which array — no backend,
+   no randomness needed. Not implemented yet since it would add a variable
+   the small dry run doesn't need.
+============================================================================= */
+const PRE_TEST_QUIZ = QUIZ2;
+const POST_TEST_QUIZ = QUIZ;
+
+let preTestScore = null;
+let postTestScore = null;
+
+function renderTestQuiz(quizData, questionsElId, prefix) {
+  const el = $(questionsElId);
+  if (!el) return;
+  el.innerHTML = quizData.map(function (q, qi) {
+    const opts = q.options.map(function (opt, oi) {
+      return '<label class="q-opt" id="' + prefix + '-opt-' + qi + '-' + oi + '">' +
+        '<input type="radio" name="' + prefix + '-q' + qi + '" value="' + oi + '"/>' +
+        '<span>' + escapeHTML(opt) + '</span></label>';
+    }).join('');
+    return '<fieldset class="q-item">' +
+      '<legend>' + (qi + 1) + '. ' + escapeHTML(q.q) + '</legend>' +
+      opts +
+      '<div class="q-explain" id="' + prefix + '-exp-' + qi + '" hidden></div>' +
+    '</fieldset>';
+  }).join('');
+}
+
+function allAnswered(quizData, prefix) {
+  return quizData.every(function (_, qi) {
+    return !!document.querySelector('input[name="' + prefix + '-q' + qi + '"]:checked');
+  });
+}
+
+function scoreOnly(quizData, prefix) {
+  let score = 0;
+  quizData.forEach(function (q, qi) {
+    const chosen = document.querySelector('input[name="' + prefix + '-q' + qi + '"]:checked');
+    if (chosen && parseInt(chosen.value, 10) === q.answer) score++;
+  });
+  return score;
+}
+
+// Marks correct/incorrect and shows explanations. Only ever called for the
+// post-test — the pre-test never calls this, by design.
+function revealAndScore(quizData, prefix) {
+  let score = 0;
+  quizData.forEach(function (q, qi) {
+    q.options.forEach(function (_, oi) {
+      const o = $(prefix + '-opt-' + qi + '-' + oi);
+      if (o) o.classList.remove('correct', 'incorrect');
+    });
+    const chosen = document.querySelector('input[name="' + prefix + '-q' + qi + '"]:checked');
+    const exp = $(prefix + '-exp-' + qi);
+    const correctOpt = $(prefix + '-opt-' + qi + '-' + q.answer);
+    if (correctOpt) correctOpt.classList.add('correct');
+    const val = parseInt(chosen.value, 10);
+    if (val === q.answer) {
+      score++;
+      if (exp) exp.innerHTML = '<span class="ok">Correct.</span> ' + escapeHTML(q.explanation);
+    } else {
+      const wrong = $(prefix + '-opt-' + qi + '-' + val);
+      if (wrong) wrong.classList.add('incorrect');
+      if (exp) exp.innerHTML = '<span class="no">Not quite.</span> ' + escapeHTML(q.explanation);
+    }
+    if (exp) exp.hidden = false;
+  });
+  return score;
+}
+
+function lockQuizInputs(quizData, prefix) {
+  quizData.forEach(function (_, qi) {
+    document.querySelectorAll('input[name="' + prefix + '-q' + qi + '"]').forEach(function (input) {
+      input.disabled = true;
+    });
+  });
+}
+
+function unlockPostTest() {
+  const lock = $('posttest-lock');
+  const block = $('posttest-quiz-block');
+  if (lock) lock.hidden = true;
+  if (block) block.hidden = false;
+}
+
+function submitPreTest() {
+  const warn = $('pretest-warn');
+  if (!allAnswered(PRE_TEST_QUIZ, 'pre')) {
+    if (warn) warn.hidden = false;
+    return;
+  }
+  if (warn) warn.hidden = true;
+
+  preTestScore = scoreOnly(PRE_TEST_QUIZ, 'pre');
+  lockQuizInputs(PRE_TEST_QUIZ, 'pre');
+
+  const check = $('pretest-check');
+  if (check) check.hidden = true;
+  const scoreEl = $('pretest-score');
+  if (scoreEl) { scoreEl.textContent = 'Baseline complete — continue to Step 2.'; scoreEl.hidden = false; }
+
+  unlockPostTest();
+  renderFeedbackSlot();
+}
+
+function submitPostTest() {
+  const warn = $('posttest-warn');
+  if (!allAnswered(POST_TEST_QUIZ, 'post')) {
+    if (warn) warn.hidden = false;
+    return;
+  }
+  if (warn) warn.hidden = true;
+
+  postTestScore = revealAndScore(POST_TEST_QUIZ, 'post');
+  lockQuizInputs(POST_TEST_QUIZ, 'post');
+
+  const check = $('posttest-check');
+  if (check) check.hidden = true;
+  const scoreEl = $('posttest-score');
+  if (scoreEl) { scoreEl.textContent = 'Score: ' + postTestScore + ' / ' + POST_TEST_QUIZ.length; scoreEl.hidden = false; }
+
+  renderFeedbackSlot();
+}
+
+function buildFeedbackURL() {
+  if (typeof GOOGLE_FORM_URL !== 'string' || !GOOGLE_FORM_URL.trim()) return null;
+  const url = GOOGLE_FORM_URL.trim();
+  const params = [];
+  if (typeof GOOGLE_FORM_ENTRY_PRE === 'string' && GOOGLE_FORM_ENTRY_PRE.trim() && preTestScore !== null) {
+    params.push('entry.' + GOOGLE_FORM_ENTRY_PRE.trim() + '=' + preTestScore);
+  }
+  if (typeof GOOGLE_FORM_ENTRY_POST === 'string' && GOOGLE_FORM_ENTRY_POST.trim() && postTestScore !== null) {
+    params.push('entry.' + GOOGLE_FORM_ENTRY_POST.trim() + '=' + postTestScore);
+  }
+  if (typeof GOOGLE_FORM_ENTRY_DIFF === 'string' && GOOGLE_FORM_ENTRY_DIFF.trim() && preTestScore !== null && postTestScore !== null) {
+    params.push('entry.' + GOOGLE_FORM_ENTRY_DIFF.trim() + '=' + (postTestScore - preTestScore));
+  }
+  if (!params.length) return url;
+  return url + (url.indexOf('?') === -1 ? '?' : '&') + 'usp=pp_url&' + params.join('&');
+}
+
+function renderFeedbackSlot() {
+  const el = $('feedback-form-slot');
+  if (!el) return;
+  const url = buildFeedbackURL();
+  if (url) {
+    el.innerHTML = '<a class="lab-btn primary" href="' + escapeHTML(url) +
+      '" target="_blank" rel="noopener noreferrer">Open Feedback Form ↗</a>' +
+      '<p style="font-size:11.5px;color:var(--muted);margin-top:8px">If both quizzes are done, your scores will already be filled in on the form — feel free to review or change them before submitting.</p>';
+  } else {
+    el.innerHTML = '<div class="results-placeholder">The feedback form link has not been added yet. ' +
+      '(Paste it into GOOGLE_FORM_URL near the top of data.js.)</div>';
+  }
+}
+
+function initTestQuizzes() {
+  renderTestQuiz(PRE_TEST_QUIZ, 'pretest-questions', 'pre');
+  renderTestQuiz(POST_TEST_QUIZ, 'posttest-questions', 'post');
+  const preCheck = $('pretest-check');
+  if (preCheck) preCheck.addEventListener('click', submitPreTest);
+  const postCheck = $('posttest-check');
+  if (postCheck) postCheck.addEventListener('click', submitPostTest);
+  renderFeedbackSlot();
+}
+
+/* =============================================================================
+   18. Init
 ============================================================================= */
 function init() {
   initTheme();
@@ -790,6 +972,7 @@ function init() {
   buildScoreTable(); initScoreTableSort();
   renderFactorGuide(); renderScoreBands(); renderRevisionLog();
   renderLessons(); initQuiz();
+  initTestQuizzes();
   initModelLab();
   initFilters();
   initMobileMenu();
