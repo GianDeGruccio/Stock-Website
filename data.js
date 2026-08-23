@@ -374,20 +374,38 @@ const QUIZ2 = [
    below (not the edit link). Leave it as '' until you have it — the test
    section will show a placeholder instead of a broken button.
 
-   To have pre/post quiz scores arrive already filled in on the form:
-   1. Add a number/short-answer field for "Pre-test score" and one for
-      "Post-test score" to your Google Form (a "Score change" field is
-      optional).
+   Every value below is computed in the browser during the test and only
+   ever leaves the page if the tester chooses to submit the feedback form —
+   nothing is sent automatically. Leave any entry ID blank to skip that
+   field silently; nothing breaks either way.
+
+   To add a new auto-filled field yourself:
+   1. Add a short-answer field to your Google Form.
    2. In the form editor: ⋮ menu -> "Get pre-filled link" -> fill in any
-      sample numbers for those fields -> Get link.
-   3. Copy the entry ID for each field from that URL (looks like
-      entry.1234567890=...) and paste just the number below.
-   Leave any of the three blank to skip it — nothing breaks either way.
+      sample value for that field -> Get link.
+   3. Copy the entry ID from that URL (looks like entry.1234567890=...)
+      and paste just the number below.
 ============================================================================= */
 const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfNH3lKdnMx43K3cH-PwyUvd7Pm_tzhacqOIUi8CxAOnOiZPg/viewform';
-const GOOGLE_FORM_ENTRY_PRE = '181024736';   // entry ID for the "pre-test score" field
-const GOOGLE_FORM_ENTRY_POST = '1211824918';  // entry ID for the "post-test score" field
-const GOOGLE_FORM_ENTRY_DIFF = '';  // optional: entry ID for a "score change" field
+const GOOGLE_FORM_ENTRY_PRE = '181024736';        // "pre-test score" field
+const GOOGLE_FORM_ENTRY_POST = '1211824918';      // "post-test score" field
+const GOOGLE_FORM_ENTRY_DIFF = '';                // optional: "score change" field
+const GOOGLE_FORM_ENTRY_TIME = '764683917';       // "elapsed time, seconds" field
+const GOOGLE_FORM_ENTRY_ORDER = '1892442255';     // "quiz order" field — value is always 'A' or 'B'
+const GOOGLE_FORM_ENTRY_PRE_ITEMS = '1608247750'; // "pre-test item results" field — e.g. "1,0,1,1,0"
+const GOOGLE_FORM_ENTRY_POST_ITEMS = '693054674'; // "post-test item results" field — e.g. "1,1,1,1,1"
+/* Item-vector positions always correspond, in order, to:
+   1. Market Capitalization  2. Beta  3. P/E Ratio
+   4. Diversification        5. Good Company vs. Good Price
+   This holds regardless of which quiz set (QUIZ or QUIZ2) a tester saw,
+   since both cover the five concepts in this same fixed order. */
+
+/* Curated subset for the Student Test's mini Model Lab widget. Chosen (not
+   random) so that pushing Valuation up produces a visible rank change
+   within a handful of rows — see TESTING-METHODOLOGY.md for why this
+   specific set. Editing this list changes only the mini-widget demo, never
+   the real Model Lab, which always uses the full ALL list. */
+const MODEL_LAB_MINI_TICKERS = ['MSFT', 'JPM', 'JNJ', 'KO', 'NVDA', 'SMCI', 'PLTR'];
 
 /* =============================================================================
    "Project Revision Log" content (only real, confirmed developments)

@@ -271,6 +271,12 @@ tr.cmp-max td{color:var(--text);}
 .lesson dd{margin:0;font-size:13px;color:var(--muted);line-height:1.65;}
 .lesson dd.connect{color:var(--text);}
 
+/* Student Test only: the "connect" field isn't tested by either quiz set,
+   so it's shown smaller/muted here as clearly-optional context. Scoped to
+   #test-lessons specifically so the real Learn page (#learn-lessons) is
+   completely unaffected. */
+#test-lessons .lesson dd.connect{color:var(--muted);font-size:11.5px;}
+
 .quiz{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:26px;margin-top:8px;}
 .quiz h4{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;margin-bottom:6px;}
 .quiz > p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:18px;}

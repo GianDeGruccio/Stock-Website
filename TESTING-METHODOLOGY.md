@@ -19,10 +19,10 @@ it shows the site doesn't work as well as I hoped.
 
 ## Testing question
 
-Does using this website for about 10–15 minutes measurably improve a student's
-understanding of five basic investing concepts (market capitalization, beta,
-P/E ratio, diversification, and price vs. quality), and what do real users
-find confusing, boring, or broken?
+Does a guided, roughly 6–8 minute walkthrough of this site measurably improve
+a student's understanding of five basic investing concepts (market
+capitalization, beta, P/E ratio, diversification, and price vs. quality), and
+what do real users find confusing, boring, or broken?
 
 ## Planned dry run
 
@@ -37,6 +37,13 @@ including any pre/post score change — will not be reported as findings
 about the website's educational value.** The sample is too small and too
 informal for that, and I am not treating it as pilot data.
 
+For the dry run specifically, I'll hand out `?order=a` and `?order=b` links
+myself rather than the plain link, so I deliberately walk through both quiz
+orderings at least once each. With only 3–5 people, letting the built-in
+random assignment decide could easily hand every tester the same order by
+chance, meaning the reversed path never actually gets exercised before it
+matters.
+
 ## Planned formal pilot
 
 **Purpose: the first actual learning and feedback analysis.** After fixing
@@ -47,29 +54,63 @@ described honestly (who, how many, how recruited) rather than vaguely. This
 is the round whose pre/post scores and feedback I intend to actually analyze
 and, eventually, publish a summary of.
 
+For balance at this sample size, I'll distribute the `?order=a` and
+`?order=b` links deliberately alternating, rather than relying only on the
+site's random fallback — true 50/50 randomness can plausibly land at an
+uneven split like 13/7 at n=15–30, while alternation guarantees the two
+orders stay close to even. To avoid the alternating sequence itself lining
+up with something else (e.g. one classroom's invites all going out before
+another's), I'll flip a coin for which order the very first tester gets, then
+alternate strictly from there. The random fallback remains available in the
+code for any later, broader, or public testing where manual alternation
+isn't practical.
+
+Before running the formal pilot, I also intend to have an outside teacher or
+educator review `QUIZ` and `QUIZ2` for approximate difficulty balance — see
+"Known methodological limitations" below for why.
+
 ## What testers do
 
-1. Read a short, honest framing of the test (what it is, that it takes
-   ~10–15 minutes, that criticism is more useful than compliments, that it's
-   anonymous and not investment advice).
-2. Take a 5-question baseline quiz. **Answers are not revealed** — no
-   correct/incorrect marks, no explanations, and ideally not even the score
-   itself — specifically so this step can't teach the concepts before the
-   learning step that follows. The quiz locks after submission.
-3. Read all five Learn lessons (the same five concepts the quizzes cover)
-   and use the Model Lab, changing at least one factor weight. A Research
-   page visit is offered afterward as optional, since it isn't tied to a
-   specific quiz concept.
-4. Take a second 5-question quiz covering the same five concepts with
-   different questions, so it isn't a memorized repeat of the first. This
-   quiz does reveal correct answers and explanations once submitted, since
-   measurement is finished at that point. This step only unlocks after
-   Step 2's baseline is submitted.
-5. Submit anonymous feedback through a separate Google Form. If both quizzes
-   are complete, the pre- and post-test scores arrive already filled in on
-   the form (via a Google Forms pre-filled link built from data already in
-   the tester's own browser) — the tester can still review or change them
-   before submitting.
+Everything below happens on one page, inside the Student Test section —
+there's no navigating to the real Learn or Model Lab pages during the test.
+This is a deliberate change from an earlier version of this flow (see
+"Known methodological limitations"): it removes navigation friction, and it
+closes a real answer-leakage risk, since the ordinary Learn page's own
+practice quiz uses the same question set (`QUIZ`) as the post-test.
+
+1. Read a short, honest framing of the test (what it is, that it takes about
+   6–8 minutes total including the feedback form, that criticism is more
+   useful than compliments, that it's anonymous and not investment advice).
+2. **Step 1 — baseline quiz (5 questions).** Answers are not revealed — no
+   correct/incorrect marks, no explanations, and not the score itself —
+   specifically so this step can't teach the concepts before the learning
+   step that follows. The quiz locks after submission.
+3. **Step 2 — five concepts, inline.** The same five lessons the quizzes
+   cover render directly inside the Student Test section, pulled from the
+   same `LESSONS` data the real Learn page uses, so an edit to a lesson
+   automatically appears in both places. Each lesson's "how it connects
+   here" line is shown smaller and muted, signaling it's background context
+   rather than something either quiz tests directly (see "How learning is
+   measured").
+4. **Step 3 — a directed Model Lab interaction.** A single Valuation-weight
+   slider, defaulting to the site's real default (20), with the instruction
+   to set it to 90 and watch a small, curated set of companies re-rank. This
+   is a supplemental, applied demonstration of the fifth lesson concept
+   (Good Company vs. Good Price) — not a second, independent teaching
+   moment, and not the full Model Lab (which stays unchanged elsewhere on
+   the site, with all five factors and all fifteen companies).
+5. **Step 4 — post-test (5 questions, alternate set).** Covers the same five
+   concepts with different questions, so it isn't a memorized repeat of the
+   first. This quiz reveals correct answers and explanations once submitted,
+   since measurement is finished at that point. Unlocks only after Step 1's
+   baseline is submitted.
+6. **Step 5 — anonymous feedback**, through a separate Google Form. Six
+   values are computed in the tester's own browser and arrive pre-filled on
+   the form once Step 4 is complete: pre-test score, post-test score,
+   elapsed time, which quiz order they got, and a correctness vector for
+   each quiz (see "How learning is measured"). Nothing is transmitted
+   anywhere unless the tester actually submits that form — the tester can
+   still review or change any pre-filled value before submitting.
 
 ## How learning is measured
 
@@ -84,18 +125,67 @@ because by that point scoring is complete. Both scores exist only in the
 tester's own browser session and are never sent anywhere unless the tester
 submits the feedback form — see "Feedback being collected" below.
 
+**Counterbalancing.** Which set (`QUIZ` or `QUIZ2`) a given tester sees first
+is controlled by a `?order=` URL parameter (`a` or `b`), falling back to a
+random 50/50 assignment if absent. See "Planned dry run" / "Planned formal
+pilot" above for how this is actually used at each stage. This exists
+because the two sets, while intended to test the same five concepts at
+comparable difficulty, are not guaranteed to be perfectly equivalent — see
+"Known methodological limitations."
+
+**Per-concept analysis, not just the aggregate.** Both quiz question sets
+cover the five concepts in the same fixed order (market cap, beta, P/E,
+diversification, price vs. quality), so each submission also records a
+five-position correctness vector (e.g. `1,0,1,1,0`) for the pre- and
+post-test, not just the total score. This lets me check whether the score
+change is roughly even across all five concepts, or concentrated in one.
+That matters specifically because of Step 3: the mini Model Lab interaction
+only reinforces the fifth concept (price vs. quality) — it doesn't touch the
+other four at all. If the fifth question's gain looks similar to the other
+four, that's evidence the five inline lessons are doing the real teaching
+and the mini Model Lab is genuinely supplemental, as intended. If it looks
+meaningfully larger, that's a real, reportable finding on its own — either
+way, this is checked rather than assumed. **The headline pre/post
+comparison should not be read as evidence that the whole website, or the
+Model Lab specifically, caused any observed change** — it's a measure of
+the five inline lessons plus one directed applied interaction, in a guided
+sequence, not of the site's Model Lab or Learn section as an independent
+visitor would encounter them.
+
 The self-reported understandability rating collected in the Google Form is
 treated as a secondary, subjective signal — useful context, not the headline
 number. "People rated it highly" is not, by itself, evidence of learning.
 
 ## Feedback being collected
 
-Through the Google Form: pre-test score, post-test score (both pre-filled
-when available, editable by the tester), which sections a tester used, prior
-familiarity with stock analysis, roughly how much time they spent, an
-understandability rating, what became clearer, what was confusing, what
-should change, and whether their anonymous feedback may be quoted. No name,
-email, or other identifying information is collected or required.
+Through the Google Form. No name, email, or other identifying information is
+collected or required.
+
+**Automatically filled in, required** (computed in-browser, never typed by
+the tester):
+- Pre-test score and post-test score
+- Elapsed time on the test, in seconds — measured from when the tester opens
+  the Student Test section to when they finish the post-test, not from page
+  load, and not self-estimated
+- Quiz order (`A` or `B`) — which question set the tester saw first
+- Pre-test and post-test item-level correctness vectors (e.g. `1,0,1,1,0`),
+  used for the per-concept analysis described above
+
+**Typed by the tester, required:**
+- Prior familiarity with stock analysis (clearly anchored categories)
+- Overall clarity/ease, 1–5 (anchored endpoints)
+- "What was the most confusing or weakest part? If nothing was confusing,
+  just say so."
+
+**Typed by the tester, optional:**
+- What became clearer
+- What would you improve
+- Permission to quote anonymously
+
+**Deliberately not asked:** which sections a tester used (the guided flow
+means every completing tester used the same sequence, so this would just
+collect a constant) and a self-estimated time spent (replaced by the
+automatic measurement above, which doesn't rely on a tester's guess).
 
 ## What counts as completion
 
@@ -120,15 +210,30 @@ vice versa) will be reported as partial, not folded into the completed count.
   interested in finance or more patient with a school project than average,
   which could bias results in a positive direction.
 - **I both built the site and am grading the quiz.** I wrote both quiz sets
-  and consider them equivalent in difficulty, but I'm not a neutral third
-  party, and I haven't had an outside educator review them for balance yet.
-- **Order isn't fully enforced.** The site's normal navigation stays open
-  during testing — nothing stops a tester from browsing Learn before
-  starting the baseline quiz, which would undercut the blind pre-test. The
-  post-test is locked until the baseline is submitted, but earlier browsing
-  isn't prevented. For the dry run this is managed through direct
-  instruction; whether it's a real problem at pilot scale is itself
-  something the dry run should surface.
+  and intended them to be equivalent in difficulty, but I'm not a neutral
+  third party. On a close read, `QUIZ2` (used as the pre-test by default)
+  leans more on applied/scenario reasoning in at least a few of its five
+  questions than `QUIZ` does — e.g. its market-cap question requires an
+  actual multiplication comparison, where `QUIZ`'s is closer to a
+  definition-recall question. If that difference is real rather than
+  incidental, it would tend to make the measured pre→post gain look larger
+  than actual learning alone would produce, since part of the "improvement"
+  could just be answering a differently-styled quiz the second time. This is
+  exactly why counterbalancing (see "How learning is measured") and an
+  outside educator's review, both planned before the formal pilot, matter —
+  and it's also why dry-run results specifically should not be read as
+  evidence of the site's educational value, even before accounting for
+  sample size.
+- **The Student Test flow no longer sends testers to the real Learn or
+  Model Lab pages, which resolves a leakage risk an earlier version of this
+  document flagged: the ordinary Learn page's own practice quiz uses the
+  same question set as the post-test, so a tester who happened to try it
+  mid-test could see post-test answers early.** With lessons rendered
+  inline and the mini Model Lab self-contained inside the Student Test
+  section itself, that specific risk no longer applies. This doesn't
+  guarantee full attention to the inline lesson content — nothing about a
+  web page can force genuine reading over fast scrolling — but it does
+  remove the one concrete way this design could leak the actual answers.
 - **Nothing persists across a page reload.** Scores live only in the
   browser's memory for that session, matching the site's existing "nothing
   is stored" design. An accidental refresh mid-test loses the baseline score

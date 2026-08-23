@@ -85,6 +85,14 @@ function showSection(id) {
   const hero = $('hero-band');
   if (hero) hero.style.display = (id === 'watchlist') ? '' : 'none';
 
+  // Student Test timer: starts the first time the tester actually opens the
+  // Test section, not at page load, so elapsed time reflects time spent on
+  // the test rather than time since the page happened to load. testStartedAt
+  // is declared in section 17 below — safe to reference here because this
+  // function only ever runs (on a click or from init()) after the entire
+  // script, including that declaration, has already executed once.
+  if (id === 'test' && testStartedAt === null) testStartedAt = Date.now();
+
   closeMobileMenu();
   window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 }
@@ -700,8 +708,12 @@ function initModelLab() {
 /* =============================================================================
    16. Learn lessons + practice quiz (browser-only, no data leaves the page)
 ============================================================================= */
-function renderLessons() {
-  const el = $('learn-lessons');
+// targetElId defaults to the real Learn page so every existing call site
+// keeps working unchanged. The Student Test flow calls this a second time
+// with 'test-lessons' — same LESSONS array, same markup, so an edit to any
+// lesson in data.js automatically appears in both places.
+function renderLessons(targetElId) {
+  const el = $(targetElId || 'learn-lessons');
   if (!el) return;
   el.innerHTML = LESSONS.map(function (l, i) {
     return '<div class="lesson">' +
@@ -776,7 +788,7 @@ function initQuiz() {
 }
 
 /* =============================================================================
-   17. Student test — pre/post quiz blocks
+   17. Student test — pre/post quiz blocks, inline lessons, mini Model Lab
    Deliberately separate from renderQuiz/checkQuiz/initQuiz above (the Learn-
    section practice quiz) so that existing, working feature is never touched
    by this addition.
@@ -785,23 +797,33 @@ function initQuiz() {
    check function reused twice: the pre-test must never reveal correct
    answers or explanations (that would teach the concepts before Step 2),
    while the post-test does reveal them once scoring is complete. Scores are
-   held in memory only (preTestScore / postTestScore below) — nothing is
-   stored or transmitted anywhere by the site itself. A page reload clears
-   them by design, same as the rest of the site's "nothing persists" model.
+   held in memory only — nothing is stored or transmitted anywhere by the
+   site itself. A page reload clears them by design, same as the rest of the
+   site's "nothing persists" model.
 
-   PRE_TEST_QUIZ / POST_TEST_QUIZ are named constants on purpose. For the
-   dry run and the first formal pilot, one fixed assignment is enough. If a
-   later formal pilot wants a counterbalanced design (some testers get QUIZ2
-   first, others get QUIZ first), the simplest approach is a URL parameter
-   read once here to swap which constant points to which array — no backend,
-   no randomness needed. Not implemented yet since it would add a variable
-   the small dry run doesn't need.
+   Counterbalancing: ?order=a or ?order=b in the URL forces which quiz set
+   is used as the pre-test vs. post-test, for deliberate A/B alternation
+   during a controlled pilot. No parameter falls back to a random 50/50
+   assignment, for later broader/public testing where manual alternation
+   isn't practical.
+     Order 'a' = QUIZ2 first (pre) / QUIZ second (post) — the original default.
+     Order 'b' = QUIZ first (pre) / QUIZ2 second (post) — reversed.
 ============================================================================= */
-const PRE_TEST_QUIZ = QUIZ2;
-const POST_TEST_QUIZ = QUIZ;
+function resolveQuizOrder() {
+  const params = new URLSearchParams(window.location.search);
+  const forced = (params.get('order') || '').toLowerCase();
+  if (forced === 'a' || forced === 'b') return forced;
+  return Math.random() < 0.5 ? 'a' : 'b';
+}
+const QUIZ_ORDER = resolveQuizOrder();
+const PRE_TEST_QUIZ = QUIZ_ORDER === 'a' ? QUIZ2 : QUIZ;
+const POST_TEST_QUIZ = QUIZ_ORDER === 'a' ? QUIZ : QUIZ2;
 
 let preTestScore = null;
 let postTestScore = null;
+let preTestItems = null;    // e.g. "1,0,1,1,0" — same 5-concept order as QUIZ/QUIZ2
+let postTestItems = null;
+let testStartedAt = null;   // set once, in showSection(), the first time id === 'test'
 
 function renderTestQuiz(quizData, questionsElId, prefix) {
   const el = $(questionsElId);
@@ -826,14 +848,17 @@ function allAnswered(quizData, prefix) {
   });
 }
 
-function scoreOnly(quizData, prefix) {
-  let score = 0;
-  quizData.forEach(function (q, qi) {
+// Returns a 0/1 array, one entry per question, in question order — which is
+// also concept order (market cap, beta, P/E, diversification, price-vs-
+// quality) for both QUIZ and QUIZ2. Score is always vectorSum() of this, so
+// a reported score and its item vector can never disagree.
+function scoreVector(quizData, prefix) {
+  return quizData.map(function (q, qi) {
     const chosen = document.querySelector('input[name="' + prefix + '-q' + qi + '"]:checked');
-    if (chosen && parseInt(chosen.value, 10) === q.answer) score++;
+    return (chosen && parseInt(chosen.value, 10) === q.answer) ? 1 : 0;
   });
-  return score;
 }
+function vectorSum(vec) { return vec.reduce(function (a, b) { return a + b; }, 0); }
 
 // Marks correct/incorrect and shows explanations. Only ever called for the
 // post-test — the pre-test never calls this, by design.
@@ -885,7 +910,9 @@ function submitPreTest() {
   }
   if (warn) warn.hidden = true;
 
-  preTestScore = scoreOnly(PRE_TEST_QUIZ, 'pre');
+  const vec = scoreVector(PRE_TEST_QUIZ, 'pre');
+  preTestScore = vectorSum(vec);
+  preTestItems = vec.join(',');
   lockQuizInputs(PRE_TEST_QUIZ, 'pre');
 
   const check = $('pretest-check');
@@ -894,7 +921,9 @@ function submitPreTest() {
   if (scoreEl) { scoreEl.textContent = 'Baseline complete — continue to Step 2.'; scoreEl.hidden = false; }
 
   unlockPostTest();
-  renderFeedbackSlot();
+  // Feedback link intentionally NOT rendered here — it only becomes
+  // available once the post-test is submitted, so it's never shown
+  // partially filled in (see submitPostTest / renderFeedbackSlot).
 }
 
 function submitPostTest() {
@@ -905,7 +934,10 @@ function submitPostTest() {
   }
   if (warn) warn.hidden = true;
 
-  postTestScore = revealAndScore(POST_TEST_QUIZ, 'post');
+  const vec = scoreVector(POST_TEST_QUIZ, 'post');
+  postTestScore = vectorSum(vec);
+  postTestItems = vec.join(',');
+  revealAndScore(POST_TEST_QUIZ, 'post'); // marks correct/incorrect + shows explanations; score comes from vec above
   lockQuizInputs(POST_TEST_QUIZ, 'post');
 
   const check = $('posttest-check');
@@ -916,45 +948,118 @@ function submitPostTest() {
   renderFeedbackSlot();
 }
 
+// Every value is correctly percent-encoded via encodeURIComponent() — needed
+// now that some values (the item vectors) contain commas, not just digits.
 function buildFeedbackURL() {
   if (typeof GOOGLE_FORM_URL !== 'string' || !GOOGLE_FORM_URL.trim()) return null;
   const url = GOOGLE_FORM_URL.trim();
   const params = [];
-  if (typeof GOOGLE_FORM_ENTRY_PRE === 'string' && GOOGLE_FORM_ENTRY_PRE.trim() && preTestScore !== null) {
-    params.push('entry.' + GOOGLE_FORM_ENTRY_PRE.trim() + '=' + preTestScore);
+
+  function add(entryConst, value) {
+    if (typeof entryConst !== 'string' || !entryConst.trim()) return;
+    if (value === null || value === undefined || value === '') return;
+    params.push('entry.' + entryConst.trim() + '=' + encodeURIComponent(value));
   }
-  if (typeof GOOGLE_FORM_ENTRY_POST === 'string' && GOOGLE_FORM_ENTRY_POST.trim() && postTestScore !== null) {
-    params.push('entry.' + GOOGLE_FORM_ENTRY_POST.trim() + '=' + postTestScore);
-  }
-  if (typeof GOOGLE_FORM_ENTRY_DIFF === 'string' && GOOGLE_FORM_ENTRY_DIFF.trim() && preTestScore !== null && postTestScore !== null) {
-    params.push('entry.' + GOOGLE_FORM_ENTRY_DIFF.trim() + '=' + (postTestScore - preTestScore));
-  }
+
+  add(GOOGLE_FORM_ENTRY_PRE, preTestScore);
+  add(GOOGLE_FORM_ENTRY_POST, postTestScore);
+  add(GOOGLE_FORM_ENTRY_DIFF, (preTestScore !== null && postTestScore !== null) ? (postTestScore - preTestScore) : null);
+  add(GOOGLE_FORM_ENTRY_TIME, (testStartedAt !== null && postTestScore !== null) ? Math.round((Date.now() - testStartedAt) / 1000) : null);
+  add(GOOGLE_FORM_ENTRY_ORDER, postTestScore !== null ? QUIZ_ORDER.toUpperCase() : null);
+  add(GOOGLE_FORM_ENTRY_PRE_ITEMS, preTestItems);
+  add(GOOGLE_FORM_ENTRY_POST_ITEMS, postTestItems);
+
   if (!params.length) return url;
   return url + (url.indexOf('?') === -1 ? '?' : '&') + 'usp=pp_url&' + params.join('&');
 }
 
+// Only called once the post-test is submitted (see submitPostTest), so the
+// feedback link is never shown with only some of the auto-filled values in
+// place. #feedback-lock mirrors the existing #posttest-lock pattern.
 function renderFeedbackSlot() {
+  const lock = $('feedback-lock');
   const el = $('feedback-form-slot');
   if (!el) return;
+  if (lock) lock.hidden = true;
+
   const url = buildFeedbackURL();
   if (url) {
     el.innerHTML = '<a class="lab-btn primary" href="' + escapeHTML(url) +
       '" target="_blank" rel="noopener noreferrer">Open Feedback Form ↗</a>' +
-      '<p style="font-size:11.5px;color:var(--muted);margin-top:8px">If both quizzes are done, your scores will already be filled in on the form — feel free to review or change them before submitting.</p>';
+      '<p style="font-size:11.5px;color:var(--muted);margin-top:8px">Your scores and a couple of other details are already filled in on the form — feel free to review or change them before submitting.</p>';
   } else {
     el.innerHTML = '<div class="results-placeholder">The feedback form link has not been added yet. ' +
       '(Paste it into GOOGLE_FORM_URL near the top of data.js.)</div>';
   }
 }
 
+/* =============================================================================
+   17b. Student Test — mini Model Lab (Valuation only)
+   A separate, self-contained widget: its own local weights, its own DOM ids,
+   its own render function. Deliberately does NOT touch mlWeights or
+   #ml-rank-tbody — the real Model Lab elsewhere on the site is completely
+   unaffected by anything that happens here.
+============================================================================= */
+function renderTestModelLab(valWeight) {
+  const tbody = $('test-ml-tbody');
+  if (!tbody) return;
+
+  const testWeights = Object.assign({}, DEFAULT_WEIGHTS, { val: valWeight });
+  const rows = MODEL_LAB_MINI_TICKERS.map(function (ticker) {
+    const s = ALL.find(function (c) { return c.ticker === ticker; });
+    return s ? { ticker: s.ticker, name: s.name, base: baseScore(s), adj: weightedScore(s.scores, testWeights) } : null;
+  }).filter(Boolean);
+
+  const baseRank = {};
+  rows.slice().sort(function (a, b) { return b.base - a.base; })
+      .forEach(function (r, i) { baseRank[r.ticker] = i + 1; });
+
+  const adjSorted = rows.slice().sort(function (a, b) { return b.adj - a.adj; });
+
+  tbody.innerHTML = adjSorted.map(function (r, i) {
+    const rank = i + 1;
+    const move = baseRank[r.ticker] - rank; // positive = moved up
+    const moveCls = move > 0 ? 'up' : (move < 0 ? 'down' : 'same');
+    const moveTxt = move > 0 ? ('▲ ' + move) : (move < 0 ? ('▼ ' + Math.abs(move)) : '–');
+    const moveAria = move > 0 ? ('up ' + move + ' places') : (move < 0 ? ('down ' + Math.abs(move) + ' places') : 'no change');
+    return '<tr>' +
+      '<td class="td-score">' + rank + '</td>' +
+      '<td><div class="td-sym">' + r.ticker + '</div><div class="td-name">' + escapeHTML(r.name) + '</div></td>' +
+      '<td class="td-score" style="color:var(--muted)">' + r.base + '</td>' +
+      '<td class="td-score">' + r.adj + '</td>' +
+      '<td><span class="rank-move ' + moveCls + '" aria-label="' + moveAria + '">' + moveTxt + '</span></td>' +
+    '</tr>';
+  }).join('');
+}
+
+function initTestModelLab() {
+  const slider = $('test-val-slider'), val = $('test-val-val');
+  if (!slider) return;
+  slider.addEventListener('input', function () {
+    const v = parseInt(slider.value, 10);
+    if (val) val.textContent = v;
+    renderTestModelLab(v);
+  });
+  renderTestModelLab(parseInt(slider.value, 10));
+}
+
+// Sets up the entire Student Test section: inline lessons (reusing LESSONS
+// via renderLessons, same as the real Learn page), the mini Model Lab, and
+// both quiz blocks. Kept under its original name to avoid renaming call
+// sites, even though its scope has grown beyond just the quizzes.
 function initTestQuizzes() {
+  renderLessons('test-lessons');
+  initTestModelLab();
+
   renderTestQuiz(PRE_TEST_QUIZ, 'pretest-questions', 'pre');
   renderTestQuiz(POST_TEST_QUIZ, 'posttest-questions', 'post');
   const preCheck = $('pretest-check');
   if (preCheck) preCheck.addEventListener('click', submitPreTest);
   const postCheck = $('posttest-check');
   if (postCheck) postCheck.addEventListener('click', submitPostTest);
-  renderFeedbackSlot();
+  // renderFeedbackSlot() is intentionally NOT called here — it only runs
+  // from submitPostTest(), once real scores exist. #feedback-lock (in the
+  // HTML) is what's visible until then.
 }
 
 /* =============================================================================

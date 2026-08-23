@@ -955,7 +955,7 @@
   <section class="section" id="sec-test" aria-label="Student Test" tabindex="-1">
     <div class="page-lead">
       <h2>Help Test This Project</h2>
-      <p>I'm running a small, informal test of whether this site actually helps someone learn a few finance basics — not collecting ratings or reviews. It takes about 10–15 minutes, and your honest reaction is genuinely more useful to me than a compliment would be.</p>
+      <p>I'm running a small, informal test of whether this site actually helps someone learn a few finance basics — not collecting ratings or reviews. It should take about 6–8 minutes total, including the short feedback form at the end, and your honest reaction is genuinely more useful to me than a compliment would be.</p>
     </div>
 
     <div class="learned-card">
@@ -963,7 +963,7 @@
       <ul class="limit-list">
         <li>This is a student-built finance education and research project, not a company or product.</li>
         <li>I'm testing whether the site helps students understand and use these tools — I'm not testing you.</li>
-        <li>This should take about 10–15 minutes.</li>
+        <li>This should take about 6–8 minutes, start to finish.</li>
         <li>Honest criticism is more useful to me than compliments. If something is confusing, boring, or broken, please say so.</li>
         <li>No identifying information is required. Answer anonymously.</li>
         <li>This is educational only. Nothing on this site is investment advice.</li>
@@ -984,17 +984,36 @@
     </div>
 
     <div class="learned-card">
-      <h4>Step 2 — Learn the Five Concepts</h4>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:6px">Both quizzes cover the same five ideas, so this covers all five, not just one:</p>
-      <ol class="plan-steps">
-        <li>Go to <strong>Learn</strong> and read all five lessons (Market Cap, Beta, P/E Ratio, Diversification, Good Company vs. Good Price).</li>
-        <li>Open the <strong>Model Lab</strong> and change at least one factor weight — see how the rankings shift.</li>
-      </ol>
-      <p style="font-size:12px;color:var(--muted);margin-top:10px">Optional, not required for the quiz: once you're done, take a look at one company's page in <strong>Research</strong>.</p>
+      <h4>Step 2 — Five Concepts</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:6px">The same five ideas both quizzes cover, right here — no need to leave this page. The "How it connects here" line under each one is background, not something either quiz tests directly.</p>
+      <div id="test-lessons"></div>
     </div>
 
     <div class="learned-card">
-      <h4>Step 3 — Same Five Ideas, New Questions</h4>
+      <h4>Step 3 — Try the Model Lab</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px">This is the fifth idea above (Good Company vs. Good Price) in action. <strong>Set Valuation to 90</strong> and watch which companies move in the rankings below. This is one worked example chosen to show a clear change, not a typical or average result.</p>
+      <div class="weight-ctrl" style="max-width:360px;margin-bottom:18px">
+        <div class="wc-top"><span class="wc-name">Valuation weight</span><span class="wc-val" id="test-val-val">20</span></div>
+        <input type="range" id="test-val-slider" min="0" max="100" step="1" value="20" aria-label="Valuation weight"/>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Rank</th>
+              <th scope="col">Ticker</th>
+              <th scope="col">Default</th>
+              <th scope="col">Adjusted</th>
+              <th scope="col">Rank move</th>
+            </tr>
+          </thead>
+          <tbody id="test-ml-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="learned-card">
+      <h4>Step 4 — Same Five Ideas, New Questions</h4>
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px">These cover the same five concepts as Step 1, just asked a different way.</p>
       <div class="results-placeholder" id="posttest-lock">Complete Step 1 first — this unlocks once your baseline is submitted.</div>
       <div class="quiz" id="posttest-quiz-block" hidden>
@@ -1008,8 +1027,9 @@
     </div>
 
     <div class="learned-card">
-      <h4>Step 4 — Tell Me What You Actually Think</h4>
+      <h4>Step 5 — Tell Me What You Actually Think</h4>
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px">This is the part that matters most. Please be honest, even if that means telling me a section wasn't clear or wasn't worth your time.</p>
+      <div class="results-placeholder" id="feedback-lock">Complete Step 4 first — the feedback form unlocks once your second quiz is submitted, so your scores can be filled in automatically.</div>
       <div id="feedback-form-slot"></div>
     </div>
 
