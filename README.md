@@ -50,7 +50,7 @@ organized and keep iterating on it.
   difference. Runs entirely in the browser.
 - **Learn** — five short beginner lessons, each tied to a company on the site,
   plus a five-question practice quiz with instant feedback.
-- **Journal** — weekly reflections (Weeks 1–4).
+- **Journal** — weekly reflections (Weeks 1–12).
 - **Research** — deeper write-ups for MSFT, NVDA, KO, and SMCI.
 - **About** — selection criteria, a project revision log, and a testing/impact
   plan.
