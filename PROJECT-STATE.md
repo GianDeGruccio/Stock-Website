@@ -1,9 +1,10 @@
 # Finance Website — Project State
 
 ## Last Updated
-- Date: 2026-09-05
+- Date: 2026-09-11
 - Branch: `main`
-- Repository state reviewed through commit: `3b4845f9a89c7be8bb8fc9f3eb8eee0dd91f8dde` — "Catch up journal through Week 12 and fix journal markup"
+- Baseline repository state reviewed through commit: `ebc4ffbeb56505c25307ace602697c11f81158ff` — "Add Claude Code repository guidance"
+- This state update accompanies the addition of `METHODOLOGY.md` (Scoring Methodology v2.0) to the repository.
 
 ## Project Purpose
 An independent student finance research and education project built and maintained by one student (Gian De Gruccio). The website is the publishing and interactive platform for that work: a stock watchlist, a self-built scoring model, a weekly learning journal, write-ups on the model's own behavior, and beginner finance lessons. It is explicitly **not** professional equity research, **not** investment advice, and **not** an academically validated study — a disclaimer the repository repeats in the README, the page footer, and the About section.
@@ -26,6 +27,8 @@ Verified against `index.html`, `app.js`, `data.js`, and `proxy/worker.js`:
 - **Security measures implemented** (`proxy/worker.js`): Finnhub key read only from `env.FINNHUB_API_KEY` (a Worker secret, never in repo/browser code); a hard-coded 15-symbol allow-list; a browser-origin allow-list enforced via CORS plus a 403 for disallowed origins; a 45-second edge cache per symbol. The README notes this doesn't fully stop a determined third party from calling the endpoint directly; Cloudflare rate limiting is a possible future addition, not yet implemented.
 
 ## Scoring Model
+
+### Live model (v1) — currently used on the site
 Exactly as defined in `data.js` (`DEFAULT_WEIGHTS`), matching the README:
 
 | Factor | Weight |
@@ -39,6 +42,11 @@ Exactly as defined in `data.js` (`DEFAULT_WEIGHTS`), matching the README:
 Each company's five factor scores (0–100) are author-assigned estimates, not derived from a formula or external data feed. The overall score is a weighted average, rounded to a whole number, mapped to a letter grade (A/B/C/D) and a "model fit" label — **Strong (75+) / Mixed (55–74) / Weak (<55)** — explicitly framed as *not* buy/sell signals.
 
 **Acknowledged limitations:** moat and risk scoring is subjective; a high score doesn't predict short-term price moves, nor does a low score mean a bad company; the model ignores breaking news, earnings surprises, rate changes, and sentiment; and one fixed framework cannot fairly compare a bank, a utility, a software company, and an early-stage growth company. This is a self-built educational heuristic, not an empirical or statistically validated model.
+
+### Scoring Methodology v2 — pre-registered, not yet implemented
+`METHODOLOGY.md` documents a second-version rulebook (v2.0), written and committed to the repository before any v2 scoring has occurred. It keeps the same five factors and top-level weights as v1 (25/25/20/15/15; v1's "Risk" factor is renamed "Stability" at the same weight) but replaces author-assigned 0–100 impressions with predefined slots scored into one of five bands (values 10/30/50/70/90), profile-specific metrics (Standard / Regulated Banking / Rate-Regulated), a documented source hierarchy (SEC filings first), and explicit missing-data rules (`scored` / `N/A — structural` / `unobserved`) with coverage thresholds that can withhold a composite entirely.
+
+**As of this writing, no company has been scored under v2, and the live site/`data.js` still uses v1's author-assigned scores.** `METHODOLOGY.md` itself states it "has not been reviewed by an expert" and is "not empirically validated." Do not describe v2 as implemented, active, or validated until an actual v2 scoring round exists in the repository.
 
 ## Research Work Currently Present
 - **Company research reports present (4 of 15):** MSFT, NVDA, KO, SMCI — each with a business case, risks, and a personal reflection, plus beta/P/E/score/sector and a "Stats last reviewed: June 2026" date. **JPM and IONQ reports are explicitly marked as not yet written.**
@@ -100,12 +108,13 @@ Verified in `app.js` §17, `index.html`'s Student Test section, and `TESTING-MET
 - The public Worker endpoint can technically still be reached by a client that spoofs an allowed-origin header; the README states this openly rather than overclaiming the origin check as a full security boundary.
 
 ## Current Strategic Priorities
-1. **Credibility/current-data audit** — refresh "last reviewed" fundamentals across all 15 companies, not only the 4 published research write-ups.
-2. **Reconcile the three existing form responses** and complete the planned dry run (3–5 testers), as process feedback only, not impact evidence.
-3. **Revise the test flow and questions** based on genuine dry-run feedback.
-4. **Pursue the already-planned outside educator/finance-professional review** of the model's assumptions and the two quiz sets' difficulty balance.
-5. **Only after 1–4, run the formal pilot** (target 15–30 students) and begin reporting real results, per the honesty commitments in `TESTING-METHODOLOGY.md`.
-6. Add the two remaining planned research reports (JPM, IONQ) — lower priority than the work above.
+1. **Document the Scoring Methodology v2 redesign in the Week 13 journal entry**, immediately after the commit that adds `METHODOLOGY.md` to the repository.
+2. **Prototype Scoring Methodology v2 on a small, varied group of companies** before any full-watchlist rollout. The fundamentals/data refresh those companies need happens as part of this prototype scoring work, not as a separate broad "refresh all 15" pass.
+3. **Treat prototype scoring problems as evidence, not as a reason to quietly adjust a rule.** Any change to a v2 threshold, formula, slot, or band after v2.0 scoring has begun requires a documented, versioned v2.1 (per `METHODOLOGY.md` §18) — never a silent edit to v2.0.
+4. **Pursue targeted outside criticism** of the scoring methodology and of the two quiz sets' difficulty balance. Any criticism received must be documented as criticism, never described as validation or endorsement.
+5. **Reconcile the three existing form responses** and complete the planned dry run (3–5 testers), as process/usability feedback only, not impact evidence.
+6. **Only after appropriate revisions and outside review, consider the planned formal pilot** (target 15–30 students), per the honesty commitments in `TESTING-METHODOLOGY.md`.
+7. A full-watchlist v2 rollout and the two remaining planned research reports (JPM, IONQ) remain lower priority than testing whether the v2 methodology is workable in practice.
 
 ## Planned / Not Yet Completed
 Collected here so these are never mistaken for accomplishments:
@@ -116,9 +125,11 @@ Collected here so these are never mistaken for accomplishments:
 - A genuine cumulative portfolio tracker with a fixed start date and real historical prices, if reliable historical data can be found.
 - Cloudflare rate limiting on the price proxy, "if traffic becomes a problem."
 - Updating the About page / README's testing description to match `TESTING-METHODOLOGY.md`.
+- Prototype scoring of a small number of companies under Scoring Methodology v2 (`METHODOLOGY.md`) — the next substantive v2 step is prototype/test scoring, not a completed full-watchlist rollout, and outside review of the methodology itself has not yet happened.
 
 ## Claim Guardrails
 - **Scoring model:** May be described as a self-built, transparent, weighted five-factor educational model with explicitly stated weights. May **not** be described as empirically validated, backtested, or professionally reviewed.
+- **Scoring Methodology v2:** May be described as a pre-registered rulebook committed to the repository (`METHODOLOGY.md`), specifying slots, bands, profiles, and missing-data rules under the same 25/25/20/15/15 weights. May **not** be described as implemented, in use on the live site, applied to any company, empirically validated, or expert-reviewed — no company has been scored under v2 as of this writing, and the site still runs on v1 scores.
 - **Company research:** May be described as student-authored qualitative write-ups covering 4 of 15 watchlist companies. May **not** be described as professional equity research or full-watchlist coverage.
 - **Sensitivity analysis:** May be described as a hand-computed exploration of 5 preset weighting scenarios. May **not** be described as a statistical robustness test, a backtest, or evidence the model "works."
 - **Testing:** May be described as a fully built testing flow with a pre-specified methodology documented before the formal pilot. Technical/process testing has begun — three form responses exist, with provenance not yet reconciled (see Testing / Impact Status). Dry-run responses may be inspected and discussed internally for process problems (bugs, confusing questions, timing, usability), but specific dry-run scores or feedback must **not** be presented publicly as evidence the site improves learning or has educational impact. The formal pilot remains the first round intended for actual learning/feedback analysis, still subject to the methodology's sample-size and design limitations.
