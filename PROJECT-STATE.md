@@ -48,6 +48,8 @@ Each company's five factor scores (0–100) are author-assigned estimates, not d
 
 **As of this writing, no company has been scored under v2, and the live site/`data.js` still uses v1's author-assigned scores.** `METHODOLOGY.md` itself states it "has not been reviewed by an expert" and is "not empirically validated." Do not describe v2 as implemented, active, or validated until an actual v2 scoring round exists in the repository.
 
+**Prototype evidence-file scaffolding exists but is empty.** `v2-evidence/` holds `ROUND.md` (round metadata: proposed as-of date, the five-ticker prototype list — MSFT, NVDA, JPM, NEE, IONQ — and a blank profile-assignment table) and `TEMPLATE.md` (the blank per-slot evidence-record format), plus one company file, `MSFT.md`, pre-populated with the blank skeleton only. No financial data, profile assignment, band, or score exists in any of these files yet.
+
 ## Research Work Currently Present
 - **Company research reports present (4 of 15):** MSFT, NVDA, KO, SMCI — each with a business case, risks, and a personal reflection, plus beta/P/E/score/sector and a "Stats last reviewed: June 2026" date. **JPM and IONQ reports are explicitly marked as not yet written.**
 - **Sensitivity analysis:** five hand-computed weighting scenarios (Base, Equal-Weight, Growth-Heavy, Value-Heavy, Defensive/Risk-Aware) applied to the same 15 companies' existing factor scores, with top-5 rank tables and written observations — a static, author-computed exploration, separate from and simpler than the live Model Lab.
@@ -56,8 +58,9 @@ Each company's five factor scores (0–100) are author-assigned estimates, not d
 - The Research page states plainly: **"I have not yet received outside feedback on this project."**
 
 ## Weekly Journal Status
-- Highest entry currently committed: **Week 12** (September 2026). Range: **Week 1 (June 2026) – Week 12 (September 2026)**.
-- **The 12 entries are not uniform in format.** Weeks 8–12 share a common structure: a market-performance badge (a ticker or index one-day move) and four fixed subsections — "What happened," "Why investors reacted this way," "What I keep thinking about," "Next question."
+- Highest entry currently committed: **Week 13** (September 2026). Range: **Week 1 (June 2026) – Week 13 (September 2026)**.
+- **The 13 entries are not uniform in format.** Weeks 8–12 share a common structure: a market-performance badge (a ticker or index one-day move) and four fixed subsections — "What happened," "Why investors reacted this way," "What I keep thinking about," "Next question."
+- **Week 13 is a third variant.** It reuses 3 of the Weeks 8–12 subsection labels ("What happened," "What I keep thinking about," "Next question") but swaps "Why investors reacted this way" for "Why I changed it this way," and uses a Weeks-5–7-style project-development badge (`Methodology v2 Pre-Registered`) rather than a market-performance badge.
 - Weeks 1–7 use earlier, more varied formats: Weeks 2–4 use a "Portfolio movement / Biggest surprise / Concept I learned (or am thinking about) / Next question" structure with dollar-based portfolio badges (e.g. "+$28.65 (+0.29%)"); Weeks 5–7 use project-development narratives with differently-labeled subsections and non-market badges such as "Version 2 Launch," "Risk Tiers Added," and "Research Project Added"; Week 1 is free-form prose with no subsection labels, badged "Starting point."
 - This document does not reproduce journal text; see `index.html`'s Journal section directly.
 
@@ -108,13 +111,12 @@ Verified in `app.js` §17, `index.html`'s Student Test section, and `TESTING-MET
 - The public Worker endpoint can technically still be reached by a client that spoofs an allowed-origin header; the README states this openly rather than overclaiming the origin check as a full security boundary.
 
 ## Current Strategic Priorities
-1. **Document the Scoring Methodology v2 redesign in the Week 13 journal entry**, immediately after the commit that adds `METHODOLOGY.md` to the repository.
-2. **Prototype Scoring Methodology v2 on a small, varied group of companies** before any full-watchlist rollout. The fundamentals/data refresh those companies need happens as part of this prototype scoring work, not as a separate broad "refresh all 15" pass.
-3. **Treat prototype scoring problems as evidence, not as a reason to quietly adjust a rule.** Any change to a v2 threshold, formula, slot, or band after v2.0 scoring has begun requires a documented, versioned v2.1 (per `METHODOLOGY.md` §18) — never a silent edit to v2.0.
-4. **Pursue targeted outside criticism** of the scoring methodology and of the two quiz sets' difficulty balance. Any criticism received must be documented as criticism, never described as validation or endorsement.
-5. **Reconcile the three existing form responses** and complete the planned dry run (3–5 testers), as process/usability feedback only, not impact evidence.
-6. **Only after appropriate revisions and outside review, consider the planned formal pilot** (target 15–30 students), per the honesty commitments in `TESTING-METHODOLOGY.md`.
-7. A full-watchlist v2 rollout and the two remaining planned research reports (JPM, IONQ) remain lower priority than testing whether the v2 methodology is workable in practice.
+1. **Prototype Scoring Methodology v2 on a small, varied group of companies** before any full-watchlist rollout. The fundamentals/data refresh those companies need happens as part of this prototype scoring work, not as a separate broad "refresh all 15" pass.
+2. **Treat prototype scoring problems as evidence, not as a reason to quietly adjust a rule.** Any change to a v2 threshold, formula, slot, or band after v2.0 scoring has begun requires a documented, versioned v2.1 (per `METHODOLOGY.md` §18) — never a silent edit to v2.0.
+3. **Pursue targeted outside criticism** of the scoring methodology and of the two quiz sets' difficulty balance. Any criticism received must be documented as criticism, never described as validation or endorsement.
+4. **Reconcile the three existing form responses** and complete the planned dry run (3–5 testers), as process/usability feedback only, not impact evidence.
+5. **Only after appropriate revisions and outside review, consider the planned formal pilot** (target 15–30 students), per the honesty commitments in `TESTING-METHODOLOGY.md`.
+6. A full-watchlist v2 rollout and the two remaining planned research reports (JPM, IONQ) remain lower priority than testing whether the v2 methodology is workable in practice.
 
 ## Planned / Not Yet Completed
 Collected here so these are never mistaken for accomplishments:
