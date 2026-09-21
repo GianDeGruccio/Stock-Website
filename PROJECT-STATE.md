@@ -58,9 +58,9 @@ Each company's five factor scores (0–100) are author-assigned estimates, not d
 - The Research page states plainly: **"I have not yet received outside feedback on this project."**
 
 ## Weekly Journal Status
-- Highest entry currently committed: **Week 13** (September 2026). Range: **Week 1 (June 2026) – Week 13 (September 2026)**.
-- **The 13 entries are not uniform in format.** Weeks 8–12 share a common structure: a market-performance badge (a ticker or index one-day move) and four fixed subsections — "What happened," "Why investors reacted this way," "What I keep thinking about," "Next question."
-- **Week 13 is a third variant.** It reuses 3 of the Weeks 8–12 subsection labels ("What happened," "What I keep thinking about," "Next question") but swaps "Why investors reacted this way" for "Why I changed it this way," and uses a Weeks-5–7-style project-development badge (`Methodology v2 Pre-Registered`) rather than a market-performance badge.
+- Highest entry currently committed: **Week 14** (September 2026). Range: **Week 1 (June 2026) – Week 14 (September 2026)**.
+- **The 14 entries are not uniform in format.** Weeks 8–12 and Week 14 share a common structure: a market-performance badge (a ticker or index one-day move) and four fixed subsections — "What happened," "Why investors reacted this way," "What I keep thinking about," "Next question."
+- **Week 13 is a separate methodology/project-development variant.** It reuses 3 of that common structure's subsection labels ("What happened," "What I keep thinking about," "Next question") but swaps "Why investors reacted this way" for "Why I changed it this way," and uses a Weeks-5–7-style project-development badge (`Methodology v2 Pre-Registered`) rather than a market-performance badge.
 - Weeks 1–7 use earlier, more varied formats: Weeks 2–4 use a "Portfolio movement / Biggest surprise / Concept I learned (or am thinking about) / Next question" structure with dollar-based portfolio badges (e.g. "+$28.65 (+0.29%)"); Weeks 5–7 use project-development narratives with differently-labeled subsections and non-market badges such as "Version 2 Launch," "Risk Tiers Added," and "Research Project Added"; Week 1 is free-form prose with no subsection labels, badged "Starting point."
 - This document does not reproduce journal text; see `index.html`'s Journal section directly.
 
