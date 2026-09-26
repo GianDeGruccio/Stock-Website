@@ -1,10 +1,10 @@
 # Finance Website — Project State
 
 ## Last Updated
-- Date: 2026-09-11
+- Date: 2026-09-26
 - Branch: `main`
-- Baseline repository state reviewed through commit: `ebc4ffbeb56505c25307ace602697c11f81158ff` — "Add Claude Code repository guidance"
-- This state update accompanies the addition of `METHODOLOGY.md` (Scoring Methodology v2.0) to the repository.
+- Baseline repository state reviewed through commit: `ce0a707755e53cf84e8a7c2d74ea648ccc69421a` — "Add Week 15 journal entry"
+- This state update records the frozen v2 prototype round setup and MSFT profile assignment, before any v2 slot evidence collection.
 
 ## Project Purpose
 An independent student finance research and education project built and maintained by one student (Gian De Gruccio). The website is the publishing and interactive platform for that work: a stock watchlist, a self-built scoring model, a weekly learning journal, write-ups on the model's own behavior, and beginner finance lessons. It is explicitly **not** professional equity research, **not** investment advice, and **not** an academically validated study — a disclaimer the repository repeats in the README, the page footer, and the About section.
@@ -48,7 +48,7 @@ Each company's five factor scores (0–100) are author-assigned estimates, not d
 
 **As of this writing, no company has been scored under v2, and the live site/`data.js` still uses v1's author-assigned scores.** `METHODOLOGY.md` itself states it "has not been reviewed by an expert" and is "not empirically validated." Do not describe v2 as implemented, active, or validated until an actual v2 scoring round exists in the repository.
 
-**Prototype evidence-file scaffolding exists but is empty.** `v2-evidence/` holds `ROUND.md` (round metadata: proposed as-of date, the five-ticker prototype list — MSFT, NVDA, JPM, NEE, IONQ — and a blank profile-assignment table) and `TEMPLATE.md` (the blank per-slot evidence-record format), plus one company file, `MSFT.md`, pre-populated with the blank skeleton only. No financial data, profile assignment, band, or score exists in any of these files yet.
+**Prototype round setup: as-of date frozen, MSFT profile assigned, no scoring yet.** `v2-evidence/ROUND.md` originally proposed 2026-09-11 market close as the round's as-of date; that date was never frozen and was superseded before any v2 input collection or scoring. The round's as-of date is now frozen at **2026-09-25 market close** (frozen 2026-09-26). MSFT has been assigned the **Standard** profile under `METHODOLOGY.md` §5, with no partial-fit flag, recorded with its assignment basis in `ROUND.md`; `v2-evidence/MSFT.md`'s header reflects the same assignment. NVDA, JPM, NEE, and IONQ remain unassigned, with no evidence files created yet. **No v2 slot evidence, band, factor score, or composite score has been produced for any company** — every slot in `MSFT.md` is still blank.
 
 ## Research Work Currently Present
 - **Company research reports present (4 of 15):** MSFT, NVDA, KO, SMCI — each with a business case, risks, and a personal reflection, plus beta/P/E/score/sector and a "Stats last reviewed: June 2026" date. **JPM and IONQ reports are explicitly marked as not yet written.**

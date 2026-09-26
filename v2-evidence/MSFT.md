@@ -1,10 +1,10 @@
 # MSFT — Scoring Methodology v2 Evidence Record
 
 - Ticker: MSFT
-- Company name:
-- Profile: [ ] (assign per METHODOLOGY.md §5 before scoring — not pre-assigned here)
-- Round as-of date: see ROUND.md (proposed 2026-09-11 market close — not yet frozen)
-- Round status: Not started — template only, no data collected, no band assigned
+- Company name: Microsoft Corporation
+- Profile: Standard (assigned per METHODOLOGY.md §5 before scoring; no partial-fit flag — see ROUND.md for assignment basis)
+- Round as-of date: 2026-09-25 market close (frozen 2026-09-26, before data collection)
+- Round status: Setup complete — no slot data collected, no band assigned
 
 ---
 
