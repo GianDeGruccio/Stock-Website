@@ -4,7 +4,7 @@
 - Company name: Microsoft Corporation
 - Profile: Standard (assigned per METHODOLOGY.md §5 before scoring; no partial-fit flag — see ROUND.md for assignment basis)
 - Round as-of date: 2026-09-25 market close (frozen 2026-09-26, before data collection)
-- Round status: In progress — Market Volatility, Cash Generation, and Balance-Sheet Capacity are scored; Profitability is unobserved; Growth, Valuation, other Stability, and Moat slots remain unfilled; no factor or composite score exists yet
+- Round status: In progress — all three Growth slots, Cash Generation, Balance-Sheet Capacity, and Market Volatility are scored; Profitability is unobserved; Valuation, other Stability, and Moat slots remain unfilled; no factor or composite score exists yet
 
 ---
 
@@ -66,36 +66,65 @@
 ## Growth (25%)
 
 ### Slot: 3-Year Growth
-- State:
-- Raw metric/value:
-- Formula/calculation:
-- Source:
-- Source period/date:
-- Scoring-round as-of date:
-- Band (1–5):
-- Flag/Note:
+- State: scored
+- Raw metric/value (USD millions; fiscal years ended June 30):
+  - FY2026 revenue: 331,839
+  - FY2023 revenue: 211,915
+  - 3-year revenue CAGR: 16.1240%
+- Formula/calculation: (331,839 / 211,915)^(1/3) − 1 = 16.1240%, in the 10–20% range (Band 4 under §11.1, Standard profile revenue CAGR).
+- Source: Microsoft FY2026 Form 10-K for FY2026 revenue; Microsoft FY2025 Form 10-K for FY2023 revenue, with the same FY2023 figure corroborated in the FY2024 and FY2023 filings
+- Source period/date: FY2023 and FY2026 (fiscal years ended June 30)
+- Scoring-round as-of date: 2026-09-25 market close
+- Band (1–5): 4
+- Flag/Note: Activision closed during FY2024, so FY2023 revenue excludes it while FY2026 includes a full year. v2.0 explicitly counts acquired revenue as growth, so no adjustment is made.
 
 ### Slot: Growth Persistence
-- State:
-- Raw metric/value:
-- Formula/calculation:
-- Source:
-- Source period/date:
-- Scoring-round as-of date:
-- Band (1–5):
-- Flag/Note:
+- State: scored
+- Raw metric/value (USD millions; fiscal years ended June 30):
+  - FY2022 revenue: 198,270
+  - FY2023 revenue: 211,915
+  - FY2024 revenue: 245,122
+  - FY2025 revenue: 281,724
+  - FY2026 revenue: 331,839
+  - FY2023 vs FY2022: positive
+  - FY2024 vs FY2023: positive
+  - FY2025 vs FY2024: positive
+  - FY2026 vs FY2025: positive
+  - Positive comparisons: 4 of 4
+- Formula/calculation: Count of positive year-over-year revenue changes across four comparisons drawn from five fiscal years; 4 of 4 positive = Band 5 under §11.2.
+- Source: Microsoft FY2024 Form 10-K, Income Statements (FY2022), accession 0000950170-24-087843; Microsoft FY2025 Form 10-K, Income Statements (FY2023), accession 0000950170-25-100235; Microsoft FY2026 Form 10-K, Income Statements (FY2024–FY2026), accession 0001193125-26-323660.
+- Source period/date: FY2022–FY2026 (fiscal years ended June 30)
+- Scoring-round as-of date: 2026-09-25 market close
+- Band (1–5): 5
+- Flag/Note: This is a deliberately coarse persistence flag under §11.2. Figures are nominal and include acquisitions.
 
 ### Slot: Growth-Driver Durability (qualitative)
-- State:
-- Source(s) reviewed:
-- Source period/date:
-- Scoring-round as-of date:
+- State: scored
+- Source(s) reviewed: Microsoft FY2026 Form 10-K, including the remaining-performance-obligation / unearned-revenue disclosures and risk factors; Microsoft FY2025 Form 10-K for the prior-year RPO comparison; Microsoft FY26 Q4 earnings release dated July 29, 2026; Microsoft FY26 Q4 earnings call dated July 29, 2026
+- Source period/date: as of June 30, 2026 (FY2026); 10-K filed 2026-07-29
+- Scoring-round as-of date: 2026-09-25 market close
 - Evidence:
+  - FY2026 commercial RPO: $678 billion; total RPO: $684 billion
+  - Weighted-average commercial RPO duration: approximately 2 years 3 months 18 days
+  - About 30% expected to be recognized within 12 months
+  - FY2025 commercial RPO: $368 billion
+  - Microsoft Cloud revenue FY2026: $214.4 billion, 64.6% of total revenue
+  - Microsoft earnings materials state commercial RPO grew 25% excluding OpenAI, commercial bookings grew 18% excluding OpenAI, and customer demand continues to exceed available capacity
 - Counter-evidence:
+  - OpenAI concentration is material. Based on the filing totals and the CFO's rounded ex-OpenAI growth disclosure, OpenAI represents approximately at least $218 billion, or at least about 32%, of FY2026 commercial RPO. This is an approximate inferred lower bound, not a company-disclosed customer figure.
+  - The approximately 2.3-year weighted-average duration applies to total commercial RPO including OpenAI. The duration of ex-OpenAI RPO is not disclosed.
+  - The share expected to be recognized within 12 months fell from about 40% to about 30%, making the backlog more long-dated.
+  - Revenue conversion is capacity-dependent, and the 10-K warns about infrastructure investment ahead of demand and the possibility that expected consumption may not materialize.
+  - Growth is concentrated in cloud and AI; some other lines are flat, declining, or low-growth.
 - Breadth and durability:
-- Falsification statement ("this band is wrong if ___"):
-- Band (1–5):
-- Flag/Note:
+  - Microsoft Cloud was 64.6% of FY2026 revenue.
+  - Server Products & Cloud Services alone represented about 39.0% of revenue.
+  - Approximately 14.2% of FY2026 revenue was in Windows & Devices, XBOX, and Enterprise & partner services, the lines identified in the cited FY2026 disclosures as flat, declining, or low-growth.
+  - RPO is not disclosed by segment, end market, or customer.
+  - The disclosed commercial RPO weighted-average duration is approximately 2.3 years.
+- Falsification statement ("this band is wrong if ___"): This band is wrong if a subsequent Microsoft filing reports commercial RPO weighted-average duration of one year or less, or discloses a cancellation/amendment of commitments included in the June 30, 2026 commercial RPO that reduces the relevant weighted-average duration to one year or less.
+- Band (1–5): 5
+- Flag/Note: Confidence: Medium — overlapping Band 4 and Band 5 anchors. Band rationale: Band 5 is used because the filing directly documents contracted commercial backlog with a weighted-average duration covering multiple years, which matches the literal §15 Band 5 anchor. Band 4 is a plausible competing interpretation because the demand runway is concentrated in cloud/AI and a large counterparty, and v2.0 provides no tie-break rule for overlapping anchors. Anti-double-counting: RPO is filed here as demand-side runway evidence and should not later be reused as primary evidence for Moat unless the Growth evidence is reconsidered under §16.
 
 ---
 
