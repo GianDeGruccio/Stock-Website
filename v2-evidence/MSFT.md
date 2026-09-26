@@ -105,14 +105,14 @@
 ## Stability (15%)
 
 ### Slot: Market Volatility
-- State:
-- Raw metric/value:
-- Formula/calculation:
-- Source:
-- Source period/date (retrieval date):
-- Scoring-round as-of date:
-- Band (1–5):
-- Flag/Note:
+- State: scored
+- Raw metric/value: Beta (5Y Monthly) = 1.11
+- Formula/calculation: No calculation required; Yahoo Finance published value, mapped directly to §13.1 band.
+- Source: Yahoo Finance, Microsoft Corporation (MSFT) quote page
+- Source period/date (retrieval date): 2026-09-26
+- Scoring-round as-of date: 2026-09-25 market close
+- Band (1–5): 3
+- Flag/Note: Beta is a retrieval-date statistic, not a reconstructed historical September 25 beta — it reflects Yahoo Finance's 5-year monthly beta as published on the 2026-09-26 retrieval date, not a beta computed specifically as of the round's as-of date. This is why METHODOLOGY.md §13.1 requires the retrieval date to be recorded alongside the value. The September 25 closing stock price was checked only as page/date context and was not entered here or used in this slot's score.
 
 ### Slot: Concentration
 - State:
