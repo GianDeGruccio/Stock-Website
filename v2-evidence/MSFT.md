@@ -4,25 +4,28 @@
 - Company name: Microsoft Corporation
 - Profile: Standard (assigned per METHODOLOGY.md §5 before scoring; no partial-fit flag — see ROUND.md for assignment basis)
 - Round as-of date: 2026-09-25 market close (frozen 2026-09-26, before data collection)
-- Round status: In progress — all three Growth slots, Cash Generation, Balance-Sheet Capacity, and Market Volatility are scored; Profitability is unobserved; Valuation, other Stability, and Moat slots remain unfilled; no factor or composite score exists yet
+- Damodaran industry mapping: Software (System & Application) — January 2026 U.S. dataset; directly verified in the official Damodaran indname.xlsx company lookup on 2026-09-26 before any valuation multiple was computed.
+- Round status: In progress — all three Financial Strength slots, all three Growth slots, and Market Volatility are scored; Valuation, other Stability, and Moat slots remain unfilled; no factor or composite score has been entered yet
 
 ---
 
 ## Financial Strength (25%)
 
 ### Slot: Profitability
-- State (`scored` / `N/A — structural` / `unobserved`): unobserved
+- State (`scored` / `N/A — structural` / `unobserved`): scored
 - Raw metric/value (USD millions; fiscal years ended June 30):
   - FY2026: revenue 331,839; operating income 155,237; operating margin 46.7808%
   - FY2025: revenue 281,724; operating income 128,528; operating margin 45.6220%
   - FY2024: revenue 245,122; operating income 109,433; operating margin 44.6443%
   - Three-year average operating margin: 45.6824%
-- Formula/calculation: Operating margin = operating income ÷ revenue for each fiscal year; three-year average of the three margins; the §10.1 Standard-profile band is then set by the ratio of that average to the industry operating margin from the external reference dataset. The company-side inputs above are complete. The applicable industry reference could not be selected because Microsoft's January 2026 Damodaran company-to-industry mapping could not be directly verified (see Flag/Note), so the ratio and band are not computed.
-- Source: Microsoft FY2026 Form 10-K, Income Statements, filed July 29, 2026 (company-side figures). Industry reference: Damodaran published industry data (January 2026 operating margin table and company-to-industry lookup).
-- Source period/date: FY2024–FY2026 (fiscal years ended June 30); 10-K filed 2026-07-29. Damodaran industry-mapping lookup attempts documented on 2026-09-26.
+  - Applicable Damodaran industry: Software (System & Application)
+  - January 2026 Pre-tax Unadjusted Operating Margin (industry reference): 32.98%
+- Formula/calculation: Operating margin = operating income ÷ revenue for each fiscal year; three-year average of the three margins; ratio to industry = 45.6824% / 32.98% = 1.3852, in the 1.15–1.50 range (Band 4 under §10.1, Standard profile).
+- Source: Microsoft FY2026 Form 10-K for company operating margins (Income Statements, filed July 29, 2026); Damodaran January 2026 U.S. Operating and Net Margins dataset for the 32.98% industry reference; official Damodaran indname.xlsx company lookup for Microsoft's industry assignment.
+- Source period/date: FY2024–FY2026 (fiscal years ended June 30); 10-K filed 2026-07-29. Damodaran company lookup workbook created/modified January 8, 2026; inspected 2026-09-26.
 - Scoring-round as-of date: 2026-09-25 market close
-- Band (1–5): none assigned
-- Flag/Note: Marked `unobserved` because the slot's industry side could not be established, not because the company's own numbers are missing or weak. The methodology requires the three-year average operating margin to be compared with the operating margin for the company's Damodaran industry. Damodaran publishes a company-to-industry lookup, but Microsoft's January 2026 company-level row could not be directly established from the accessible sources after documented attempts on 2026-09-26. The official January 2026 margin table shows Software (System & Application) at 32.98%, and secondary evidence strongly corroborates that Microsoft has historically been classified there, but the exact January 2026 mapping was not directly verified. Therefore no band is assigned under the current rules. Context only, not a scored result: had Software (System & Application) been the confirmed industry, the ratio would be 45.6824% / 32.98% = 1.3852, which falls in the 1.15–1.50 range (Band 4 under §10.1). This is not the recorded Profitability result, and this slot is not scored.
+- Band (1–5): 4
+- Flag/Note: Industry mapping history: Microsoft's January 2026 Damodaran company-to-industry mapping was initially unavailable from the accessible sources, and this slot was first recorded as `unobserved` after documented attempts on 2026-09-26. It was then directly verified from the official January 2026 Damodaran company lookup on 2026-09-26, before any valuation multiple was computed. The verified record is the `By company name` sheet, row 26710: Microsoft Corporation (NasdaqGS:MSFT), Industry Group Software (System & Application), Primary Sector Information Technology, SIC code 7372, country United States. The workbook itself is not stored in this repository. The slot record was updated from `unobserved` to `scored` after the official January 2026 Damodaran company-to-industry mapping was directly verified, during the initial evidence-collection process and before any factor/composite score or valuation multiple was calculated. There was no change to the methodology, thresholds, or company-side figures.
 
 ### Slot: Cash Generation
 - State: scored
