@@ -4,7 +4,7 @@
 - Company name: Microsoft Corporation
 - Profile: Standard (assigned per METHODOLOGY.md §5 before scoring; no partial-fit flag — see ROUND.md for assignment basis)
 - Round as-of date: 2026-09-25 market close (frozen 2026-09-26, before data collection)
-- Round status: Setup complete — no slot data collected, no band assigned
+- Round status: In progress — Market Volatility is scored; all other slots remain unfilled and no factor or composite score exists yet
 
 ---
 
