@@ -18,6 +18,22 @@
 | NEE | [ ] | | |
 | IONQ | [ ] | | |
 
+## Valuation preflight decisions
+These decisions were recorded before any MSFT valuation multiple was computed, and before any share price was retrieved for the Valuation slots. They apply the committed v2.0 rules as written; they do not change `METHODOLOGY.md`.
+
+1. **Standard positive-EPS multiple.** The primary multiple is trailing P/E = share price / TTM diluted GAAP EPS. For MSFT as of 2026-09-25, the latest filed TTM denominator is FY2026 diluted GAAP EPS of $17.95 from the FY2026 10-K.
+2. **External industry P/E field.** For Standard-profile P/E comparisons under v2.0, use the Damodaran January 2026 `PE Ratio by Sector (US)` column named exactly `Trailing PE`. This is the literal operational interpretation of the already-committed §12.1 phrase "Industry trailing P/E". For Software (System & Application), that January 2026 value is `79.17`. The separate `Aggregate Mkt Cap/ Trailing Net Income (only money making firms)` field is not substituted. Whether that alternative would be analytically preferable is a prototype finding for possible v2.1 review after this round.
+3. **Own-history denominator.** Each historical P/E denominator is that fiscal year's diluted GAAP EPS from that fiscal year's 10-K.
+4. **Non-trading fiscal-year-end.** Under v2.0, a prior or subsequent trading-session close is not substituted for a fiscal-year-end date on which the market was closed. Such an exact-date observation is unavailable. MSFT FY2024 ended Sunday 2024-06-30, so that historical observation will not be used. FY2022, FY2023, FY2025, and FY2026 provide four available observations, meeting the §12.3 minimum-history requirement. The absence of an explicit non-trading-day convention is flagged as a prototype finding for possible v2.1, rather than changing v2.0 during the round.
+5. **Price field.** Use the Yahoo Finance regular-session `Close`, not `Adjusted Close`. Historical prices used in P/E are not dividend-adjusted.
+6. **Named price source.** Yahoo Finance is the named market-data source for all current and historical share prices in this round, consistent with its existing use for beta.
+7. **Known valuation limitations retained.**
+   - Own-history ratios pair fiscal-year-end prices with annual EPS that was filed after those year-end dates, creating a look-ahead/timing mismatch.
+   - The January 2026 industry reference and the September 2026 company multiple have the timing mismatch already disclosed in §12.2.
+   - Microsoft is included in its own Damodaran industry benchmark, so the benchmark is not independent of the company being compared. No numerical estimate of Microsoft's share of industry market cap is given here; one would need to be separately verified on a comparable basis.
+
+No share price has been retrieved for the Valuation slots, no MSFT P/E has been calculated, and no Valuation band has been assigned as of this record.
+
 ## Per-company evidence files
 - [MSFT.md](MSFT.md) — evidence collection in progress: Financial Strength, Growth, and Market Volatility slots recorded; Valuation, Concentration, Regulatory/Legal Exposure, Reporting/Governance Integrity, and Moat not yet begun; no factor or composite score.
 - NVDA.md — not yet created; create from `TEMPLATE.md` when this company's prototype work begins.
