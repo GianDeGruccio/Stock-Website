@@ -5,7 +5,7 @@
 - Profile: Standard (assigned per METHODOLOGY.md §5 before scoring; no partial-fit flag — see ROUND.md for assignment basis)
 - Round as-of date: 2026-09-25 market close (frozen 2026-09-26, before data collection)
 - Damodaran industry mapping: Software (System & Application) — January 2026 U.S. dataset; directly verified in the official Damodaran indname.xlsx company lookup on 2026-09-26 before any valuation multiple was computed.
-- Round status: In progress — all three Financial Strength slots, all three Growth slots, both Valuation slots, and Market Volatility are scored; Concentration, Regulatory/Legal Exposure, Reporting/Governance Integrity, and Moat slots remain unfilled; no factor or composite score has been entered yet
+- Round status: In progress — all 13 MSFT v2 slots are now scored (Financial Strength, Growth, Valuation, all four Stability slots, and Moat); no factor score or composite score has been entered yet
 
 ---
 
@@ -183,55 +183,96 @@
 - Flag/Note: Beta is a retrieval-date statistic, not a reconstructed historical September 25 beta — it reflects Yahoo Finance's 5-year monthly beta as published on the 2026-09-26 retrieval date, not a beta computed specifically as of the round's as-of date. This is why METHODOLOGY.md §13.1 requires the retrieval date to be recorded alongside the value. The September 25 closing stock price was checked only as page/date context and was not entered here or used in this slot's score.
 
 ### Slot: Concentration
-- State:
-- Customer dimension — largest disclosed customer %:
-- Customer dimension source/period:
-- Product/Service dimension — largest disclosed line %:
-- Product/Service dimension source/period:
-- Which dimension drove the band:
-- Scoring-round as-of date:
-- Band (1–5):
-- Flag/Note:
+- State: scored
+- Customer dimension — largest disclosed customer %: No individual customer accounted for more than 10% of revenue (no customer disclosed at ≥ 10%). Customer dimension band: 5 (§13.2).
+- Customer dimension source/period: Microsoft FY2026 Form 10-K, Note 18 / Segment Information, filed 2026-07-29, disclosure that no individual customer accounted for more than 10% of revenue in FY2026, FY2025, or FY2024. Silence above the ASC 280 10% disclosure threshold is scored as band 5 under §13.2.
+- Product/Service dimension — largest disclosed line %: Server products and cloud services, $129,425M of $331,839M total FY2026 revenue; 129,425 / 331,839 = 39.0023%. Product/Service dimension band: 4 (30–45% range under §13.2).
+- Product/Service dimension source/period: Microsoft FY2026 Form 10-K revenue-by-product/service disaggregation table, filed 2026-07-29, showing Server products and cloud services $129,425M and total revenue $331,839M (fiscal year ended June 30, 2026).
+- Which dimension drove the band: Product/Service (Band 4, the worse of the two scored dimensions; the slot takes the worse applicable dimension under §13.2).
+- Scoring-round as-of date: 2026-09-25 market close
+- Band (1–5): 4
+- Flag/Note: The cross-cutting Microsoft Cloud figure ($214.4B) was not used as the product/service line, because the filed disaggregation table identifies the product/service lines separately and Microsoft Cloud overlaps several of them. Known limitation (§13.2, §20): the product-concentration band depends on how finely Microsoft chooses to disaggregate revenue, which is its own reporting choice.
 
 ### Slot: Regulatory/Legal Exposure (qualitative)
-- State:
+- State: scored
 - Source(s) reviewed:
-- Source period/date:
-- Scoring-round as-of date:
+  - Primary scored source: Microsoft FY2026 Form 10-K, Note 13 / Income Taxes, filed 2026-07-29 — IRS transfer-pricing adjustments of $28.9B plus penalties and interest for tax years 2004–2013; Microsoft disputes the adjustments and is pursuing administrative appeal and potentially judicial proceedings; tax years 2014–2017 remain under audit.
+  - Additional context: UK Competition and Markets Authority, official GOV.UK announcement dated 2026-05-14, strategic-market-status investigation into Microsoft's business-software ecosystem.
+  - Secondary press-confirmed context only: CIO (2026-06-01) and The Register (2026-02-16), reporting an FTC investigation. No direct FTC or Microsoft confirmation was identified, and this evidence does not drive the Band 3 score.
+- Source period/date: as of June 30, 2026 (FY2026); 10-K filed 2026-07-29. Context sources dated 2026-05-14 (CMA), 2026-06-01 (CIO), and 2026-02-16 (The Register).
+- Scoring-round as-of date: 2026-09-25 market close
 - Evidence:
+  - Primary scored support — Microsoft's own FY2026 10-K disclosure (Note 13 / Income Taxes): the IRS seeks $28.9B plus penalties and interest for tax years 2004–2013. Microsoft disputes the adjustments and is pursuing administrative appeal and potentially judicial proceedings. Tax years 2014–2017 remain under audit.
+  - This fits the §15 Band 3 anchor: one identified material proceeding with uncertain final magnitude.
+  - Additional context, not the scored support: the UK Competition and Markets Authority's strategic-market-status investigation into Microsoft's business-software ecosystem (official GOV.UK announcement dated 2026-05-14).
+  - Secondary press-confirmed context only: an FTC investigation has been reported by CIO (2026-06-01) and The Register (2026-02-16). No direct FTC or Microsoft confirmation was identified, and this evidence does not drive the Band 3 score.
 - Counter-evidence:
+  - Microsoft states that it believes its tax-contingency allowances are adequate.
+  - The final magnitude of any liability is uncertain and may be materially lower than the amount the IRS seeks, given that Microsoft is disputing the adjustments.
 - Breadth and durability:
-- Falsification statement:
-- Band (1–5):
-- Flag/Note:
+  - Breadth: a single identified material proceeding concerning transfer-pricing tax adjustments; not a business-model-level or product-level threat, and not an exclusivity expiry.
+  - Durability: multi-year and unresolved — tax years 2004–2013 are in dispute, 2014–2017 remain under audit, and Microsoft describes administrative appeal and potentially judicial proceedings still ahead.
+- Falsification statement: This band is wrong if a subsequent Microsoft filing discloses either (a) resolution of the IRS transfer-pricing dispute with no additional material liability beyond amounts already reserved, which would indicate a better band, or (b) a second identified material proceeding or an adverse outcome with a material quantified financial effect beyond the reserved amounts, which would indicate a worse band. Under §17, any such event after the 2026-09-25 as-of date does not change this round's score; it triggers a material-event flag and is considered at the next scoring round.
+- Band (1–5): 3
+- Flag/Note: Confidence: Medium. The band rests on one company-disclosed proceeding whose ultimate magnitude is uncertain; the band 3 vs. band 2 boundary depends on whether other live regulatory matters are counted as additional material proceedings, and they were treated as context here rather than as scored support. Per §15, this band reflects what was found in the reviewed sources, not a claim that nothing else exists. The falsification statement was drafted for this entry to be observable and consistent with the frozen-round rule.
 
 ### Slot: Reporting/Governance Integrity (qualitative)
-- State:
+- State: scored
 - Source(s) reviewed:
-- Source period/date:
-- Scoring-round as-of date:
+  - Microsoft FY2022, FY2023, FY2024, FY2025, and FY2026 Forms 10-K.
+  - Microsoft FY2026 Form 10-K, Items 8, 9, and 9A.
+  - EDGAR full-text searches across Microsoft filings in the five-year window for Item 4.01, Item 4.02, NT filings, restatement/non-reliance indicators, material weaknesses, going-concern language, and adverse auditor departures. Part of the negative-event review relied on this full-text search rather than direct page-by-page reading of every filing.
+- Source period/date: FY2022–FY2026 (fiscal years ended June 30); FY2026 10-K filed 2026-07-29
+- Scoring-round as-of date: 2026-09-25 market close
 - Evidence:
+  - The FY2026 10-K directly confirms an unqualified financial-statement audit opinion.
+  - Management concluded that internal control over financial reporting (ICFR) was effective as of June 30, 2026.
+  - Deloitte expressed an unqualified opinion on ICFR.
+  - Item 9, Changes in and Disagreements with Accountants: Not applicable.
+  - Five-year review, FY2022–FY2026: no identified restatement, Item 4.02 non-reliance filing, material weakness, NT late filing, going-concern doubt, or adverse auditor departure.
+  - This matches the §15 Band 5 anchor.
 - Counter-evidence:
+  - The five-year negative-event review was not a direct page-by-page reading of every filing; part of it relied on EDGAR full-text searches, which can miss an event that is phrased unexpectedly.
+  - Absence of an identified negative event is not proof that none occurred.
 - Breadth and durability:
-- Falsification statement:
-- Band (1–5):
-- Flag/Note:
+  - Breadth: applies to Microsoft's consolidated financial reporting and internal controls as a whole.
+  - Durability: no identified negative reporting event across five consecutive fiscal years (FY2022–FY2026), with a clean current-year audit and ICFR opinion.
+- Falsification statement: This band is wrong if a Microsoft filing or SEC record covering any period from FY2022 through the 2026-09-25 as-of date shows a restatement, Item 4.02 non-reliance determination, material weakness, late-filing notice, going-concern doubt, or adverse auditor resignation/dismissal that this review did not identify. Under §17, an event first occurring after the as-of date does not change this round's score; it triggers a material-event flag and is considered at the next scoring round.
+- Band (1–5): 5
+- Flag/Note: Confidence: Medium-high. The confidence is not higher because of the EDGAR full-text-search limitation noted above. Per §15, Band 5 is written strictly and this slot is a red-flag slot that discriminates only for companies with real reporting problems; a Band 5 across most large companies is expected. The falsification statement was drafted for this entry to be observable and consistent with the frozen-round rule.
 
 ---
 
 ## Moat (15%)
 
 ### Slot: Moat (qualitative)
-- State:
+- State: scored
 - Source(s) reviewed:
-- Source period/date:
-- Scoring-round as-of date:
+  - Microsoft 365 Blog, 2021-08-19, commercial pricing update effective 2022-03-01.
+  - Microsoft FY2023 Q4 Productivity and Business Processes performance disclosure.
+  - Microsoft Licensing, 2026-02-16, Microsoft 365 packaging/pricing update effective 2026-07-01.
+  - Microsoft FY2026 Form 10-K, Item 1 and Risk Factors, filed 2026-07-29.
+- Source period/date: Sources dated 2021-08-19 (pricing update, effective 2022-03-01), FY2023 Q4, 2026-02-16 (packaging/pricing update, effective 2026-07-01), and the FY2026 Form 10-K filed 2026-07-29.
+- Scoring-round as-of date: 2026-09-25 market close
 - Evidence:
+  - Named mechanisms: switching costs and ecosystem effects in Microsoft 365 and Microsoft's software platforms; and cloud scale economics.
+  - The 2022 commercial price increase, including Office 365 E3 from $20 to $23 (+15%).
+  - FY2023 Q4 disclosure that Office 365 Commercial seats were still growing 11%, with revenue per user increasing after that price increase.
+  - The 2026 pricing increase (Microsoft Licensing, effective 2026-07-01) is contextual evidence only. No retention response is claimed, because the post-increase response was not yet established.
+  - The FY2026 10-K's documented platform network effects and switching costs (Item 1 and Risk Factors).
+  - The FY2026 10-K's cloud scale-economics mechanisms.
+  - Windows OEM distribution.
 - Counter-evidence:
+  - Microsoft's own statement that barriers to entry are low in many businesses.
+  - Free/open-source competitors.
+  - Hyperscaler competition, including that hyperscalers can match some cloud scale advantages.
+  - Direct behavioral moat evidence does not clearly cover all revenue (incomplete breadth).
 - Breadth and durability:
-- Falsification statement:
-- Band (1–5):
-- Flag/Note:
+  - Breadth: the mechanisms apply to large parts of the business (Microsoft 365 and software platforms, cloud), but the direct behavioral evidence does not clearly cover all revenue.
+  - Durability: switching-cost and ecosystem effects are structural and multi-year, but Microsoft's own statement that barriers to entry are low in many businesses limits how far they extend.
+- Falsification statement: This band is wrong if a subsequent Microsoft filing or earnings disclosure reports a year-over-year decline in Microsoft 365 commercial paid seats, or discloses share loss or customer defection in a core platform business, which would indicate erosion and a worse band; or if it directly documents retention or switching-cost behavior covering most of revenue with no material counter-evidence, which would indicate a better band. Under §17, any such event after the 2026-09-25 as-of date does not change this round's score; it triggers a material-event flag and is considered at the next scoring round.
+- Band (1–5): 4
+- Flag/Note: Confidence: Medium. Band 4 rather than Band 5 because of the material counter-evidence and incomplete breadth; this matches the §15 Band 4 anchor (a named mechanism with reasonable evidence, but narrower breadth or identified counter-evidence). Per §16, RPO/backlog, Azure demand/capacity, Copilot growth, revenue growth, operating margin, and FCF margin were not used as primary Moat evidence (returns and demand-side runway are scored elsewhere, and returns may only corroborate). The falsification statement was drafted for this entry to be observable and consistent with the frozen-round rule.
 
 ---
 
