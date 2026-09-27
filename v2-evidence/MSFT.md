@@ -5,7 +5,7 @@
 - Profile: Standard (assigned per METHODOLOGY.md §5 before scoring; no partial-fit flag — see ROUND.md for assignment basis)
 - Round as-of date: 2026-09-25 market close (frozen 2026-09-26, before data collection)
 - Damodaran industry mapping: Software (System & Application) — January 2026 U.S. dataset; directly verified in the official Damodaran indname.xlsx company lookup on 2026-09-26 before any valuation multiple was computed.
-- Round status: In progress — all three Financial Strength slots, all three Growth slots, and Market Volatility are scored; Valuation, other Stability, and Moat slots remain unfilled; no factor or composite score has been entered yet
+- Round status: In progress — all three Financial Strength slots, all three Growth slots, both Valuation slots, and Market Volatility are scored; Concentration, Regulatory/Legal Exposure, Reporting/Governance Integrity, and Moat slots remain unfilled; no factor or composite score has been entered yet
 
 ---
 
@@ -134,24 +134,39 @@
 ## Valuation (20%)
 
 ### Slot: Primary Multiple vs. External Industry Reference
-- State:
+- State: scored
 - Raw metric/value:
-- Formula/calculation:
-- Source:
-- Source period/date:
-- Scoring-round as-of date:
-- Band (1–5):
-- Flag/Note:
+  - Primary multiple: trailing P/E (Standard profile, positive TTM diluted GAAP EPS), per the preflight decisions in ROUND.md
+  - Yahoo Finance regular-session Close, 2026-09-25: $516.17
+  - FY2026 diluted GAAP EPS: $17.95
+  - Current trailing P/E: 28.7560
+  - Industry trailing P/E (Damodaran January 2026, Software (System & Application), `Trailing PE`): 79.17
+  - Ratio to industry: 0.3632
+- Formula/calculation: Current trailing P/E = 516.17 / 17.95 = 28.7560. Ratio = 28.7560 / 79.17 = 0.3632, which is ≤ 0.70 (Band 5 under §12.2).
+- Source: Yahoo Finance for the share price (regular-session Close, not Adjusted Close); Microsoft FY2026 Form 10-K for diluted GAAP EPS; Damodaran January 2026 `PE Ratio by Sector (US)` for the industry reference, using the column named exactly `Trailing PE`.
+- Source period/date: Price as of 2026-09-25 (regular-session close); EPS for fiscal year ended June 30, 2026 (10-K filed 2026-07-29); industry reference from the January 2026 Damodaran dataset.
+- Scoring-round as-of date: 2026-09-25 market close
+- Band (1–5): 5
+- Flag/Note: Limitations retained: (1) the January 2026 industry reference and the September 2026 company multiple do not share a date (the §12.2 timing mismatch, disclosed rather than corrected); (2) Microsoft is included in its own Damodaran industry benchmark, so the benchmark is not independent of the company being compared, and no estimate of Microsoft's share of industry market cap is given; (3) the direction (cheaper relative to industry scores higher) is a built-in assumption of the model, not a finding. The separate Damodaran aggregate market cap / trailing net income field was not substituted; see the preflight decisions in ROUND.md.
 
 ### Slot: Same Multiple vs. Own History
-- State:
-- Raw metric/value:
-- Formula/calculation:
-- Source:
-- Source period/date:
-- Scoring-round as-of date:
-- Band (1–5):
-- Flag/Note:
+- State: scored
+- Raw metric/value (trailing P/E at each fiscal-year-end close; Yahoo Finance regular-session Close, not Adjusted Close; diluted GAAP EPS from that fiscal year's 10-K):
+  - FY2022: Close $256.83 / diluted EPS $9.65 = 26.6145
+  - FY2023: Close $340.54 / diluted EPS $9.68 = 35.1798
+  - FY2024: unavailable — 2024-06-30 was a Sunday; under the v2.0 preflight rule no substitute trading-day close is used
+  - FY2025: Close $497.41 / diluted EPS $13.64 = 36.4670
+  - FY2026: Close $373.02 / diluted EPS $17.95 = 20.7811
+  - Available observations: 4 (sorted: 20.7811, 26.6145, 35.1798, 36.4670)
+  - Historical median P/E: 30.8971
+  - Current trailing P/E: 28.7560
+  - Current / own-history median ratio: 0.9307
+- Formula/calculation: Median of the four available observations = (26.6145 + 35.1798) / 2 = 30.8971. Ratio = 28.7560 / 30.8971 = 0.9307, in the 0.90–1.15 range (Band 3 under §12.3, thresholds as in §12.2). Four of five year-end observations are available with a positive denominator, meeting the §12.3 minimum-history requirement.
+- Source: Yahoo Finance for fiscal-year-end and current share prices (regular-session Close, not Adjusted Close; not dividend-adjusted); Microsoft 10-Ks for each fiscal year's diluted GAAP EPS.
+- Source period/date: Fiscal-year-end closes for FY2022, FY2023, FY2025, and FY2026 (fiscal years ended June 30); current price as of 2026-09-25.
+- Scoring-round as-of date: 2026-09-25 market close
+- Band (1–5): 3
+- Flag/Note: Limitations retained: (1) FY2024 is omitted because its exact fiscal-year-end (Sunday 2024-06-30) was a non-trading day and v2.0 has no explicit non-trading-day convention; this is flagged as a prototype finding for possible v2.1, not a change to v2.0 during the round; (2) each historical EPS was filed after its fiscal-year-end price date, creating a look-ahead/timing mismatch; (3) Adjusted Close was not substituted, so historical prices are not dividend-adjusted; (4) the two Valuation slots share a price numerator, so they are not independent, as disclosed in §12.3.
 
 ---
 

@@ -1,7 +1,7 @@
 # Scoring Methodology v2 — Prototype Round
 
 ## Round status
-- Status: In progress — the round's as-of date is frozen and MSFT's profile remains Standard. MSFT has seven scored slots: Financial Strength (Profitability 4, Cash Generation 5, Balance-Sheet Capacity 4), Growth (3-Year Growth 4, Growth Persistence 5, Growth-Driver Durability 5), and Stability (Market Volatility 3). Valuation, Concentration, Regulatory/Legal Exposure, Reporting/Governance Integrity, and Moat remain incomplete. No factor score or composite score has been entered. NVDA, JPM, NEE, and IONQ have not begun scoring.
+- Status: In progress — the round's as-of date is frozen and MSFT's profile remains Standard. MSFT has nine scored slots: Financial Strength (Profitability 4, Cash Generation 5, Balance-Sheet Capacity 4), Growth (3-Year Growth 4, Growth Persistence 5, Growth-Driver Durability 5), Valuation (Primary Multiple vs Industry 5, Same Multiple vs Own History 3), and Stability (Market Volatility 3). Concentration, Regulatory/Legal Exposure, Reporting/Governance Integrity, and Moat remain incomplete. No factor score or composite score has been entered. NVDA, JPM, NEE, and IONQ have not begun scoring.
 - Prototype companies (a small, deliberately varied group, tested before any full-watchlist rollout — see `PROJECT-STATE.md` Current Strategic Priorities): MSFT, NVDA, JPM, NEE, IONQ.
 
 ## As-of date (METHODOLOGY.md §8)
@@ -35,7 +35,7 @@ These decisions were recorded before any MSFT valuation multiple was computed, a
 No share price has been retrieved for the Valuation slots, no MSFT P/E has been calculated, and no Valuation band has been assigned as of this record.
 
 ## Per-company evidence files
-- [MSFT.md](MSFT.md) — evidence collection in progress: Financial Strength, Growth, and Market Volatility slots recorded; Valuation, Concentration, Regulatory/Legal Exposure, Reporting/Governance Integrity, and Moat not yet begun; no factor or composite score.
+- [MSFT.md](MSFT.md) — evidence collection in progress: Financial Strength, Growth, Valuation, and Market Volatility slots recorded; Concentration, Regulatory/Legal Exposure, Reporting/Governance Integrity, and Moat not yet begun; no factor or composite score.
 - NVDA.md — not yet created; create from `TEMPLATE.md` when this company's prototype work begins.
 - JPM.md — not yet created; create from `TEMPLATE.md` when this company's prototype work begins.
 - NEE.md — not yet created; create from `TEMPLATE.md` when this company's prototype work begins.
