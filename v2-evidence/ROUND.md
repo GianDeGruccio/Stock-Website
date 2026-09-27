@@ -1,7 +1,7 @@
 # Scoring Methodology v2 — Prototype Round
 
 ## Round status
-- Status: In progress — the round's as-of date is frozen and MSFT's profile remains Standard. MSFT has 13 scored slots: Financial Strength (Profitability 4, Cash Generation 5, Balance-Sheet Capacity 4), Growth (3-Year Growth 4, Growth Persistence 5, Growth-Driver Durability 5), Valuation (Primary Multiple vs Industry 5, Same Multiple vs Own History 3), Stability (Market Volatility 3, Concentration 4, Regulatory/Legal Exposure 3, Reporting/Governance Integrity 5), and Moat (4). No factor score or composite score has been entered. NVDA, JPM, NEE, and IONQ have not begun scoring.
+- Status: In progress — the round's as-of date is frozen and MSFT's profile remains Standard. MSFT has all 13 slots completed: Financial Strength (Profitability 4, Cash Generation 5, Balance-Sheet Capacity 4), Growth (3-Year Growth 4, Growth Persistence 5, Growth-Driver Durability 5), Valuation (Primary Multiple vs Industry 5, Same Multiple vs Own History 3), Stability (Market Volatility 3, Concentration 4, Regulatory/Legal Exposure 3, Reporting/Governance Integrity 5), and Moat (4). All five factor coverage checks passed. MSFT factor scores: Financial Strength 76.6667, Growth 83.3333, Valuation 70.0000, Stability 65.0000, Moat 70.0000. MSFT composite: 74.25. NVDA, JPM, NEE, and IONQ have not begun scoring.
 - Prototype companies (a small, deliberately varied group, tested before any full-watchlist rollout — see `PROJECT-STATE.md` Current Strategic Priorities): MSFT, NVDA, JPM, NEE, IONQ.
 
 ## As-of date (METHODOLOGY.md §8)
@@ -35,7 +35,7 @@ These decisions were recorded before any MSFT valuation multiple was computed, a
 No share price has been retrieved for the Valuation slots, no MSFT P/E has been calculated, and no Valuation band has been assigned as of this record.
 
 ## Per-company evidence files
-- [MSFT.md](MSFT.md) — all 13 slot records completed (Financial Strength, Growth, Valuation, Stability, and Moat); no factor or composite score entered yet.
+- [MSFT.md](MSFT.md) — all 13 slot records completed; all five factor coverage checks passed; factor scores and composite (74.25) recorded in its Composite section.
 - NVDA.md — not yet created; create from `TEMPLATE.md` when this company's prototype work begins.
 - JPM.md — not yet created; create from `TEMPLATE.md` when this company's prototype work begins.
 - NEE.md — not yet created; create from `TEMPLATE.md` when this company's prototype work begins.

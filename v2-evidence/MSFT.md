@@ -5,7 +5,7 @@
 - Profile: Standard (assigned per METHODOLOGY.md §5 before scoring; no partial-fit flag — see ROUND.md for assignment basis)
 - Round as-of date: 2026-09-25 market close (frozen 2026-09-26, before data collection)
 - Damodaran industry mapping: Software (System & Application) — January 2026 U.S. dataset; directly verified in the official Damodaran indname.xlsx company lookup on 2026-09-26 before any valuation multiple was computed.
-- Round status: In progress — all 13 MSFT v2 slots are now scored (Financial Strength, Growth, Valuation, all four Stability slots, and Moat); no factor score or composite score has been entered yet
+- Round status: Complete for MSFT in this prototype round — v2.0 slot scoring (all 13 slots), factor scoring, and composite calculation are complete (composite 74.25; see Composite section)
 
 ---
 
@@ -277,12 +277,19 @@
 ---
 
 ## Composite
-Do not fill in until every factor's coverage rule (METHODOLOGY.md §7) has been checked.
-- Financial Strength factor score:
-- Growth factor score:
-- Valuation factor score:
-- Stability factor score:
-- Moat factor score:
-- Coverage check passed for all five factors?:
-- Composite score (only if coverage passed):
-- Or: Not Scored — Insufficient Evidence (if any factor failed coverage):
+Coverage rules (METHODOLOGY.md §7) were checked for every factor before the composite was calculated.
+- Coverage audit (scored slots / applicable slots; minimum required):
+  - Financial Strength: 3/3 scored; minimum required 2 — PASS
+  - Growth: 3/3 scored; minimum required 2 — PASS
+  - Valuation: 2/2 scored; minimum required 2 — PASS
+  - Stability: 4/4 scored; minimum required 3 — PASS
+  - Moat: 1/1 scored; minimum required 1 — PASS
+- Financial Strength factor score: 230/3 = 76.6667 (Profitability Band 4 = 70; Cash Generation Band 5 = 90; Balance-Sheet Capacity Band 4 = 70)
+- Growth factor score: 250/3 = 83.3333 (3-Year Growth Band 4 = 70; Growth Persistence Band 5 = 90; Growth-Driver Durability Band 5 = 90)
+- Valuation factor score: 140/2 = 70.0000 (Primary Multiple vs Industry Band 5 = 90; Same Multiple vs Own History Band 3 = 50)
+- Stability factor score: 260/4 = 65.0000 (Market Volatility Band 3 = 50; Concentration Band 4 = 70; Regulatory/Legal Exposure Band 3 = 50; Reporting/Governance Integrity Band 5 = 90)
+- Moat factor score: 70.0000 (Moat Band 4 = 70)
+- Coverage check passed for all five factors?: Yes
+- Composite score (only if coverage passed): 74.25
+- Or: Not Scored — Insufficient Evidence (if any factor failed coverage): Not applicable — all five factors passed coverage.
+- Calculation/audit note: Band-to-value mapping is the §4 convention (Band 5 = 90, 4 = 70, 3 = 50, 2 = 30, 1 = 10). Each factor score is the plain average of its scored slots (§3). Composite = 0.25(76.6667) + 0.25(83.3333) + 0.20(70.0000) + 0.15(65.0000) + 0.15(70.0000) = 74.25 at the §3 weights of 25/25/20/15/15. The exact fractions (230/3 and 250/3) give the same 74.25, so the rounded factor displays do not create a rounding ambiguity. All slot bands are as recorded above and were not changed for this calculation. v2.0 defines no numerical cutoff for a qualitative composite label, so none is assigned, and this is not a recommendation. This is one prototype company's result under v2.0, not validation of the model.
