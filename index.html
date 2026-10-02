@@ -59,7 +59,7 @@
   <!-- HERO BAND (watchlist only) -->
   <div class="hero-band" id="hero-band">
     <div class="hero-inner">
-      <div class="eyebrow">Student Finance Research Project · Summer 2026</div>
+      <div class="eyebrow">Student Finance Research Project · Started Summer 2026</div>
       <h1>Risk-Tiered Stock Watchlist</h1>
       <div class="hero-note">Educational project · not financial advice</div>
       <p class="hero-sub">10 established companies and 5 higher-risk growth stocks. I built this project to learn how investors compare business quality, valuation, risk, and long-term growth. Built and maintained by Gian De Gruccio.</p>
@@ -143,6 +143,7 @@
     <div class="panel">
       <h3>The Scoring Model</h3>
       <p>Each company is scored out of 100 using a weighted five-factor model. The point is to make comparing companies more organized and less based on gut feeling, so I look at the same five things every time. Scores of 75 and above are labeled Strong Model Fit, scores from 55 to 74 are labeled Mixed Model Fit, and scores below 55 are labeled Weak Model Fit. These labels only reflect how each company fits my scoring model. They are not buy or sell recommendations.</p>
+      <div class="warn-box"><strong>Status note:</strong> the scores shown below are all v1, my own author-assigned factor scores. I've separately pre-registered a more rigorous <strong>Scoring Methodology v2.0</strong> (<a href="https://github.com/GianDeGruccio/Stock-Website/blob/main/METHODOLOGY.md" target="_blank" rel="noopener noreferrer">METHODOLOGY.md</a>), whose rules, bands, and thresholds were committed before any company was scored under them. MSFT is the first completed v2 prototype company (composite score 74.25; see its <a href="https://github.com/GianDeGruccio/Stock-Website/blob/main/v2-evidence/MSFT.md" target="_blank" rel="noopener noreferrer">full evidence record</a>). v2 has not been applied to the rest of the watchlist and is not yet the active scoring system used by the live watchlist or Model Lab.</div>
       <div class="formula-row">
         <div class="fblock"><div class="fw">25%</div><div class="fn">Financial Strength</div><div class="fd">Higher scores go to companies with strong cash flow, manageable debt, and consistent profitability.</div></div>
         <div class="fblock"><div class="fw">25%</div><div class="fn">Growth</div><div class="fd">Higher scores go to companies with rising revenue, earnings growth, or exposure to a long-term trend.</div></div>
@@ -334,7 +335,7 @@
 
   <!-- ============================ JOURNAL ============================ -->
   <section class="section" id="sec-journal" aria-label="Journal" tabindex="-1">
-    <p class="journal-intro">A running log of what the simulated portfolio did each week, what my assumptions got right or wrong, and what I learned. Updated weekly throughout Summer 2026.</p>
+    <p class="journal-intro">A running log of what the simulated portfolio did each week, what my assumptions got right or wrong, and what I learned. 15 entries published from June through September 2026.</p>
     <p class="journal-clarify">Note on the numbers: each entry records the daily equal-weight snapshot observed during that week's check-in — a single day's movement, not a full week's or cumulative return.</p>
 
 <div class="journal-entry">
@@ -623,7 +624,7 @@
     </div>
 
     <div class="coming-soon">
-      Updated weekly throughout Summer 2026.
+      15 entries published from June through September 2026.
       <span>New reflections are added as the project develops.</span>
     </div>
   </section>
@@ -984,18 +985,16 @@
     <div class="learned-card">
       <h4>Next Steps for the Project</h4>
       <ul class="limit-list">
-        <li>Add JPM and IONQ research reports.</li>
-        <li>Ask a finance, economics, business, or accounting teacher or professor for feedback on the model.</li>
-        <li>Improve the scoring model after getting feedback.</li>
-        <li>Track weekly portfolio changes through the summer.</li>
-        <li>Learn more about valuation ratios and how different sectors should be scored.</li>
+        <li>Seek outside criticism of the v2 methodology's assumptions.</li>
+        <li>Complete the small dry run (3–5 testers) and revise the test flow based on usability feedback.</li>
+        <li>Make the v2 prototype and its known limitations public, alongside the v1 scores already on the site.</li>
       </ul>
     </div>
 
     <!-- Expert Feedback — Planned (replaces the old "Outside Feedback") -->
     <div class="learned-card">
       <h4>Expert Feedback — Planned</h4>
-      <p>My next step is to ask an educator or finance professional to review the model's assumptions, especially whether the same scoring framework should be used across different sectors. Any changes made from that feedback will be documented here.</p>
+      <p>My next step is to ask an educator or finance professional for outside criticism of the model's assumptions, including the Scoring Methodology v2 rules I pre-registered, and whether v2's metrics, thresholds, and company profiles are appropriate across different types of businesses. No outside review has happened yet. Any criticism received will be documented here as criticism, not as endorsement.</p>
     </div>
 
     <!-- Project Revision Log (rendered from data.js) -->
@@ -1008,7 +1007,7 @@
     <!-- Testing and Impact -->
     <div class="learned-card">
       <h4>Testing and Impact</h4>
-      <p>No formal student pilot has happened yet. The next stage of this project is to test whether the website actually helps beginners understand finance concepts. I plan to conduct a small, supervised student learning session and use anonymous feedback to improve the explanations and tools.</p>
+      <p>No formal student pilot has happened yet. Technical/process dry-run testing has begun. A small number of anonymous form responses exist, but I haven't yet fully reconciled which are genuine outside dry-run testers versus my own technical testing, so I'm not treating them as formal results. No learning-impact conclusion can be drawn from them yet. The next stage is to complete a small dry run, revise the flow based on that usability feedback, and then run a formal, supervised student pilot.</p>
       <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px">Planned process:</p>
       <ol class="plan-steps">
         <li>A short introductory quiz to see what participants already know.</li>
@@ -1018,7 +1017,7 @@
         <li>Revisions to the explanations and tools based on common misunderstandings.</li>
       </ol>
       <p style="margin-top:14px"><button class="lab-btn" type="button" data-section="test">Go to the student test →</button></p>
-      <div class="results-placeholder">Results will appear here after the first session is run. No sessions have taken place yet, so there is nothing to report. This section is built so real, anonymous findings can be added later without rebuilding the page.</div>
+      <div class="results-placeholder">Results will appear here once the formal student pilot is run. A small number of dry-run/process responses exist already, but they are process checks, not formal-pilot results, and no learning-impact findings have been analyzed yet. This section is built so real, anonymous findings can be added later without rebuilding the page.</div>
     </div>
 
     <div class="method-grid">

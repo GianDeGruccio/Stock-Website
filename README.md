@@ -50,7 +50,7 @@ organized and keep iterating on it.
   difference. Runs entirely in the browser.
 - **Learn** — five short beginner lessons, each tied to a company on the site,
   plus a five-question practice quiz with instant feedback.
-- **Journal** — weekly reflections (Weeks 1–12).
+- **Journal** — weekly reflections (Weeks 1–15).
 - **Research** — deeper write-ups for MSFT, NVDA, KO, and SMCI.
 - **About** — selection criteria, a project revision log, and a testing/impact
   plan.
@@ -74,6 +74,14 @@ Score labels (model fit only, **not** buy/sell calls): **Strong** (75+),
 factor means, which indicators I consider, and roughly how I split high/medium/low
 scores. Because scores are a weighted average, they stay on a 0–100 scale even if
 weights don't total 100% — only the *relative* sizes of the weights matter.
+
+**v1 vs. v2.** Everything above describes the live v1 model, which is what's shown on
+the watchlist and Model Lab. A more rigorous **Scoring Methodology v2.0** (see
+`METHODOLOGY.md`) has been pre-registered. Its rules, bands, and thresholds were
+committed before any company was scored under them. MSFT is the first completed v2
+prototype company (composite 74.25; see `v2-evidence/MSFT.md`); the rest of the
+watchlist has not been scored under v2, and v2 is not yet the active scoring system
+used by the live watchlist or Model Lab.
 
 ## Model limitations
 
@@ -277,13 +285,13 @@ reviewed and edited by me.
 
 ## Roadmap
 
-- Add JPM and IONQ research reports.
-- Ask an educator or finance professional to review the model's assumptions,
-  especially cross-sector scoring, and document any resulting changes.
-- Run a small, supervised student learning session and use anonymous feedback to
-  improve the explanations and tools.
-- Explore a genuine cumulative tracker with a fixed, visible start date and real
-  historical prices (only if reliable historical data is available).
+- Seek outside criticism of the v2 methodology's assumptions and the two quiz sets'
+  difficulty balance.
+- Reconcile the three existing dry-run form responses and complete a small dry run
+  (3–5 testers), then revise the test flow from that usability feedback before
+  running a formal student pilot.
+- Make the v2 prototype and its known limitations public, alongside the v1 scores
+  already on the site.
 
 ## Privacy
 

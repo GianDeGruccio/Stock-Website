@@ -418,4 +418,6 @@ const REVISION_LOG = [
   { when: 'July 2026', text: "Weekly journal expanded through Week 4." },
   { when: 'July 2026', text: "Technical audit identified misleading sparklines, mobile-navigation limitations, API-key exposure, and daily-versus-cumulative portfolio confusion." },
   { when: 'July 2026', text: "Current update corrected those issues and added the Model Lab and the Learn section." },
+  { when: 'September 2026', text: "Scoring Methodology v2.0 pre-registered before prototype scoring began." },
+  { when: 'September 2026', text: "MSFT completed as the first v2.0 prototype company; issues found during scoring were documented for later review rather than changing v2.0." },
 ];

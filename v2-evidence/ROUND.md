@@ -32,7 +32,7 @@ These decisions were recorded before any MSFT valuation multiple was computed, a
    - The January 2026 industry reference and the September 2026 company multiple have the timing mismatch already disclosed in §12.2.
    - Microsoft is included in its own Damodaran industry benchmark, so the benchmark is not independent of the company being compared. No numerical estimate of Microsoft's share of industry market cap is given here; one would need to be separately verified on a comparable basis.
 
-No share price has been retrieved for the Valuation slots, no MSFT P/E has been calculated, and no Valuation band has been assigned as of this record.
+At the time these preflight decisions were recorded, no share price had yet been retrieved for the Valuation slots, no MSFT P/E had yet been calculated, and no Valuation band had yet been assigned. These decisions were made before those calculations were performed.
 
 ## Per-company evidence files
 - [MSFT.md](MSFT.md) — all 13 slot records completed; all five factor coverage checks passed; factor scores and composite (74.25) recorded in its Composite section.

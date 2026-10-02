@@ -48,7 +48,7 @@ I want this section near the top rather than buried at the bottom.
 - **It has not been reviewed by an expert.** Outside review of this methodology is something I want and have not yet obtained. If and when it happens, it will be documented as criticism received, not as endorsement.
 - **The thresholds are mine.** Most of the specific numbers in this document — where one band ends and the next begins — are reasonable lines I drew. They are not industry standards, and this document labels which is which throughout.
 - **The band-to-number mapping is arbitrary.** See Section 4.
-- **Scores are relative to this model only.** A "Strong Model Fit" label means a company fits what this model rewards. It does not mean the company is a good business or a good investment, and a low score does not mean the opposite.
+- **Scores are relative to this model only.** A higher composite score means a company fits more of what this model rewards; a lower score means it fits less. This says nothing about whether the company is a good business or a good investment, and a low score does not mean the opposite. v2.0 defines no numerical cutoff or label for the composite.
 - **Coverage is limited.** I score a small hand-picked watchlist. Nothing here generalizes to the market.
 - **Some things are invisible to this model.** Management quality, breaking news, earnings surprises, interest-rate moves, sentiment, and anything that happened after the scoring round's as-of date are all outside it.
 
@@ -887,11 +887,11 @@ costs. Otherwise "it is very profitable" would score twice.
 
 ## 19. Status at commit
 
-**As of version 2.0, no company has been scored under Scoring Methodology v2.** Every
-threshold, band anchor, formula, and rule in this document was written before any v2
-result existed, and v2.0 is committed to the repository before the first v2 scoring
-round begins. The v1 scores currently on the site were produced under a different and
-less structured model and are not v2 results.
+**When version 2.0 was originally committed to the repository, no company had yet been
+scored under Scoring Methodology v2.** Every threshold, band anchor, formula, and rule
+in this document was written before any v2 result existed, and v2.0 was committed to
+the repository before the first v2 scoring round began. The v1 scores currently on the
+site were produced under a different and less structured model and are not v2 results.
 
 Anyone checking this can verify it from the repository history: the commit adding
 v2.0 precedes any commit containing v2 scores or a v2 inputs table.

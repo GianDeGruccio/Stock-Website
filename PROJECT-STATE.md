@@ -1,10 +1,10 @@
 # Finance Website — Project State
 
 ## Last Updated
-- Date: 2026-09-26
+- Date: 2026-10-02
 - Branch: `main`
-- Baseline repository state reviewed through commit: `ce0a707755e53cf84e8a7c2d74ea648ccc69421a` — "Add Week 15 journal entry"
-- This state update records the frozen v2 prototype round setup and MSFT profile assignment, before any v2 slot evidence collection.
+- Baseline repository state reviewed through commit: `47305c0d33aab835a2c77235876d7bcdfa32a45c` — "Clarify v2 methodology status"
+- This state update brings PROJECT-STATE.md's opening status language in sync with the completed MSFT v2 prototype score and a professor-facing consistency cleanup across `METHODOLOGY.md`, `v2-evidence/ROUND.md`, `index.html`, and `README.md`; it does not change any score, threshold, formula, band, or evidence conclusion.
 
 ## Project Purpose
 An independent student finance research and education project built and maintained by one student (Gian De Gruccio). The website is the publishing and interactive platform for that work: a stock watchlist, a self-built scoring model, a weekly learning journal, write-ups on the model's own behavior, and beginner finance lessons. It is explicitly **not** professional equity research, **not** investment advice, and **not** an academically validated study — a disclaimer the repository repeats in the README, the page footer, and the About section.
@@ -17,7 +17,7 @@ Verified against `index.html`, `app.js`, `data.js`, and `proxy/worker.js`:
 - **Five-factor scoring model**, computed client-side from static, hand-assigned factor scores (`data.js` §"Pure scoring math").
 - **Model Lab**: live weight sliders, full re-ranking, a two-company comparison highlighting the largest weighted factor gap, Normalize/Reset controls — runs entirely in-browser, stores nothing (`app.js` §15).
 - **Learn section**: 5 lessons plus a 5-question practice quiz (`QUIZ`) with instant feedback and retry, no data collected (`app.js` §16).
-- **Journal**: weekly first-person entries through **Week 12**, spanning two structurally different eras (see "Weekly Journal Status").
+- **Journal**: weekly first-person entries through **Week 15**, spanning two structurally different eras (see "Weekly Journal Status").
 - **Research section**: a "Model Testing Project" (sensitivity analysis) and 4 "Company Research Notes" write-ups (see below).
 - **Student Test**: a fully built pre/post testing flow (see its own section) — implemented in code, and dry-run/process testing of it has begun (see "Testing / Impact Status").
 - **Daily equal-weight snapshot**: a $10k hypothetical, equal-weight-at-previous-close view, explicitly labeled as *not* a cumulative return tracker.
