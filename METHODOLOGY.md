@@ -1,7 +1,6 @@
 # Scoring Methodology v2
 
-**Status:** Pre-registered rulebook. No company has been scored under v2 as of this
-version.
+**Status:** Pre-registered v2.0 rulebook. Prototype scoring is underway, and Microsoft is the first completed company under v2.0. The scoring rules below were committed before prototype scoring began and have not been changed based on Microsoft's result.
 
 **Version:** 2.0
 
