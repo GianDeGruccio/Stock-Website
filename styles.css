@@ -195,6 +195,7 @@ main{display:block;}
 .factor-item .fsubj em{color:var(--text);font-style:normal;font-weight:600;}
 .band-guide{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
 .warn-box{border:1px solid var(--border);border-left:3px solid var(--gold);background:var(--gold-dim);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--text);line-height:1.6;margin-top:6px;}
+.panel p a,.warn-box a{color:var(--blue);}
 
 /* ---- Score table ---------------------------------------------------------- */
 .score-table-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}

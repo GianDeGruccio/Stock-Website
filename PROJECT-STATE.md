@@ -1,10 +1,10 @@
 # Finance Website — Project State
 
 ## Last Updated
-- Date: 2026-10-02
+- Date: 2026-10-26
 - Branch: `main`
-- Baseline repository state reviewed through commit: `47305c0d33aab835a2c77235876d7bcdfa32a45c` — "Clarify v2 methodology status"
-- This state update brings PROJECT-STATE.md's opening status language in sync with the completed MSFT v2 prototype score and a professor-facing consistency cleanup across `METHODOLOGY.md`, `v2-evidence/ROUND.md`, `index.html`, and `README.md`; it does not change any score, threshold, formula, band, or evidence conclusion.
+- Baseline repository state reviewed through commit: `19c6c6f7f457f71972d057c493fa2fcc29338453` — "Align project status for outside review"
+- This state update accompanies an accuracy/consistency maintenance pass (JNJ description, static beta/P/E labeling, risk-measure explanation, Model Lab all-zero-weight guard, About/Research alignment, and October outreach status). It does not change any score, weight, threshold, formula, band, sensitivity result, or evidence conclusion.
 
 ## Project Purpose
 An independent student finance research and education project built and maintained by one student (Gian De Gruccio). The website is the publishing and interactive platform for that work: a stock watchlist, a self-built scoring model, a weekly learning journal, write-ups on the model's own behavior, and beginner finance lessons. It is explicitly **not** professional equity research, **not** investment advice, and **not** an academically validated study — a disclaimer the repository repeats in the README, the page footer, and the About section.
@@ -15,7 +15,7 @@ Verified against `index.html`, `app.js`, `data.js`, and `proxy/worker.js`:
 - **15-company watchlist**, split into **10 "Core" and 5 "Growth" companies** (`data.js`: `CORE` and `GROWTH`, combined into `ALL`).
 - **Live market data**: front end calls a configurable `API_BASE_URL` (a Cloudflare Worker); if unset or unreachable, the UI shows explicit "unavailable / stale / partial" states rather than inventing data (`app.js` §8, no random-price code anywhere).
 - **Five-factor scoring model**, computed client-side from static, hand-assigned factor scores (`data.js` §"Pure scoring math").
-- **Model Lab**: live weight sliders, full re-ranking, a two-company comparison highlighting the largest weighted factor gap, Normalize/Reset controls — runs entirely in-browser, stores nothing (`app.js` §15).
+- **Model Lab**: live weight sliders, full re-ranking, a two-company comparison highlighting the largest weighted factor gap, Normalize/Reset controls — runs entirely in-browser, stores nothing (`app.js` §15). When all five weights are zero, adjusted rankings and weighted comparisons are hidden behind an explanatory message instead of showing meaningless all-zero results.
 - **Learn section**: 5 lessons plus a 5-question practice quiz (`QUIZ`) with instant feedback and retry, no data collected (`app.js` §16).
 - **Journal**: weekly first-person entries through **Week 15**, spanning two structurally different eras (see "Weekly Journal Status").
 - **Research section**: a "Model Testing Project" (sensitivity analysis) and 4 "Company Research Notes" write-ups (see below).
@@ -87,7 +87,7 @@ Verified in `app.js` §17, `index.html`'s Student Test section, and `TESTING-MET
 - Reconciling which of the three existing responses are technical/self-tests versus genuine external dry-run testers.
 - Completing the planned dry run (target 3–5 testers) and revising the flow based on it.
 - **No formal pilot has occurred.** The About page states directly: *"No formal student pilot has happened yet."*
-- **No outside/expert review has occurred** — an educator/finance-professional review of the model and quiz balance remains a future step.
+- **No outside/expert review has occurred.** As reported by the project owner (off-repository, not verifiable from the repo): six targeted requests for criticism were sent to professors in early October 2026, with a follow-up round in mid-October. No substantive response, review, or endorsement has been confirmed.
 - **No dry-run or formal-pilot results have been formally analyzed or published as findings.**
 
 ## Privacy and Security
@@ -106,14 +106,20 @@ Verified in `app.js` §17, `index.html`'s Student Test section, and `TESTING-MET
 - The four published research reports carry a "Stats last reviewed: June 2026" date, now several months old; the other 11 companies' fundamentals carry no per-entry review date at all.
 - The testing methodology's own author acknowledges a conflict of interest (same person wrote and will grade the quizzes) and a possible difficulty mismatch between the two quiz sets — the reason counterbalancing and outside review are planned.
 - **Testing activity remains minimal and unreconciled** (see Testing / Impact Status above) — no dry run or formal pilot has been completed, and no learning-gain or impact conclusion can be drawn yet.
-- No outside/expert review of the model or quizzes has occurred, despite being a stated near-term priority in the README, About page, and Research page.
-- **Documentation drift:** the About page's "Testing and Impact" outline and the README roadmap both still describe an older, simpler testing plan (e.g. "guided use of the Learn and Model Lab sections") rather than the more specific flow actually built in `TESTING-METHODOLOGY.md` — self-contained inline lessons, a separate mini Model Lab, the dry-run/formal-pilot split, and A/B counterbalancing.
+- No outside/expert review of the model or quizzes has occurred. Criticism has been requested (owner-reported October 2026 outreach), but none has been received.
+- Watchlist beta and P/E figures are hand-entered static references (unchanged in `data.js` since it was created in July 2026). The site now labels them as such, but they have not been refreshed.
 - The public Worker endpoint can technically still be reached by a client that spoofs an allowed-origin header; the README states this openly rather than overclaiming the origin check as a full security boundary.
 
 ## Current Strategic Priorities
+
+### Immediate priority: admissions freeze (October 2026, through the November 1–2, 2026 college deadlines)
+- The only current commitments are (a) the approved admissions-readiness accuracy/consistency maintenance, and (b) responding to and documenting any important external feedback that arrives (documented as criticism, never as validation or endorsement).
+- No new v2 companies, formal pilot, broader research, new features, or methodology changes are planned during the freeze. `METHODOLOGY.md` v2.0 is unchanged.
+
+### Longer-term roadmap (possible later work, not current commitments)
 1. **Prototype Scoring Methodology v2 on a small, varied group of companies** before any full-watchlist rollout. The fundamentals/data refresh those companies need happens as part of this prototype scoring work, not as a separate broad "refresh all 15" pass.
 2. **Treat prototype scoring problems as evidence, not as a reason to quietly adjust a rule.** Any change to a v2 threshold, formula, slot, or band after v2.0 scoring has begun requires a documented, versioned v2.1 (per `METHODOLOGY.md` §18) — never a silent edit to v2.0.
-3. **Pursue targeted outside criticism** of the scoring methodology and of the two quiz sets' difficulty balance. Any criticism received must be documented as criticism, never described as validation or endorsement.
+3. **Pursue targeted outside criticism** of the scoring methodology and of the two quiz sets' difficulty balance. Requests were sent in October 2026 (owner-reported); any criticism received must be documented as criticism, never described as validation or endorsement.
 4. **Reconcile the three existing form responses** and complete the planned dry run (3–5 testers), as process/usability feedback only, not impact evidence.
 5. **Only after appropriate revisions and outside review, consider the planned formal pilot** (target 15–30 students), per the honesty commitments in `TESTING-METHODOLOGY.md`.
 6. A full-watchlist v2 rollout and the two remaining planned research reports (JPM, IONQ) remain lower priority than testing whether the v2 methodology is workable in practice.
@@ -136,7 +142,7 @@ Collected here so these are never mistaken for accomplishments:
 - **Sensitivity analysis:** May be described as a hand-computed exploration of 5 preset weighting scenarios. May **not** be described as a statistical robustness test, a backtest, or evidence the model "works."
 - **Testing:** May be described as a fully built testing flow with a pre-specified methodology documented before the formal pilot. Technical/process testing has begun — three form responses exist, with provenance not yet reconciled (see Testing / Impact Status). Dry-run responses may be inspected and discussed internally for process problems (bugs, confusing questions, timing, usability), but specific dry-run scores or feedback must **not** be presented publicly as evidence the site improves learning or has educational impact. The formal pilot remains the first round intended for actual learning/feedback analysis, still subject to the methodology's sample-size and design limitations.
 - **Educational impact:** May **not** be claimed. Only a small number of unreconciled dry-run responses exist for process checking; no learning-gain data has been analyzed.
-- **Outside validation:** May **not** be claimed; no professor, educator, or professional review has occurred.
+- **Outside validation:** May **not** be claimed; no professor, educator, or professional review has occurred. It may be stated that criticism was requested in October 2026, but not that any was received.
 
 ## Source-of-Truth Note
 For **current implementation/code state**: (1) the live repository — highest authority, (2) this `PROJECT-STATE.md`, (3) other current, verifiable evidence (e.g. a fresh site inspection), (4) older conversations or planning documents, lowest priority.

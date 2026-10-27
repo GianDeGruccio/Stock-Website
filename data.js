@@ -29,7 +29,7 @@ const CORE = [
 
   { ticker: 'JNJ',  name: 'Johnson & Johnson',  sector: 'Healthcare',       beta: '0.55', pe: '22',   w52l: '140', w52h: '170', w52p: 60, risk: 18,
     scores: { fin: 90, growth: 55, val: 72, risk: 92, moat: 85 },
-    thesis: "Long history of raising its dividend. Pharma, medical technology, and consumer health diversify the business and add stability." },
+    thesis: "A healthcare company focused on Innovative Medicine (pharmaceuticals) and MedTech (medical devices). It separated its consumer health business into Kenvue in 2023, and it has a long history of raising its dividend." },
 
   { ticker: 'PG',   name: 'Procter & Gamble',   sector: 'Consumer Staples', beta: '0.59', pe: '26',   w52l: '155', w52h: '183', w52p: 55, risk: 15,
     scores: { fin: 88, growth: 50, val: 68, risk: 94, moat: 90 },
@@ -173,7 +173,7 @@ const FACTOR_GUIDE = [
   },
   {
     key: 'risk', name: 'Risk', weight: 15,
-    meaning: "How much uncertainty surrounds the company. A HIGHER score here means LOWER risk in my scale.",
+    meaning: "How much uncertainty surrounds the company. A HIGHER score here means LOWER risk in my scale. This is separate from the \"Risk level\" bar on the watchlist cards, where a higher number means MORE risk; both are rough estimates and are not exact opposites of each other.",
     indicators: ['Volatility, including beta', 'Business or customer concentration', 'Debt', 'Regulatory exposure', 'Competitive pressure', 'Company-specific uncertainty'],
     high: "Stable demand, diversified business, low volatility, few obvious threats (lower risk).",
     mid: "Some concentration, moderate volatility, or one notable risk factor.",
@@ -413,11 +413,17 @@ const MODEL_LAB_MINI_TICKERS = ['MSFT', 'JPM', 'JNJ', 'KO', 'NVDA', 'SMCI', 'PLT
 const REVISION_LOG = [
   { when: 'June 2026', text: "Initial 15-company watchlist and five-factor scoring model created." },
   { when: 'June 2026', text: "Research reports added for MSFT, NVDA, KO, and SMCI." },
+  { when: 'June 2026', text: "Some watchlist stats checked against Yahoo Finance and corrected." },
   { when: 'June 2026', text: "Buy / Watch / Avoid terminology replaced with Strong / Mixed / Weak Model Fit." },
   { when: 'June 2026', text: "Model Limitations and Data Sources sections added." },
   { when: 'July 2026', text: "Weekly journal expanded through Week 4." },
   { when: 'July 2026', text: "Technical audit identified misleading sparklines, mobile-navigation limitations, API-key exposure, and daily-versus-cumulative portfolio confusion." },
-  { when: 'July 2026', text: "Current update corrected those issues and added the Model Lab and the Learn section." },
+  { when: 'July 2026', text: "Website update (Version 2 of the site) corrected those issues, moved live prices behind a secure server-side proxy, and added the Model Lab and the Learn section." },
+  { when: 'July 2026', text: "Model Testing Project added to the Research page: a sensitivity analysis of five weighting scenarios." },
+  { when: 'August 2026', text: "Student Test built, then redesigned into one self-contained page: a blind baseline quiz, inline lessons, a mini Model Lab exercise, a second quiz, and an anonymous feedback form." },
   { when: 'September 2026', text: "Scoring Methodology v2.0 pre-registered before prototype scoring began." },
   { when: 'September 2026', text: "MSFT completed as the first v2.0 prototype company; issues found during scoring were documented for later review rather than changing v2.0." },
+  { when: 'October 2026', text: "Public documentation updated so the site, README, and methodology consistently separate the live v1 model from the v2 prototype." },
+  { when: 'October 2026', text: "Six targeted requests for outside criticism sent to professors in early October, with a follow-up round in mid-October. No substantive response or endorsement has been confirmed." },
+  { when: 'October 2026', text: "Accuracy and consistency maintenance: corrected the Johnson & Johnson description, labeled beta and P/E as static reference figures, explained the two different risk measures, added a Model Lab guard for all-zero weights, and aligned the About and Research pages with the project's current state." },
 ];

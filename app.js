@@ -146,6 +146,8 @@ function initMobileMenu() {
 /* =============================================================================
    6. Watchlist cards
 ============================================================================= */
+const STATIC_FIGURE_NOTE = 'Approximate reference figure entered by hand. Not refreshed automatically and may be out of date.';
+
 function buildCard(company, tier, index) {
   const id = safeId(company.ticker);
   const score = baseScore(company);
@@ -177,12 +179,12 @@ function buildCard(company, tier, index) {
     '</div>' +
     '<p class="thesis-txt">' + escapeHTML(company.thesis) + '</p>' +
     '<div class="stat-row">' +
-      '<div class="schip">Beta<b>' + company.beta + '</b></div>' +
-      '<div class="schip">P/E<b>' + company.pe + '</b></div>' +
+      '<div class="schip" title="' + STATIC_FIGURE_NOTE + '">Beta (ref.)<b>' + company.beta + '</b></div>' +
+      '<div class="schip" title="' + STATIC_FIGURE_NOTE + '">P/E (ref.)<b>' + company.pe + '</b></div>' +
       '<div class="schip">Score<b>' + score + '/100</b></div>' +
     '</div>' +
     '<div class="risk-row">' +
-      '<span class="rl">Risk level</span>' +
+      '<span class="rl" title="My rough estimate of overall risk: a higher number means MORE risk. Separate from the Risk factor on the Scoring Model page, where a higher score means LESS risk.">Risk level</span>' +
       '<div class="rtrack"><div class="rfill" style="width:' + company.risk + '%"></div></div>' +
       '<span class="rl">' + company.risk + '/100</span>' +
     '</div>';
@@ -570,15 +572,29 @@ function renderMLWeights() {
   });
 
   const totEl = $('ml-total'), msgEl = $('ml-total-msg');
-  if (totEl) { totEl.textContent = 'Total: ' + total + '%'; totEl.className = 'lab-total ' + (total === 100 ? 'ok' : 'warn'); }
+  if (totEl) {
+    totEl.textContent = total === 0 ? 'Total: 0%. Set at least one weight above zero.' : 'Total: ' + total + '%';
+    totEl.className = 'lab-total ' + (total === 100 ? 'ok' : 'warn');
+  }
   if (msgEl) {
-    msgEl.textContent = total === 100
-      ? 'Weights total 100%. Each value equals its share of the score.'
-      : 'Weights total ' + total + '%. Scores still use the relative sizes, so the ranking stays valid — “Normalize” makes them total 100%.';
+    msgEl.textContent = total === 0
+      ? 'With every weight at zero there is nothing to score, so adjusted scores, rankings, and comparisons are hidden until at least one weight is positive.'
+      : total === 100
+        ? 'Weights total 100%. Each value equals its share of the score.'
+        : 'Weights total ' + total + '%. Scores still use the relative sizes, so the ranking stays valid — “Normalize” makes them total 100%.';
   }
 }
 
 function renderMLRanking() {
+  const tbody = $('ml-rank-tbody');
+  if (!tbody) return;
+  // weightedScore() returns 0 for every company when all weights are zero,
+  // so an "adjusted ranking" would just be an alphabetical list. Show nothing instead.
+  if (mlTotal() <= 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="color:var(--muted);text-align:center;padding:18px">No adjusted ranking: set at least one factor weight above zero.</td></tr>';
+    return;
+  }
+
   // Original ranking uses my default weights.
   const orig = ALL.map(function (s) { return { ticker: s.ticker, base: baseScore(s) }; });
   const origSorted = orig.slice().sort(function (a, b) { return (b.base - a.base) || a.ticker.localeCompare(b.ticker); });
@@ -591,8 +607,6 @@ function renderMLRanking() {
   });
   const adjSorted = adj.slice().sort(function (a, b) { return (b.adj - a.adj) || a.ticker.localeCompare(b.ticker); });
 
-  const tbody = $('ml-rank-tbody');
-  if (!tbody) return;
   tbody.innerHTML = adjSorted.map(function (r, i) {
     const rank = i + 1;
     const move = origRank[r.ticker] - rank;              // positive = moved up
@@ -635,6 +649,7 @@ function renderMLCompare() {
   if (thB) thB.textContent = B.ticker;
 
   const total = mlTotal();
+  const noWeights = total <= 0;
   const rows = FACTOR_KEYS.map(function (pair) {
     const k = pair[0], label = pair[1];
     const eff = total > 0 ? mlWeights[k] / total : 0;
@@ -646,19 +661,23 @@ function renderMLCompare() {
   rows.forEach(function (r, i) { if (Math.abs(r.wdiff) > Math.abs(rows[maxIdx].wdiff)) maxIdx = i; });
 
   tbody.innerHTML = rows.map(function (r, i) {
-    const gap = (r.wdiff >= 0 ? '+' : '') + r.wdiff.toFixed(1);
-    const tag = (i === maxIdx && A.ticker !== B.ticker) ? '<span class="cmp-tag">biggest driver</span>' : '';
-    const cls = (i === maxIdx && A.ticker !== B.ticker) ? 'cmp-max' : '';
+    const isDriver = !noWeights && i === maxIdx && A.ticker !== B.ticker;
+    const gap = noWeights ? '—' : (r.wdiff >= 0 ? '+' : '') + r.wdiff.toFixed(1);
+    const tag = isDriver ? '<span class="cmp-tag">biggest driver</span>' : '';
+    const cls = isDriver ? 'cmp-max' : '';
+    const gapCls = noWeights ? 'same' : (r.wdiff > 0 ? 'up' : (r.wdiff < 0 ? 'down' : 'same'));
     return '<tr class="' + cls + '">' +
       '<td>' + escapeHTML(r.label) + tag + '</td>' +
       '<td class="td-score">' + r.a + '</td>' +
       '<td class="td-score">' + r.b + '</td>' +
-      '<td class="delta ' + (r.wdiff > 0 ? 'up' : (r.wdiff < 0 ? 'down' : 'same')) + '">' + gap + '</td>' +
+      '<td class="delta ' + gapCls + '">' + gap + '</td>' +
     '</tr>';
   }).join('');
 
   if (summary) {
-    if (A.ticker === B.ticker) {
+    if (noWeights) {
+      summary.innerHTML = 'All weights are zero, so there is no weighted score to compare. Set at least one factor weight above zero.';
+    } else if (A.ticker === B.ticker) {
       summary.innerHTML = 'Pick two <b>different</b> companies to compare.';
     } else {
       const aTot = weightedScore(A.scores, mlWeights), bTot = weightedScore(B.scores, mlWeights);

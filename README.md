@@ -1,16 +1,18 @@
 # Student Finance Research Project
 
-A finance-learning website I built to practice analyzing companies: a 15-company
-watchlist, a transparent five-factor scoring model, an interactive **Model Lab**
-for experimenting with that model, and a short **Learn** section with a practice
-quiz. Live prices are fetched through a small server-side proxy so no API key is
-exposed.
+A finance research and education website I built to practice analyzing companies.
+It started in June 2026 as a 15-company watchlist with a transparent five-factor
+scoring model, and grew over the following months to include an interactive
+**Model Lab**, a short **Learn** section with a practice quiz, a self-contained
+student test, and a more rule-based scoring methodology (v2) prototyped on
+Microsoft. Live prices are fetched through a small server-side proxy so no API key
+is exposed.
 
 **Educational project — not financial advice.** Nothing here is a recommendation
 to buy or sell any security.
 
 Built and maintained by **Gian De Gruccio**, a student interested in finance,
-economics, applied mathematics, and web development.
+economics, and business analysis.
 
 ---
 
@@ -51,7 +53,9 @@ organized and keep iterating on it.
 - **Learn** — five short beginner lessons, each tied to a company on the site,
   plus a five-question practice quiz with instant feedback.
 - **Journal** — weekly reflections (Weeks 1–15).
-- **Research** — deeper write-ups for MSFT, NVDA, KO, and SMCI.
+- **Research** — a five-scenario sensitivity analysis of the v1 model, plus deeper
+  write-ups for MSFT, NVDA, KO, and SMCI (historical snapshots, stats last reviewed
+  June 2026).
 - **About** — selection criteria, a project revision log, and a testing/impact
   plan.
 - Dark/light theme, filters, a sortable score table, and a responsive mobile
@@ -271,11 +275,12 @@ git push
 
 ## Data-source statement
 
-Live prices come from the Finnhub API (via the proxy). Company and fundamental
-figures are approximate reference values checked against public sources such as
-Yahoo Finance, company investor-relations pages, SEC filings, and market-data
-sites. These figures can change over time. Journal reflections are based on daily
-snapshots and my own notes.
+Live prices come from the Finnhub API (via the proxy) and update automatically.
+Beta and P/E on the watchlist cards are approximate reference values entered by
+hand and checked against public sources such as Yahoo Finance, company
+investor-relations pages, SEC filings, and market-data sites. They are **not**
+refreshed automatically, may be out of date, and should not be read as current
+fundamentals. Journal reflections are based on daily snapshots and my own notes.
 
 ## AI-assistance disclosure
 
@@ -285,13 +290,14 @@ reviewed and edited by me.
 
 ## Roadmap
 
-- Seek outside criticism of the v2 methodology's assumptions and the two quiz sets'
-  difficulty balance.
+- Review and document any criticism that arrives from the October 2026 outreach
+  (six targeted requests to professors plus a follow-up round). No substantive
+  response or endorsement has been confirmed so far.
+- Review the issues recorded during the Microsoft v2 prototype before deciding
+  whether v2 needs a documented revision.
 - Reconcile the three existing dry-run form responses and complete a small dry run
   (3–5 testers), then revise the test flow from that usability feedback before
-  running a formal student pilot.
-- Make the v2 prototype and its known limitations public, alongside the v1 scores
-  already on the site.
+  considering a formal student pilot.
 
 ## Privacy
 

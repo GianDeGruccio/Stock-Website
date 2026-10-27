@@ -92,6 +92,7 @@
     </div>
 
     <p class="intro-note">I chose these 15 companies to compare different types of investments: stable established companies, AI-related growth companies, consumer brands, financial companies, and more speculative technology names. The goal was not to build a perfect portfolio, but to practice comparing risk and quality across different sectors. The colored letter on each card is a grade from my own scoring model, explained on the Scoring Model page. The bar under each price shows only that stock's move today.</p>
+    <p class="intro-note"><strong>Reading the numbers on each card:</strong> the price and today's move update from the live-price service. Beta and P/E, marked "ref.", are approximate reference figures I entered by hand in summer 2026. They are not refreshed automatically, may be out of date, and should not be read as current fundamentals. The "Risk level" bar is my own rough estimate where a higher number means more risk. That is a different measure from the Risk factor on the Scoring Model page, where a higher score means less risk. Both are subjective estimates, and they are not exact opposites of each other.</p>
 
     <div class="sec-hd">
       <span class="tier-pill pill-c">Core Companies</span>
@@ -135,7 +136,7 @@
       <p class="future-note"><b>Planned:</b> A cumulative tracker requires fixed purchase dates, actual starting prices, and consistent historical data. This is planned for a future version. Until then, this stays an honest one-day snapshot.</p>
     </div>
 
-    <div class="disclaimer"><p><strong>Educational project — not financial advice.</strong> This is a student finance research project. Nothing here is a recommendation to buy or sell any security. Live prices are requested through a small server-side proxy (see the README); fundamental stats are approximate reference values that I check against public sources and that can change over time.</p></div>
+    <div class="disclaimer"><p><strong>Educational project — not financial advice.</strong> This is a student finance research project. Nothing here is a recommendation to buy or sell any security. Live prices are requested through a small server-side proxy (see the README). Beta and P/E are approximate reference values entered by hand; they are not refreshed automatically and may be out of date.</p></div>
   </section>
 
   <!-- ============================ SCORING MODEL ============================ -->
@@ -531,17 +532,18 @@
 
 <div class="journal-entry">
       <div class="je-hd">
-        <div><div class="je-week">Week 5 — Launching Version 2 and Preparing for Outside Feedback</div><div class="je-date">July 2026</div></div>
-        <div class="je-perf up">Version 2 Launch</div>
+        <div><div class="je-week">Week 5 — Launching Website Version 2 and Preparing for Outside Feedback</div><div class="je-date">July 2026</div></div>
+        <div class="je-perf up">Website v2 Launch</div>
       </div>
       <div class="je-body">
+        <p><em>Note added October 2026: "Version 2" in this entry means the July update to the website itself. It is not the separate Scoring Methodology v2 I wrote in September 2026.</em></p>
         <p><strong>What changed this week:</strong> This week, I launched Version 2 of my finance website. The project now feels more complete than the original version because it includes live stock prices, a 15-company watchlist, a scoring model, a Model Lab, beginner finance lessons, and a short quiz. Instead of only showing research pages, the site now gives visitors a way to interact with the model and see how changing assumptions can change company rankings.</p>
         <p><strong>Fixing a security issue:</strong> One of the biggest improvements this week was fixing the way live market data works. Earlier in the project, I realized that putting an API key directly into a public website was a serious security issue. To solve this, I moved live price requests through a Cloudflare Worker, so the website can still show market data without exposing the key in the browser. This helped me understand that building a finance tool is not only about the investing model, but also about making the site safer and more responsible.</p>
         <p><strong>What the Model Lab taught me:</strong> The Model Lab was also an important addition because it shows that a scoring model depends on the assumptions behind it. If someone changes the weight placed on growth, valuation, risk, or financial strength, the rankings can change even when the company data stays the same. That made me think more carefully about the limitations of my model. A simple five-factor model can be useful for beginners, but it can also oversimplify companies that operate in very different industries.</p>
         <p><strong>Next question:</strong> My biggest realization this week is that the next step is not just adding more features. The project needs outside feedback. I want to know whether the model is accurate enough, whether the explanations are clear, and whether the site is actually useful for someone beginning to learn finance. My next goal is to send the website to professors and finance professionals so I can revise the project based on real criticism instead of only my own assumptions.</p>
       </div>
       <div class="je-tags">
-        <span class="je-tag">Version 2 Launch</span>
+        <span class="je-tag">Website v2 Launch</span>
         <span class="je-tag">Cloudflare Worker</span>
         <span class="je-tag">Model Lab</span>
         <span class="je-tag">Outside Feedback</span>
@@ -653,6 +655,12 @@
         <p>This test uses the same 15 companies and the same underlying factor scores — Financial Strength, Growth, Valuation, Risk, and Moat — described on the Scoring Model page. Nothing about the individual company scores changes in this section.</p>
         <p>The only thing that changes is the weight given to each factor. I tested five weighting scenarios: my default model, an equal-weight model, a growth-heavy model, a value-heavy model, and a defensive/risk-aware model. Every score is still calculated as a weighted average on a 0–100 scale.</p>
         <p>The point of this section is not to find the one "correct" model. It is to see how much the choice of weights can move a company's rank, even when nothing about the company itself changes.</p>
+      </div>
+
+      <div class="panel">
+        <h3>How This Relates to Scoring Methodology v2</h3>
+        <p>This sensitivity analysis was done in July 2026 and uses only the original (v1) factor scores. Separately, in September 2026 I pre-registered <a href="https://github.com/GianDeGruccio/Stock-Website/blob/main/METHODOLOGY.md" target="_blank" rel="noopener noreferrer">Scoring Methodology v2</a>, a more rule-based approach, and completed a v2 prototype for Microsoft only (<a href="https://github.com/GianDeGruccio/Stock-Website/blob/main/v2-evidence/MSFT.md" target="_blank" rel="noopener noreferrer">evidence record</a>, composite 74.25).</p>
+        <p style="margin-bottom:0">v2 has not been applied to the other 14 companies, so none of the results below use v2 scores. The five-scenario analysis and the unfinished v2 rollout are separate pieces of work.</p>
       </div>
 
       <div class="panel">
@@ -809,16 +817,17 @@
       </div>
 
       <div class="panel">
-        <h3>Outside Feedback and Revision Plan</h3>
-        <p>I have not yet received outside feedback on this project. Nothing in this section reflects feedback that has already happened — it's a plan for what comes next.</p>
-        <p>My plan is to share the site with professors and instructors in finance, economics, business, and applied math, and with finance professionals who might be willing to take a look. I'm especially interested in feedback on whether the five-factor methodology holds up as a learning framework, whether the weighting assumptions are reasonable, whether the explanations across the site are clear, and what limitations I might be missing or underestimating.</p>
-        <p style="margin-bottom:0">Once I receive feedback, any changes I make because of it will be added to the Project Revision Log on the About page, so there's an honest, visible record of what changed and why.</p>
+        <h3>Outside Criticism and Revision Plan</h3>
+        <p>I have asked for outside criticism of this project, but I have not received any yet. In early October 2026 I sent six targeted requests to professors, followed by a follow-up round in mid-October. As of this update, no substantive expert review or endorsement has been confirmed, so nothing on this page reflects outside feedback.</p>
+        <p>I'm especially interested in criticism of whether the five-factor approach holds up as a learning framework, whether the weighting assumptions are reasonable, and whether the v2 rules' metrics, thresholds, and company profiles are appropriate across different types of businesses.</p>
+        <p style="margin-bottom:0">If criticism arrives, any changes I make because of it will be added to the Project Revision Log on the About page, so there's an honest, visible record of what changed and why. Criticism will be recorded as criticism, not as endorsement.</p>
       </div>
     </div>
 
     <div id="research-company-notes">
       <div class="page-lead">
         <h2>Company Research Notes</h2>
+        <p>These four reports are historical research snapshots from June 2026. Their stats were last reviewed then and have not been refreshed since, so they should not be read as current financial analysis. They use the original (v1) scores, not Scoring Methodology v2.</p>
       </div>
     <div class="research-card">
       <div class="rc-hd">
@@ -917,8 +926,8 @@
     </div>
 
     <div class="coming-soon">
-      Additional research reports are being added throughout the summer.
-      <span>Next focus: JPM and IONQ, to compare how my model handles a financial company versus a speculative growth company.</span>
+      Four company reports have been published.
+      <span>Reports on JPM and IONQ were planned, to compare how my model handles a financial company versus a speculative growth company, but have not been written.</span>
     </div>
     </div>
   </section>
@@ -929,8 +938,8 @@
       <div class="about-av">G</div>
       <div>
         <h3>Gian De Gruccio</h3>
-        <div class="ah-sub">Student · finance, economics, applied math, web development</div>
-        <p>I built this project because I wanted to move beyond just being interested in finance and actually practice analyzing companies. I am still learning, but this website gives me a place to organize my research, test a scoring model, and reflect on what I get right or wrong each week. Each company has a reason for being included, each score follows the same basic framework, and each journal entry tracks what I learned as the project developed.</p>
+        <div class="ah-sub">Student · finance, economics, business analysis</div>
+        <p>I built this project because I wanted to move beyond just being interested in finance and actually practice analyzing companies. It started in June 2026 as a 15-company watchlist with a simple scoring model. Over the summer and into the fall, it grew into a broader research and education project, including a tool for testing how weights change rankings, beginner lessons, a student test, and a more rule-based scoring methodology that I tested on Microsoft. I am still learning, and the Project Revision Log below shows what changed and when.</p>
       </div>
     </div>
 
@@ -944,15 +953,15 @@
       <div class="learned-item">
         <div class="li-num">01</div>
         <div class="li-body">
-          <h6>Finance is portfolio construction, not just stock picking</h6>
-          <p>I started thinking this project was about finding good companies. It turned out to be more about building a system: how much risk to take, how to balance stability and growth, and why spreading across sectors matters more than any single pick.</p>
+          <h6>A score needs visible reasoning and evidence behind it</h6>
+          <p>My original model gave every company a structured 0–100 score, which made comparisons more organized. But when I looked back at the individual factor scores, I could not always show why a company got an 88 instead of an 82, and someone else could not have reproduced them. That led me to develop and document Scoring Methodology v2, with clearer rules, sources, and evidence behind each score.</p>
         </div>
       </div>
       <div class="learned-item">
         <div class="li-num">02</div>
         <div class="li-body">
-          <h6>Beta changed how I think about risk</h6>
-          <p>Before this project, I mostly thought risk meant "could this company go bankrupt." Beta taught me that risk also means how much a stock amplifies market moves, and that a list full of high-beta stocks can get hurt badly in a downturn even if every company in it is solid.</p>
+          <h6>Beta measures one kind of risk, not all of it</h6>
+          <p>Beta describes how much a stock has tended to move with the overall market. That is useful, but it is only market sensitivity. It does not capture debt, how concentrated a business is, legal or regulatory problems, or the chance of financial trouble, so a low-beta stock is not automatically a safe business and a high-beta stock is not automatically a weak one.</p>
         </div>
       </div>
       <div class="learned-item">
@@ -965,8 +974,8 @@
       <div class="learned-item">
         <div class="li-num">04</div>
         <div class="li-body">
-          <h6>Consistency matters more than any single call</h6>
-          <p>The most useful part of this project is not the website itself, it is the habit of checking prices, reading about the companies, and updating the journal each week. Steady, small decisions over time seem to matter more than one big idea.</p>
+          <h6>Improvement comes from reviewing and revising earlier work</h6>
+          <p>Most of this project's progress came from going back over what I had already built: correcting stats, rewriting unclear explanations, redesigning the student test, and recording the problems I found while scoring Microsoft under v2 instead of quietly changing the rules. Keeping a written record of what changed and why has been more useful than any single idea.</p>
         </div>
       </div>
     </div>
@@ -974,47 +983,47 @@
     <div class="learned-card">
       <h4>Questions I'm Still Working On</h4>
       <ul class="limit-list">
-        <li>How much should valuation matter compared with growth?</li>
-        <li>Should a company with high volatility automatically receive a lower score?</li>
-        <li>How do investors decide when a great company is too expensive?</li>
-        <li>How should I compare companies from completely different sectors?</li>
-        <li>What financial metrics matter most for banks compared with technology companies?</li>
+        <li>How can financial strength be compared fairly across industries, such as a bank versus a software company?</li>
+        <li>How can a competitive advantage be judged with evidence that someone else could check?</li>
+        <li>How do I know whether a predefined valuation threshold is meaningful, rather than just applied consistently?</li>
+        <li>How should a scoring system balance growth, valuation, and business stability?</li>
+        <li>What evidence would actually test whether this methodology is useful?</li>
       </ul>
     </div>
 
     <div class="learned-card">
       <h4>Next Steps for the Project</h4>
       <ul class="limit-list">
-        <li>Seek outside criticism of the v2 methodology's assumptions.</li>
+        <li>Review and document any criticism that arrives from the October outreach.</li>
+        <li>Review the issues recorded during the Microsoft v2 prototype before deciding whether v2 needs a documented revision.</li>
         <li>Complete the small dry run (3–5 testers) and revise the test flow based on usability feedback.</li>
-        <li>Make the v2 prototype and its known limitations public, alongside the v1 scores already on the site.</li>
       </ul>
     </div>
 
-    <!-- Expert Feedback — Planned (replaces the old "Outside Feedback") -->
+    <!-- Outside Criticism Requested (replaces the old "Expert Feedback — Planned") -->
     <div class="learned-card">
-      <h4>Expert Feedback — Planned</h4>
-      <p>My next step is to ask an educator or finance professional for outside criticism of the model's assumptions, including the Scoring Methodology v2 rules I pre-registered, and whether v2's metrics, thresholds, and company profiles are appropriate across different types of businesses. No outside review has happened yet. Any criticism received will be documented here as criticism, not as endorsement.</p>
+      <h4>Outside Criticism Requested</h4>
+      <p>In early October 2026, I sent six targeted requests to professors asking for criticism of the project's scoring methodology, especially whether the v2 rules' metrics, thresholds, and company profiles are appropriate across different types of businesses. I sent a follow-up round in mid-October. As of this update, no substantive expert review or endorsement has been confirmed. Any criticism I receive will be documented here as criticism, not as endorsement.</p>
     </div>
 
     <!-- Project Revision Log (rendered from data.js) -->
     <div class="learned-card">
       <h4>Project Revision Log</h4>
-      <p>A record of real, confirmed developments in the project so far. Broad month labels are used, and nothing here claims outside feedback has happened yet.</p>
+      <p>Confirmed, completed developments from June 2026 onward, in order, using broad month labels. Plans are listed under Next Steps, not here. Requests for outside criticism are recorded, but no outside feedback has been received.</p>
       <ul class="timeline" id="revision-log"></ul>
     </div>
 
     <!-- Testing and Impact -->
     <div class="learned-card">
       <h4>Testing and Impact</h4>
-      <p>No formal student pilot has happened yet. Technical/process dry-run testing has begun. A small number of anonymous form responses exist, but I haven't yet fully reconciled which are genuine outside dry-run testers versus my own technical testing, so I'm not treating them as formal results. No learning-impact conclusion can be drawn from them yet. The next stage is to complete a small dry run, revise the flow based on that usability feedback, and then run a formal, supervised student pilot.</p>
-      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px">Planned process:</p>
+      <p>No formal student pilot has happened yet. Technical/process dry-run testing has begun. Three earlier anonymous form responses exist, but I haven't fully reconciled which came from outside dry-run testers and which came from my own technical testing, so I'm not treating them as formal results. No learning gains have been demonstrated, and I am not claiming the site improves learning. The next stage is to complete a small dry run, revise the flow based on that usability feedback, and only then consider a formal, supervised student pilot.</p>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px">How the Student Test works (everything happens on one page):</p>
       <ol class="plan-steps">
-        <li>A short introductory quiz to see what participants already know.</li>
-        <li>Guided use of the Learn and Model Lab sections.</li>
-        <li>A short follow-up quiz to see what changed.</li>
-        <li>Anonymous feedback on what was clear and what was confusing.</li>
-        <li>Revisions to the explanations and tools based on common misunderstandings.</li>
+        <li>A five-question baseline quiz. Answers are not shown back, so it stays a true baseline.</li>
+        <li>Five short lessons shown inline on the same page.</li>
+        <li>A guided mini Model Lab exercise: raise the Valuation weight and watch a small set of companies re-rank.</li>
+        <li>A second five-question quiz on the same concepts, with different questions. The two question sets swap order between testers.</li>
+        <li>An anonymous feedback form with the quiz results pre-filled. Nothing is sent unless the tester chooses to submit it.</li>
       </ol>
       <p style="margin-top:14px"><button class="lab-btn" type="button" data-section="test">Go to the student test →</button></p>
       <div class="results-placeholder">Results will appear here once the formal student pilot is run. A small number of dry-run/process responses exist already, but they are process checks, not formal-pilot results, and no learning-impact findings have been analyzed yet. This section is built so real, anonymous findings can be added later without rebuilding the page.</div>
@@ -1040,7 +1049,7 @@
           <li>Exposure to a long-term trend such as AI or quantum computing</li>
           <li>Higher beta accepted, since more volatility comes with the upside</li>
           <li>Often smaller, with more room to grow but more risk</li>
-          <li>Kept to a smaller position size because of that risk</li>
+          <li>Labeled as higher risk on the site, though the hypothetical snapshot still splits money equally across all 15 companies</li>
         </ul>
       </div>
     </div>
